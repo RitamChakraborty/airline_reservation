@@ -29,6 +29,11 @@
     <input:password path="password" id="password"/>
     <form:errors path="password" cssClass="ui-state-error-text"/>
     <br>
+    <c:if test="${ not empty errorMessage}">
+        <p>
+            <%= request.getAttribute("errorMessage") %>
+        </p>
+    </c:if>
     <input type="submit" value="Login">
     <input type="reset" value="Reset">
 </form:form>

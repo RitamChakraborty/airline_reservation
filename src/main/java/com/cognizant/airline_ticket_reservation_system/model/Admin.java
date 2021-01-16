@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 @Component
 @Entity
@@ -29,6 +30,20 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Admin)) return false;
+        Admin admin = (Admin) o;
+        return getUsername().equals(admin.getUsername()) &&
+                getPassword().equals(admin.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUsername(), getPassword());
     }
 
     @Override
