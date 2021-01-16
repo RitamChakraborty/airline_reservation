@@ -1,10 +1,14 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
+import com.cognizant.airline_ticket_reservation_system.model.Admin;
 import com.cognizant.airline_ticket_reservation_system.model.RoleSelection;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,15 +25,31 @@ public class LoginController {
 
         switch (role) {
             case "Admin": {
-                return "admin-login";
+                return "redirect:/admin-login";
             }
             case "User": {
-                return "user-login";
+                return "redirect:/user-login";
             }
             default: {
                 return "error";
             }
         }
+    }
+
+    @GetMapping("/admin-login")
+    public String adminLogin(@ModelAttribute("admin") Admin admin) {
+        return "admin-login";
+    }
+
+    @PostMapping("/admin-home")
+    public String adminHome(@Valid @ModelAttribute("admin") Admin admin, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "admin-login";
+        }
+
+        // Todo: Validate Admin details
+
+        return "admin-home";
     }
 
     @ModelAttribute("roles")

@@ -1,3 +1,9 @@
+<%@ page contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1" isELIgnored="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,6 +14,23 @@
     <title>Admin Home</title>
 </head>
 <body>
-<h1>Admin Home</h1>
+<h1>Admin Login</h1>
+<%--@elvariable id="admin" type="com.cognizant.airline_ticket_reservation_system.model.Admin"--%>
+<form:form action="/admin-home" method="post" modelAttribute="admin">
+    <form:label path="username">
+        <spring:message code="label.username"/>
+    </form:label>
+    <form:input path="username" id="username"/>
+    <form:errors path="username" cssClass="ui-state-error-text"/>
+    <br>
+    <form:label path="password">
+        <spring:message code="label.password"/>
+    </form:label>
+    <input:password path="password" id="password"/>
+    <form:errors path="password" cssClass="ui-state-error-text"/>
+    <br>
+    <input type="submit" value="Login">
+    <input type="reset" value="Reset">
+</form:form>
 </body>
 </html>
