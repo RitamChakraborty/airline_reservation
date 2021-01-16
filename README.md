@@ -5,6 +5,6 @@
 - Afrin K
 - Kunal Goel
 - Pallavi Gupta
-- Ritam Chakraborty
-- Shuktika Mahanty 
+- [Ritam Chakraborty](https://github.com/RitamChakraborty)
+- [Shuktika Mahanty](https://github.com/Shuktika15) 
  
