@@ -18,7 +18,9 @@
 <body>
 <%--@elvariable id="roleSelection" type="com.cognizant.airline_ticket_reservation_system.model.RoleSelection"--%>
 <form:form action="/login" method="get" modelAttribute="roleSelection">
-    <form:label path="role">Select Role</form:label>
+    <form:label path="role">
+        <spring:message code="label.selectRole"/>
+    </form:label>
     <br>
     <form:select path="role" items="${ roles }" id="role"/>
     <br>
