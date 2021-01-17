@@ -1,5 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
+import com.cognizant.airline_ticket_reservation_system.model.User;
 import com.cognizant.airline_ticket_reservation_system.model.UserRegistration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -29,9 +30,19 @@ public class UserController {
     ) {
         if (bindingResult.hasErrors()) {
             return "user-registration";
+        } else if (!userRegistration.getPassword().equals(userRegistration.getConfirmPassword())) {
+            modelMap.addAttribute("errorMessage", errorMessage);
+            return "user-registration";
         }
 
-        System.out.println(userRegistration);
+        User user = new User();
+        user.setName(userRegistration.getName());
+        user.setPassword(userRegistration.getPassword());
+        user.setEmail(userRegistration.getEmail());
+        user.setAddress(userRegistration.getAddress());
+        user.setPhone(userRegistration.getPhone());
+
+        System.out.println(user);
 
         return "user-home";
     }

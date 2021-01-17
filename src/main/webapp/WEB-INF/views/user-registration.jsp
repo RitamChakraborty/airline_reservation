@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,6 +25,9 @@
     <spring:message code="label.user.confirmPassword"/>
     <form:password path="confirmPassword"/>
     <form:errors path="confirmPassword"/>
+    <c:if test="${ not empty errorMessage}">
+        <span>${ errorMessage }</span>
+    </c:if>
     <br>
     <spring:message code="label.user.email"/>
     <form:input path="email"/>
