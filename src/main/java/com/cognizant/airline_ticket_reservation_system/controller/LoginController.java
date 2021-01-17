@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @PropertySource("classpath:messages.properties")
@@ -25,11 +23,6 @@ public class LoginController {
     @Autowired
     public void setLoginService(LoginService loginService) {
         this.loginService = loginService;
-    }
-
-    @GetMapping("/")
-    public String roleSelect(@ModelAttribute("roleSelection") RoleSelection roleSelection) {
-        return "role-select";
     }
 
     @GetMapping("/login")
@@ -78,30 +71,5 @@ public class LoginController {
     @GetMapping("/user-login")
     public String userLogin() {
         return "user-login";
-    }
-
-    @GetMapping("/manage-flight")
-    public String manageFlight() {
-        return "manage-flight";
-    }
-
-    @GetMapping("/schedule-flight")
-    public String scheduleFlight() {
-        return "schedule-flight";
-    }
-
-    @GetMapping("/booking-details")
-    public String bookingDetails() {
-        return "booking-details";
-    }
-
-    @GetMapping("/user-details")
-    public String userDetails() {
-        return "user-details";
-    }
-
-    @ModelAttribute("roles")
-    public List<String> populateRoles() {
-        return Arrays.asList("Admin", "User");
     }
 }
