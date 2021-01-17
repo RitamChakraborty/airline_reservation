@@ -9,5 +9,6 @@
 </head>
 <body>
 <h1>User Home</h1>
+<h2>Welcome ${ user.name }</h2>
 </body>
 </html>

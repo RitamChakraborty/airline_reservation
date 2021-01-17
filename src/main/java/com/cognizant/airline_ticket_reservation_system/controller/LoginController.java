@@ -1,9 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
-import com.cognizant.airline_ticket_reservation_system.model.Admin;
-import com.cognizant.airline_ticket_reservation_system.model.RoleSelection;
-import com.cognizant.airline_ticket_reservation_system.model.User;
-import com.cognizant.airline_ticket_reservation_system.model.UserLogin;
+import com.cognizant.airline_ticket_reservation_system.model.*;
 import com.cognizant.airline_ticket_reservation_system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,8 +89,39 @@ public class LoginController {
             modelMap.addAttribute("errorMessage", errorMessage);
             return "user-login";
         } else {
-            System.out.println(user);
+            modelMap.addAttribute("user", user);
             return "user-home";
         }
+    }
+
+    @GetMapping("/user-registration")
+    public String userRegistration(@ModelAttribute("userRegistration") UserRegistration userRegistration) {
+        return "user-registration";
+    }
+
+    @PostMapping("/user-singup")
+    public String userSignup(
+            @Valid @ModelAttribute("userRegistration") UserRegistration userRegistration,
+            BindingResult bindingResult,
+            ModelMap modelMap,
+            @Value("${error.user.confirmPassword.notEqual}") String errorMessage
+    ) {
+        if (bindingResult.hasErrors()) {
+            return "user-registration";
+        } else if (!userRegistration.getPassword().equals(userRegistration.getConfirmPassword())) {
+            modelMap.addAttribute("errorMessage", errorMessage);
+            return "user-registration";
+        }
+
+        User user = new User();
+        user.setName(userRegistration.getName());
+        user.setPassword(userRegistration.getPassword());
+        user.setEmail(userRegistration.getEmail());
+        user.setAddress(userRegistration.getAddress());
+        user.setPhone(userRegistration.getPhone());
+
+        modelMap.addAttribute("user", user);
+
+        return "user-home";
     }
 }
