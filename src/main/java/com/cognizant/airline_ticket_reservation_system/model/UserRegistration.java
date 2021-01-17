@@ -2,13 +2,27 @@ package com.cognizant.airline_ticket_reservation_system.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 @Component
 public class UserRegistration {
+    @NotBlank(message = "error.user.name")
     private String name;
+    @NotBlank(message = "error.password")
+    @Size(min = 6, message = "error.user.password.length")
+    @Pattern(regexp = "^.+$", message = "error.user.password.specialCharacter")
     private String password;
+    @NotBlank(message = "error.user.confirmPassword")
     private String confirmPassword;
+    @Email(message = "error.user.email")
     private String email;
+    @NotBlank(message = "error.user.address")
     private String address;
+    @NotBlank(message = "error.user.phone")
+    @Pattern(regexp = "^(\\d{10})?$", message = "error.user.phone.invalid")
     private String phone;
 
     public String getName() {
