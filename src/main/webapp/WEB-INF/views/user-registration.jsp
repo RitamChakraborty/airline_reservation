@@ -12,7 +12,7 @@
 <body>
 <h1>User Registration</h1>
 <%--@elvariable id="userRegistration" type="com.cognizant.airline_ticket_reservation_system.model.UserRegistration"--%>
-<form:form action="/user-signup" method="post" modelAttribute="userRegistration">
+<form:form action="/user-singup" method="post" modelAttribute="userRegistration">
     <spring:message code="label.user.name"/>
     <form:input path="name"/>
     <form:errors path="name"/>

@@ -5,24 +5,23 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Component
 public class UserRegistration {
-    @NotBlank(message = "error.user.name")
+    @NotBlank(message = "{error.user.name}")
     private String name;
-    @NotBlank(message = "error.password")
-    @Size(min = 6, message = "error.user.password.length")
-    @Pattern(regexp = "^.+$", message = "error.user.password.specialCharacter")
+    @NotBlank(message = "{error.password}")
+    @Pattern(regexp = "^(\\w{6,})?$", message = "{error.user.password.length}")
     private String password;
-    @NotBlank(message = "error.user.confirmPassword")
+    @NotBlank(message = "{error.user.confirmPassword}")
     private String confirmPassword;
-    @Email(message = "error.user.email")
+    @NotBlank(message = "{error.user.email}")
+    @Email(message = "{error.user.email.invalid}")
     private String email;
-    @NotBlank(message = "error.user.address")
+    @NotBlank(message = "{error.user.address}")
     private String address;
-    @NotBlank(message = "error.user.phone")
-    @Pattern(regexp = "^(\\d{10})?$", message = "error.user.phone.invalid")
+    @NotBlank(message = "{error.user.phone}")
+    @Pattern(regexp = "^(\\d{10})?$", message = "{error.user.phone.invalid}")
     private String phone;
 
     public String getName() {
@@ -71,5 +70,17 @@ public class UserRegistration {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRegistration{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }
