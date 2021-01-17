@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,7 +25,7 @@
     <form:label path="password">
         <spring:message code="label.password"/>
     </form:label>
-    <input:password path="password" id="password"/>
+    <form:password path="password" id="password"/>
     <form:errors path="password" cssClass="ui-state-error-text"/>
     <br>
     <c:if test="${ not empty errorMessage}">
