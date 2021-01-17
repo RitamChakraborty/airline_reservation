@@ -37,5 +37,8 @@
     <input type="submit" value="Login">
     <input type="reset" value="Reset">
 </form:form>
+<div class="news-feed">
+    News feed will be displayed here
+</div>
 </body>
 </html>

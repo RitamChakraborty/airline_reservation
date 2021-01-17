@@ -9,5 +9,8 @@
 </head>
 <body>
 <h1>Welcome Admin</h1>
+<div class="news-feed">
+    News feed will be displayed here
+</div>
 </body>
 </html>
