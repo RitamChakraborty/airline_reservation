@@ -2,6 +2,7 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.Admin;
 import com.cognizant.airline_ticket_reservation_system.model.RoleSelection;
+import com.cognizant.airline_ticket_reservation_system.model.User;
 import com.cognizant.airline_ticket_reservation_system.model.UserLogin;
 import com.cognizant.airline_ticket_reservation_system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,14 @@ public class LoginController {
             return "user-login";
         }
 
-        return "user-home";
+        User user = loginService.validateUser(userLogin);
+
+        if (user == null) {
+            modelMap.addAttribute("errorMessage", errorMessage);
+            return "user-login";
+        } else {
+            System.out.println(user);
+            return "user-home";
+        }
     }
 }
