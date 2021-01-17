@@ -2,8 +2,6 @@ package com.cognizant.airline_ticket_reservation_system.model;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 @Component
 public class UserRegistration {
     private String name;
@@ -12,8 +10,6 @@ public class UserRegistration {
     private String email;
     private String address;
     private String phone;
-    private Date dob;
-    private String gender;
 
     public String getName() {
         return name;
@@ -61,21 +57,5 @@ public class UserRegistration {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 }
