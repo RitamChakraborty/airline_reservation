@@ -14,8 +14,8 @@
 </head>
 <body>
 <h1>User Login</h1>
-<%--@elvariable id="user" type="com.cognizant.airline_ticket_reservation_system.model.User"--%>
-<form:form action="/user-home" method="post" modelAttribute="user">
+<%--@elvariable id="userLogin" type="com.cognizant.airline_ticket_reservation_system.model.UserLogin"--%>
+<form:form action="/user-home" method="post" modelAttribute="userLogin">
     <form:label path="id">
         <spring:message code="label.userId"/>
     </form:label>

@@ -2,7 +2,7 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.Admin;
 import com.cognizant.airline_ticket_reservation_system.model.RoleSelection;
-import com.cognizant.airline_ticket_reservation_system.model.User;
+import com.cognizant.airline_ticket_reservation_system.model.UserLogin;
 import com.cognizant.airline_ticket_reservation_system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,30 +70,21 @@ public class LoginController {
     }
 
     @GetMapping("/user-login")
-    public String userLogin(@ModelAttribute("user") User user) {
+    public String userLogin(@ModelAttribute("userLogin") UserLogin userLogin) {
         return "user-login";
     }
 
     @PostMapping("/user-home")
     public String userHome(
-            @Valid @ModelAttribute("user") User user,
+            @Valid @ModelAttribute("userLogin") UserLogin userLogin,
             BindingResult bindingResult,
             ModelMap modelMap,
             @Value("${error.admin.invalidCredentials}") String errorMessage
     ) {
-        System.out.println(user);
+        if (bindingResult.hasErrors()) {
+            return "user-login";
+        }
+
         return "user-home";
-//        if (bindingResult.hasErrors()) {
-//            return "admin-login";
-//        }
-//
-//        boolean validAdmin = loginService.validAdmin(user);
-//
-//        if (validAdmin) {
-//            return "user-home";
-//        } else {
-//            modelMap.addAttribute("errorMessage", errorMessage);
-//            return "user-login";
-//        }
     }
 }
