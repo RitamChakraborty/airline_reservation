@@ -36,6 +36,7 @@
     <input type="submit" value="Login">
     <input type="reset" value="Reset">
 </form:form>
+<a href="${pageContext.request.contextPath}/user-registration">Sign Up</a>
 <div class="news-feed">
     News feed will be displayed here
 </div>
