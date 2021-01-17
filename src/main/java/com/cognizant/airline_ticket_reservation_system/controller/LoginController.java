@@ -80,6 +80,26 @@ public class LoginController {
         return "user-login";
     }
 
+    @GetMapping("/manage-flight")
+    public String manageFlight() {
+        return "manage-flight";
+    }
+
+    @GetMapping("/schedule-flight")
+    public String scheduleFlight() {
+        return "schedule-flight";
+    }
+
+    @GetMapping("/booking-details")
+    public String bookingDetails() {
+        return "booking-details";
+    }
+
+    @GetMapping("/user-details")
+    public String userDetails() {
+        return "user-details";
+    }
+
     @ModelAttribute("roles")
     public List<String> populateRoles() {
         return Arrays.asList("Admin", "User");
