@@ -6,17 +6,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Component
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = "{error.id}")
     private Integer id;
+    @NotBlank(message = "{error.password}")
     private String password;
+    @NotBlank(message = "{error.user.name}")
     private String name;
+    @Email(message = "{error.user.email}")
     private String email;
+    @NotBlank(message = "{error.user.address}")
     private String address;
+    @NotBlank(message = "{error.user.phone}")
+    @Pattern(regexp = "^(\\d{10})?$", message = "{error.user.phone.invalid}")
     private String phone;
 
     public Integer getId() {
