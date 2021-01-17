@@ -4,6 +4,8 @@ import com.cognizant.airline_ticket_reservation_system.model.Admin;
 import com.cognizant.airline_ticket_reservation_system.model.RoleSelection;
 import com.cognizant.airline_ticket_reservation_system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@PropertySource("classpath:messages.properties")
 public class LoginController {
     private LoginService loginService;
 
@@ -52,7 +55,12 @@ public class LoginController {
     }
 
     @PostMapping("/admin-home")
-    public String adminHome(@Valid @ModelAttribute("admin") Admin admin, BindingResult bindingResult, ModelMap modelMap) {
+    public String adminHome(
+            @Valid @ModelAttribute("admin") Admin admin,
+            BindingResult bindingResult,
+            ModelMap modelMap,
+            @Value("${error.admin.invalidCredentials}") String errorMessage
+    ) {
         if (bindingResult.hasErrors()) {
             return "admin-login";
         }
@@ -62,7 +70,7 @@ public class LoginController {
         if (validAdmin) {
             return "admin-home";
         } else {
-            modelMap.addAttribute("errorMessage", "User id or password is incorrect");
+            modelMap.addAttribute("errorMessage", errorMessage);
             return "admin-login";
         }
     }
