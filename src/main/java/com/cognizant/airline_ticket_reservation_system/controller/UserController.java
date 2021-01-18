@@ -19,7 +19,15 @@ public class UserController {
     }
 
     @PostMapping("/user-home")
-    public String userHome() {
+    public String userHomePost() {
+        return "user-home";
+    }
+
+    @GetMapping("/user-home")
+    public String userHome(@RequestParam("id") Integer id, ModelMap modelMap) {
+        User user = userService.getUserById(id);
+        modelMap.addAttribute("user", user);
+
         return "user-home";
     }
 
@@ -47,6 +55,23 @@ public class UserController {
         modelMap.addAttribute("user", user);
 
         return "update-details";
+    }
+
+    @PostMapping("/update-details")
+    public String updateDetailsPost(
+            @RequestParam("id") Integer id,
+            @RequestParam("name") String name,
+            @RequestParam("address") String address,
+            @RequestParam("phone") String phone
+    ) {
+        System.out.println("Id : " + id);
+        System.out.println("Name : " + name);
+        System.out.println("Address : " + address);
+        System.out.println("Phone : " + phone);
+
+        // Todo: Update details for the user in the database
+
+        return "redirect:/user-home?id=" + id;
     }
 
     @GetMapping("/change-password")
