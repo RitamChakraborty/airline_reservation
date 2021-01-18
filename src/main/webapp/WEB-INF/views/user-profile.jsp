@@ -5,20 +5,20 @@
 </head>
 <body>
 <h1>User Profile</h1>
-<p>User ID : <%=request.getParameter("id")%>
+<p>User ID : ${ user.id }
 </p>
-<p>Name : <%=request.getParameter("name")%>
+<p>Name : ${ user.name }
 </p>
-<p>Email : <%=request.getParameter("email")%>
+<p>Email : ${ user.email }
 </p>
-<p>Address : <%=request.getParameter("address")%>
+<p>Address : ${ user.address }
 </p>
-<p>Phone No: <%=request.getParameter("phone")%>
+<p>Phone No: ${ user.phone }
 </p>
-<a href="<c:url value="/update-details"/>">
+<a href="<c:url value="/update-details?id=${ user.id }"/>">
     <button>Update Details</button>
 </a>
-<a href="<c:url value="/change-password"/>">
+<a href="<c:url value="/change-password?id=${ user.id }"/>">
     <button>Change Password</button>
 </a>
 </body>

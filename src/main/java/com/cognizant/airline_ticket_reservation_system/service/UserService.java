@@ -16,6 +16,10 @@ public class UserService {
         this.userDao = userDao;
     }
 
+    public User getUserById(Integer id) {
+        return userDao.findById(id).orElse(null);
+    }
+
     public List<User> getUsers() {
         return (List<User>) userDao.findAll();
     }

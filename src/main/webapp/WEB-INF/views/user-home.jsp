@@ -24,7 +24,7 @@
             <a href="<c:url value="/history"/>">History</a>
         </li>
         <li>
-            <a href="<c:url value="/view-profile?id=${ user.id }&name=${ user.name }&email=${ user.email }&address=${ user.address }&phone=${ user.phone }"/>">View
+            <a href="<c:url value="/view-profile?id=${ user.id }"/>">View
                 Profile</a>
         </li>
         <li>
