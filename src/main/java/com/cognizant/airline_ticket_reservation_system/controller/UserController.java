@@ -61,15 +61,18 @@ public class UserController {
     public String updateDetailsPost(
             @RequestParam("id") Integer id,
             @RequestParam("name") String name,
+            @RequestParam("email") String email,
             @RequestParam("address") String address,
             @RequestParam("phone") String phone
     ) {
-        System.out.println("Id : " + id);
-        System.out.println("Name : " + name);
-        System.out.println("Address : " + address);
-        System.out.println("Phone : " + phone);
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setEmail(email);
+        user.setAddress(address);
+        user.setPhone(phone);
 
-        // Todo: Update details for the user in the database
+        userService.updateUserById(user);
 
         return "redirect:/user-home?id=" + id;
     }
