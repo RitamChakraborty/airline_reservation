@@ -14,4 +14,9 @@ public class UserController {
     public String history() {
         return "history";
     }
+
+    @GetMapping("/view-profile")
+    public String viewProfile() {
+        return "user-profile";
+    }
 }
