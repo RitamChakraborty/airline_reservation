@@ -1,5 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
+import com.cognizant.airline_ticket_reservation_system.dao.UserDao;
 import com.cognizant.airline_ticket_reservation_system.model.*;
 import com.cognizant.airline_ticket_reservation_system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,16 @@ import javax.validation.Valid;
 @PropertySource("classpath:messages.properties")
 public class LoginController {
     private LoginService loginService;
+    private UserDao userDao;
 
     @Autowired
     public void setLoginService(LoginService loginService) {
         this.loginService = loginService;
+    }
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @GetMapping("/login")
@@ -120,6 +127,7 @@ public class LoginController {
         user.setAddress(userRegistration.getAddress());
         user.setPhone(userRegistration.getPhone());
 
+        userDao.save(user);
         modelMap.addAttribute("user", user);
 
         return "user-home";
