@@ -9,6 +9,11 @@
     <title>User Home</title>
 </head>
 <body>
+<c:if test="${ not empty request.getParameter('msg')}">
+    <script>
+        alert('${ msg }');
+    </script>
+</c:if>
 <header>
     <h2>Welcome ${ user.name }</h2>
 </header>

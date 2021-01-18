@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 @Entity
 @Component
@@ -74,6 +75,23 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId().equals(user.getId()) &&
+                getName().equals(user.getName()) &&
+                getEmail().equals(user.getEmail()) &&
+                getAddress().equals(user.getAddress()) &&
+                getPhone().equals(user.getPhone());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getEmail(), getAddress(), getPhone());
     }
 
     @Override

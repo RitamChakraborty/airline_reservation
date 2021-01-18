@@ -6,9 +6,14 @@
     <title>Update Details</title>
 </head>
 <body>
+<c:if test="${ not empty noUpdateError}">
+    <script>
+        alert('${ noUpdateError }');
+    </script>
+</c:if>
 <h1>Update Details</h1>
 <%--@elvariable id="userDetailsUpdate" type="com.cognizant.airline_ticket_reservation_system.model.UserDetailsUpdate"--%>
-<form:form action="/update-details?id=${ user.id }" method="post" modelAttribute="userDetailsUpdate">
+<form:form action="/update-details?id=${ id }" method="post" modelAttribute="userDetailsUpdate">
     <form:label path="name">
         <spring:message code="label.user.name"/>
     </form:label>
