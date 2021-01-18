@@ -2,9 +2,15 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
+    @PostMapping("/user-home")
+    public String userHome() {
+        return "user-home";
+    }
+
     @GetMapping("/book-ticket")
     public String bookTicket() {
         return "book-ticket";

@@ -79,8 +79,8 @@ public class LoginController {
         return "user-login";
     }
 
-    @PostMapping("/user-home")
-    public String userHome(
+    @PostMapping("/user-validation")
+    public String userValidation(
             @Valid @ModelAttribute("userLogin") UserLogin userLogin,
             BindingResult bindingResult,
             ModelMap modelMap,
@@ -97,7 +97,7 @@ public class LoginController {
             return "user-login";
         } else {
             modelMap.addAttribute("user", user);
-            return "user-home";
+            return "forward:/user-home";
         }
     }
 
@@ -130,6 +130,6 @@ public class LoginController {
         userDao.save(user);
         modelMap.addAttribute("user", user);
 
-        return "user-home";
+        return "forward:/user-home";
     }
 }
