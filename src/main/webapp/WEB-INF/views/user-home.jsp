@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +9,29 @@
     <title>User Home</title>
 </head>
 <body>
-<h1>User Home</h1>
-<h2>Welcome ${ user.name }</h2>
+<header>
+    <h2>Welcome ${ user.name }</h2>
+</header>
+<nav>
+    <ul>
+        <li>
+            <a href="<c:url value="/"/>">Home</a>
+        </li>
+        <li>
+            <a href="<c:url value="/book-ticket"/>">Book Ticket</a>
+        </li>
+        <li>
+            <a href="<c:url value="/history"/>">History</a>
+        </li>
+        <li>
+            <button class="logout">Logout</button>
+        </li>
+    </ul>
+</nav>
+<article>
+    <div class="news-feed">
+        News feed will be displayed here
+    </div>
+</article>
 </body>
 </html>

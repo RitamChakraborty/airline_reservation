@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,19 +15,19 @@
 <nav>
     <ul>
         <li>
-            <a href="/">Home</a>
+            <a href="<c:url value="/"/>">Home</a>
         </li>
         <li>
-            <a href="/manage-flight">Manage Flight</a>
+            <a href="<c:url value="/manage-flight"/>">Manage Flight</a>
         </li>
         <li>
-            <a href="/schedule-flight">Schedule Flight</a>
+            <a href="<c:url value="/schedule-flight"/>">Schedule Flight</a>
         </li>
         <li>
-            <a href="/booking-details">Booking Details</a>
+            <a href="<c:url value="/booking-details"/>">Booking Details</a>
         </li>
         <li>
-            <a href="/user-details">User Details</a>
+            <a href="<c:url value="/user-details"/>">User Details</a>
         </li>
         <li>
             <button class="logout">Logout</button>
