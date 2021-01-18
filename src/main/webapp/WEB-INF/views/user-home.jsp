@@ -24,7 +24,8 @@
             <a href="<c:url value="/history"/>">History</a>
         </li>
         <li>
-            <a href="<c:url value="/view-profile"/>">View Profile</a>
+            <a href="<c:url value="/view-profile?id=${ user.id }&name=${ user.name }&email=${ user.email }&address=${ user.address }&phone=${ user.phone }"/>">View
+                Profile</a>
         </li>
         <li>
             <button class="logout">Logout</button>
