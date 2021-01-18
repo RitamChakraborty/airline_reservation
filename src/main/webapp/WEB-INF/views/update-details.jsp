@@ -1,26 +1,40 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title>Update Details</title>
 </head>
 <body>
 <h1>Update Details</h1>
-<form action="<c:url value="/update-details?id=${ user.id }"/>" method="post">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" value="${ user.name }" required>
+<%--@elvariable id="userDetailsUpdate" type="com.cognizant.airline_ticket_reservation_system.model.UserDetailsUpdate"--%>
+<form:form action="/update-details?id=${ user.id }" method="post" modelAttribute="userDetailsUpdate">
+    <form:label path="name">
+        <spring:message code="label.user.name"/>
+    </form:label>
+    <form:input path="name" value="${ user.name }"/>
+    <form:errors path="name"/>
     <br>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" value="${ user.email }" required>
+    <form:label path="email">
+        <spring:message code="label.user.email"/>
+    </form:label>
+    <form:input path="email" value="${ user.email }"/>
+    <form:errors path="email"/>
     <br>
-    <label for="address">Address</label>
-    <input type="text" name="address" id="address" cols="15" rows="5" value="${ user.address }" required>
+    <form:label path="address">
+        <spring:message code="label.user.address"/>
+    </form:label>
+    <form:input path="address" value="${ user.address }"/>
+    <form:errors path="address"/>
     <br>
-    <label for="phone">Phone No</label>
-    <input type="tel" name="phone" id="phone" value="${ user.phone }" required>
+    <form:label path="phone">
+        <spring:message code="label.user.phone"/>
+    </form:label>
+    <form:input path="phone" value="${ user.phone }"/>
+    <form:errors path="phone"/>
     <br>
     <input type="submit" value="Update">
     <input type="reset" value="Reset">
-</form>
+</form:form>
 </body>
 </html>
