@@ -25,4 +25,14 @@ public class UserController {
     public String viewProfile() {
         return "user-profile";
     }
+
+    @GetMapping("/update-details")
+    public String updateDetails() {
+        return "update-details";
+    }
+
+    @GetMapping("/change-password")
+    public String changePassword() {
+        return "change-password";
+    }
 }
