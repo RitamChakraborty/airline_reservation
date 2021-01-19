@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,7 +31,10 @@ public class AdminController {
     }
 
     @GetMapping("/manage-flight")
-    public String manageFlight() {
+    public String manageFlight(ModelMap modelMap) {
+        List<Flight> flights = flightService.getFlights();
+        modelMap.addAttribute("flights", flights);
+
         return "manage-flight";
     }
 
@@ -65,5 +69,15 @@ public class AdminController {
     ) {
         flightService.addFlight(flight);
         return "redirect:/manage-flight";
+    }
+
+    @GetMapping("/update-flight")
+    public String updateFlight(@RequestParam("no") Integer no) {
+        return "update-flight";
+    }
+
+    @GetMapping("/delete-flight")
+    public String deleteFlight(@RequestParam("no") Integer no) {
+        return "delete-flight";
     }
 }

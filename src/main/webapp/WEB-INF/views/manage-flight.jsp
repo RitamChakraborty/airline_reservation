@@ -15,5 +15,41 @@
 <nav>
     <a href="<c:url value="/add-flight"/>">Add Flight</a>
 </nav>
+<c:choose>
+    <c:when test="${ not empty flights }">
+        <table>
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>Airline</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Economy Seats</th>
+                <th>Business Seats</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="flight" items="${ flights }">
+                <tr>
+                    <td>${ flight.no }</td>
+                    <td>${ flight.airline }</td>
+                    <td>${ flight.model }</td>
+                    <td>${ flight.type }</td>
+                    <td>${ flight.seatsEconomy }</td>
+                    <td>${ flight.seatsBusiness }</td>
+                    <td>
+                        <a href="<c:url value="/update-flight?no=${ flight.no }"/>">Update</a>
+                        <a href="<c:url value="/delete-flight?no=${ flight.no }"/>">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:when>
+    <c:otherwise>
+        <p>Not flights available</p>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>
