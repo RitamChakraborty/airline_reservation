@@ -9,9 +9,9 @@
     <title>User Home</title>
 </head>
 <body>
-<c:if test="${ not empty request.getParameter('msg')}">
+<c:if test="${ not empty param.msg}">
     <script>
-        alert('${ msg }');
+        alert('${ param.msg }');
     </script>
 </c:if>
 <header>
