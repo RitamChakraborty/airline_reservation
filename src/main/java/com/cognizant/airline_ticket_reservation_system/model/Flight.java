@@ -1,11 +1,14 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Flight {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer no;
     private String airline;
     private String model;
