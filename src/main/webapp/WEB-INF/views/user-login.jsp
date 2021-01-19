@@ -17,7 +17,7 @@
 <%--@elvariable id="userLogin" type="com.cognizant.airline_ticket_reservation_system.model.UserLogin"--%>
 <form:form action="/user-validation" method="post" modelAttribute="userLogin">
     <form:label path="id">
-        <spring:message code="label.userId"/>
+        <spring:message code="label.user.id"/>
     </form:label>
     <form:input path="id" id="user-id"/>
     <form:errors path="id" cssClass="ui-state-error-text"/>
@@ -37,6 +37,7 @@
     <input type="reset" value="Reset">
 </form:form>
 <a href="<c:url value="/user-registration"/>">Sign Up</a>
+<a href="<c:url value="/forget-password"/>">Forget Password</a>
 <div class="news-feed">
     News feed will be displayed here
 </div>

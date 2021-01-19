@@ -3,6 +3,7 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 import com.cognizant.airline_ticket_reservation_system.model.User;
 import com.cognizant.airline_ticket_reservation_system.model.UserChangePassword;
 import com.cognizant.airline_ticket_reservation_system.model.UserDetailsUpdate;
+import com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword;
 import com.cognizant.airline_ticket_reservation_system.service.UserService;
 import com.cognizant.airline_ticket_reservation_system.validator.UserChangePasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,9 +140,7 @@ public class UserController {
 
         User user = userService.getUserById(id);
         String password = user.getPassword();
-        String previousPassword = userChangePassword.getPreviousPassword();
         String newPassword = userChangePassword.getNewPassword();
-        String confirmPassword = userChangePassword.getConfirmPassword();
         userChangePassword.setOriginalPassword(password);
 
         userChangePasswordValidator.validate(userChangePassword, bindingResult);
@@ -150,6 +149,47 @@ public class UserController {
             return "change-password";
         }
 
+        user.setPassword(newPassword);
+        userService.updateUser(user);
+
+        return "redirect:/user-home?id=" + id + "&msg=" + message;
+    }
+
+    @GetMapping("/forget-password")
+    public String changePassword(@ModelAttribute("userForgetPassword") UserForgetPassword userForgetPassword) {
+        return "forget-password";
+    }
+
+    @PostMapping("/forget-password")
+    public String changePasswordPost(
+            @Valid @ModelAttribute("userForgetPassword") UserForgetPassword userForgetPassword,
+            BindingResult bindingResult,
+            ModelMap modelMap,
+            @Value("${user.updatePasswordSuccessfully}") String message
+    ) {
+        Integer id = userForgetPassword.getId();
+        if (id != null) {
+            User user = userService.getUserById(id);
+
+            if (user == null) {
+                bindingResult.rejectValue("id", "error.userForgetPassword.id.notExists");
+            }
+        }
+
+        String newPassword = userForgetPassword.getNewPassword();
+        String confirmPassword = userForgetPassword.getConfirmPassword();
+
+        if (newPassword != null && confirmPassword != null) {
+            if (!newPassword.equals(confirmPassword)) {
+                bindingResult.rejectValue("confirmPassword", "error.userChangePassword.confirmPassword.notEqual");
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "forget-password";
+        }
+
+        User user = userService.getUserById(id);
         user.setPassword(newPassword);
         userService.updateUser(user);
 
