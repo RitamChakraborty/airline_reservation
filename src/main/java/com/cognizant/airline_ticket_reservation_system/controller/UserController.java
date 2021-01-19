@@ -1,6 +1,7 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.User;
+import com.cognizant.airline_ticket_reservation_system.model.UserChangePassword;
 import com.cognizant.airline_ticket_reservation_system.model.UserDetailsUpdate;
 import com.cognizant.airline_ticket_reservation_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,14 @@ public class UserController {
     }
 
     @GetMapping("/user-home")
-    public String userHome(@RequestParam("id") Integer id, ModelMap modelMap) {
+    public String userHome(
+            @RequestParam("id") Integer id,
+            @RequestParam("msg") String message,
+            ModelMap modelMap
+    ) {
         User user = userService.getUserById(id);
         modelMap.addAttribute("user", user);
+        modelMap.addAttribute("msg", message);
 
         return "user-home";
     }
@@ -84,6 +90,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "update-details";
         }
+
         User user = new User();
         user.setId(id);
         user.setName(userDetailsUpdate.getName());
@@ -98,15 +105,54 @@ public class UserController {
             return "update-details";
         }
 
-        // Todo: Verify that updated user has some changes
-
-        userService.updateUserById(user);
+        userService.updateUser(user);
 
         return "redirect:/user-home?id=" + id + "&msg=" + message;
     }
 
     @GetMapping("/change-password")
-    public String changePassword() {
+    public String changePassword(
+            @RequestParam("id") Integer id,
+            @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
+            ModelMap modelMap
+    ) {
+        modelMap.addAttribute("id", id);
         return "change-password";
+    }
+
+    @PostMapping("/change-password")
+    public String changePasswordPost(
+            @RequestParam("id") Integer id,
+            @Valid @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
+            BindingResult bindingResult,
+            ModelMap modelMap,
+            @Value("${user.updatePasswordSuccessfully}") String message
+    ) {
+        modelMap.addAttribute("id", id);
+
+        if (bindingResult.hasErrors()) {
+            return "change-password";
+        }
+
+        System.out.println(userChangePassword);
+
+        User user = userService.getUserById(id);
+        String password = user.getPassword();
+        String previousPassword = userChangePassword.getPreviousPassword();
+        String newPassword = userChangePassword.getNewPassword();
+        String confirmPassword = userChangePassword.getConfirmPassword();
+
+        if (!newPassword.equals(confirmPassword)) {
+            // Todo: Confirm password did not match
+        } else if (!password.equals(previousPassword)) {
+            // Todo: Current password did not match
+        } else if (previousPassword.equals(newPassword)) {
+            // Todo: No change of password
+        }
+
+        user.setPassword(newPassword);
+        userService.updateUser(user);
+
+        return "redirect:/user-home?id=" + id + "&msg=" + message;
     }
 }

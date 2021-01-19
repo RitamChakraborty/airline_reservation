@@ -16,7 +16,8 @@ public class UserDaoManual {
 
     public void update(User user) {
         jdbcTemplate.update(
-                "update user set name = ?, email = ?, address = ?, phone = ? where id = ?",
+                "update user set password = ?, name = ?, email = ?, address = ?, phone = ? where id = ?",
+                user.getPassword(),
                 user.getName(),
                 user.getEmail(),
                 user.getAddress(),

@@ -27,7 +27,7 @@ public class UserService {
         return userDao.findById(id).orElse(null);
     }
 
-    public void updateUserById(User user) {
+    public void updateUser(User user) {
         userDaoManual.update(user);
     }
 
