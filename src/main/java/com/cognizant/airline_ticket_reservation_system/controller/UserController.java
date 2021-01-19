@@ -4,6 +4,7 @@ import com.cognizant.airline_ticket_reservation_system.model.User;
 import com.cognizant.airline_ticket_reservation_system.model.UserChangePassword;
 import com.cognizant.airline_ticket_reservation_system.model.UserDetailsUpdate;
 import com.cognizant.airline_ticket_reservation_system.service.UserService;
+import com.cognizant.airline_ticket_reservation_system.validator.UserChangePasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -21,10 +22,16 @@ import javax.validation.Valid;
 @PropertySource("classpath:messages.properties")
 public class UserController {
     private UserService userService;
+    private UserChangePasswordValidator userChangePasswordValidator;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setUserChangePasswordValidator(UserChangePasswordValidator userChangePasswordValidator) {
+        this.userChangePasswordValidator = userChangePasswordValidator;
     }
 
     @PostMapping("/user-home")
@@ -123,31 +130,24 @@ public class UserController {
     @PostMapping("/change-password")
     public String changePasswordPost(
             @RequestParam("id") Integer id,
-            @Valid @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
+            @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
             BindingResult bindingResult,
             ModelMap modelMap,
             @Value("${user.updatePasswordSuccessfully}") String message
     ) {
         modelMap.addAttribute("id", id);
 
-        if (bindingResult.hasErrors()) {
-            return "change-password";
-        }
-
-        System.out.println(userChangePassword);
-
         User user = userService.getUserById(id);
         String password = user.getPassword();
         String previousPassword = userChangePassword.getPreviousPassword();
         String newPassword = userChangePassword.getNewPassword();
         String confirmPassword = userChangePassword.getConfirmPassword();
+        userChangePassword.setOriginalPassword(password);
 
-        if (!newPassword.equals(confirmPassword)) {
-            // Todo: Confirm password did not match
-        } else if (!password.equals(previousPassword)) {
-            // Todo: Current password did not match
-        } else if (previousPassword.equals(newPassword)) {
-            // Todo: No change of password
+        userChangePasswordValidator.validate(userChangePassword, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "change-password";
         }
 
         user.setPassword(newPassword);

@@ -7,6 +7,7 @@ import javax.validation.constraints.Pattern;
 
 @Component
 public class UserChangePassword {
+    String originalPassword;
     @NotBlank(message = "{error.userChangePassword.previousPassword}")
     private String previousPassword;
     @NotBlank(message = "{error.userChangePassword.newPassword}")
@@ -14,6 +15,14 @@ public class UserChangePassword {
     private String newPassword;
     @NotBlank(message = "{error.userChangePassword.confirmPassword}")
     private String confirmPassword;
+
+    public String getOriginalPassword() {
+        return originalPassword;
+    }
+
+    public void setOriginalPassword(String originalPassword) {
+        this.originalPassword = originalPassword;
+    }
 
     public String getPreviousPassword() {
         return previousPassword;
