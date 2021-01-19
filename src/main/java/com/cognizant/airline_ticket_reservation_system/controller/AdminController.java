@@ -40,4 +40,9 @@ public class AdminController {
 
         return "user-details";
     }
+
+    @GetMapping("/add-flight")
+    public String addFlight() {
+        return "add-flight";
+    }
 }

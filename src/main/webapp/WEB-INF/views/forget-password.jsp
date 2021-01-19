@@ -36,7 +36,7 @@
     <form:label path="confirmPassword">
         <spring:message code="label.userChangePassword.confirmPassword"/>
     </form:label>
-    <form:input path="confirmPassword"/>
+    <form:password path="confirmPassword"/>
     <form:errors path="confirmPassword"/>
     <br>
     <input type="submit" value="Submit">
