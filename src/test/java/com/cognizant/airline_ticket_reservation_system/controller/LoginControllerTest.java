@@ -16,7 +16,6 @@ import org.springframework.validation.BindingResult;
 @RunWith(MockitoJUnitRunner.class)
 public class LoginControllerTest {
     private static final Admin admin1 = new Admin();
-    private static final Admin Admin2 = new Admin();
     @Mock
     private static LoginService loginService1;
     @Mock
@@ -76,5 +75,7 @@ public class LoginControllerTest {
         String errorMessage = "error-message";
         String expected = "admin-login";
         String actual = loginController.adminHome(admin1, bindingResult2, modelMap, errorMessage);
+
+        Assert.assertEquals(expected, actual);
     }
 }
