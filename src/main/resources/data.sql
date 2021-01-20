@@ -9,5 +9,6 @@ values ('k.afrin', 'Afrin Kardashian', 'kardashian.afrin@gmail.com', 'Saltlake C
 
 insert into flight(airline, model, type, seats_economy, seats_business)
 values ('British Airways', 'Boing 777', 'International', 200, 50),
-       ('US Airlines', 'Airbus a380', 'International', 500, 200),
-       ('Fly Emirates', 'Boing 747', 'International', 250, 75);
+       ('Lufthansa', 'Airbus A380', 'International', 500, 200),
+       ('Emirates', 'Boing 747', 'International', 250, 75),
+       ('IndiGo', 'Airbus A300', 'Domestic', '50', 10);

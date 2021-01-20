@@ -13,27 +13,29 @@
     <form:label path="airline">
         <spring:message code="label.flight.airline"/>
     </form:label>
-    <form:input path="airline"/>
+    <form:select path="airline" items="${ airlines }"/>
     <br>
     <form:label path="model">
         <spring:message code="label.flight.model"/>
     </form:label>
-    <form:input path="model"/>
+    <form:select path="model" items="${ models }"/>
     <br>
     <form:label path="type">
         <spring:message code="label.flight.type"/>
     </form:label>
-    <form:input path="type"/>
+    <form:select path="type" items="${ types }"/>
     <br>
     <form:label path="seatsEconomy">
         <spring:message code="label.flight.seatsEconomy"/>
     </form:label>
     <form:input path="seatsEconomy"/>
+    <form:errors path="seatsEconomy"/>
     <br>
     <form:label path="seatsBusiness">
         <spring:message code="label.flight.seatsBusiness"/>
     </form:label>
     <form:input path="seatsBusiness"/>
+    <form:errors path="seatsBusiness"/>
     <br>
     <input type="submit" value="Add Flight">
     <input type="reset" value="Reset">

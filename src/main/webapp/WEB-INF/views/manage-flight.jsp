@@ -7,6 +7,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Manage Flight</title>
+    <style>
+        * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+            border-collapse: collapse;
+        }
+
+        table, tr, th, td {
+            border: 1px solid lightgrey;
+        }
+    </style>
 </head>
 <body>
 <h1>

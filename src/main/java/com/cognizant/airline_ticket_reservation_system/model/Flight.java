@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Flight {
@@ -13,7 +15,11 @@ public class Flight {
     private String airline;
     private String model;
     private String type;
+    @NotNull(message = "{flight.seatsEconomy}")
+    @PositiveOrZero(message = "{flight.seatsEconomy.negative}")
     private Integer seatsEconomy;
+    @NotNull(message = "{flight.seatsBusiness}")
+    @PositiveOrZero(message = "{flight.seatsBusiness.negative}")
     private Integer seatsBusiness;
 
     public Integer getNo() {
