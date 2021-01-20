@@ -42,7 +42,7 @@ public class FlightController {
             @Valid @ModelAttribute("flight") Flight flight,
             BindingResult bindingResult,
             ModelMap modelMap,
-            @Value("Flight added successfully") String message
+            @Value("${flight.additionSuccessful}") String message
     ) {
         if (bindingResult.hasErrors()) {
             return "add-flight";
@@ -71,7 +71,7 @@ public class FlightController {
             @Valid @ModelAttribute("flight") Flight flight,
             BindingResult bindingResult,
             ModelMap modelMap,
-            @Value("Flight updated successfully") String message
+            @Value("${flight.updateSuccessful}") String message
     ) {
         if (bindingResult.hasErrors()) {
             return "update-flight";
@@ -99,7 +99,7 @@ public class FlightController {
     public String deleteFlight(
             @RequestParam("no") Integer no,
             ModelMap modelMap,
-            @Value("Flight deleted successfully") String message
+            @Value("${flight.deleteSuccessful}") String message
     ) {
         flightService.deleteFlightByNo(no);
         return "redirect:/manage-flight?msg=" + message;
