@@ -20,6 +20,11 @@
     </style>
 </head>
 <body>
+<c:if test="${ not empty param.msg }">
+    <script>
+        alert('${ param.msg }');
+    </script>
+</c:if>
 <h1>
     Manage Flight
 </h1>

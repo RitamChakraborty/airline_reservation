@@ -25,7 +25,7 @@ public class FlightController {
     }
 
     @GetMapping("/manage-flight")
-    public String manageFlight(ModelMap modelMap) {
+    public String manageFlight(@RequestParam(value = "msg", required = false) String message, ModelMap modelMap) {
         List<Flight> flights = flightService.getFlights();
         modelMap.addAttribute("flights", flights);
 
@@ -41,14 +41,15 @@ public class FlightController {
     public String addFlightPost(
             @Valid @ModelAttribute("flight") Flight flight,
             BindingResult bindingResult,
-            ModelMap modelMap
+            ModelMap modelMap,
+            @Value("Flight added successfully") String message
     ) {
         if (bindingResult.hasErrors()) {
             return "add-flight";
         }
 
         flightService.addFlight(flight);
-        return "redirect:/manage-flight";
+        return "redirect:/manage-flight?msg=" + message;
     }
 
     @GetMapping("/update-flight")
@@ -69,7 +70,8 @@ public class FlightController {
             @RequestParam("no") Integer no,
             @Valid @ModelAttribute("flight") Flight flight,
             BindingResult bindingResult,
-            ModelMap modelMap
+            ModelMap modelMap,
+            @Value("Flight updated successfully") String message
     ) {
         if (bindingResult.hasErrors()) {
             return "update-flight";
@@ -78,7 +80,7 @@ public class FlightController {
         flight.setNo(no);
         flightService.updateFlight(flight);
 
-        return "redirect:/manage-flight";
+        return "redirect:/manage-flight?msg=" + message;
     }
 
     @GetMapping("/delete-flight")
@@ -100,7 +102,7 @@ public class FlightController {
             @Value("Flight deleted successfully") String message
     ) {
         flightService.deleteFlightByNo(no);
-        return "redirect:/manage-flight";
+        return "redirect:/manage-flight?msg=" + message;
     }
 
     @ModelAttribute("airlines")
