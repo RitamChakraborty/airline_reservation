@@ -52,8 +52,33 @@ public class FlightController {
     }
 
     @GetMapping("/update-flight")
-    public String updateFlight(@RequestParam("no") Integer no) {
+    public String updateFlight(
+            @RequestParam("no") Integer no,
+            @ModelAttribute("flight") Flight flight,
+            ModelMap modelMap
+    ) {
+        Flight flightFromDatabase = flightService.getFlightByNo(no);
+        modelMap.addAttribute("flight", flightFromDatabase);
+        modelMap.addAttribute("no", no);
+
         return "update-flight";
+    }
+
+    @PostMapping("/update-flight")
+    public String updateFlight(
+            @RequestParam("no") Integer no,
+            @Valid @ModelAttribute("flight") Flight flight,
+            BindingResult bindingResult,
+            ModelMap modelMap
+    ) {
+        if (bindingResult.hasErrors()) {
+            return "update-flight";
+        }
+
+        flight.setNo(no);
+        flightService.updateFlight(flight);
+
+        return "redirect:/manage-flight";
     }
 
     @GetMapping("/delete-flight")
