@@ -37,7 +37,7 @@ public class LoginServiceTest {
     @Before
     public void setUp() {
         Mockito.when(adminDao.findById("ritam")).thenReturn(Optional.of(admin1));
-        Mockito.when(adminDao.findById("pritam")).thenReturn(Optional.ofNullable(null));
+        Mockito.when(adminDao.findById("pritam")).thenReturn(Optional.empty());
     }
 
     @Test
@@ -56,5 +56,11 @@ public class LoginServiceTest {
     public void validAdmin_test_invalid_admin() {
         boolean result = loginService.validAdmin(admin2);
         Assert.assertFalse(result);
+    }
+
+    @Test
+    public void validAdmin_test_verify_call_findById() {
+        loginService.validAdmin(admin1);
+        Mockito.verify(adminDao).findById("ritam");
     }
 }
