@@ -36,6 +36,10 @@ public class FlightService {
         flightDaoCustom.update(flight);
     }
 
+    public void deleteFlightByNo(Integer no) {
+        flightDao.deleteById(no);
+    }
+
     public List<Flight> getFlights() {
         return (List<Flight>) flightDao.findAll();
     }

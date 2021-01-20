@@ -82,8 +82,25 @@ public class FlightController {
     }
 
     @GetMapping("/delete-flight")
-    public String deleteFlight(@RequestParam("no") Integer no) {
+    public String deleteFlight(
+            @RequestParam("no") Integer no,
+            ModelMap modelMap
+    ) {
+        Flight flight = flightService.getFlightByNo(no);
+        modelMap.addAttribute("flight", flight);
+        modelMap.addAttribute("no", no);
+
         return "delete-flight";
+    }
+
+    @PostMapping("/delete-flight")
+    public String deleteFlight(
+            @RequestParam("no") Integer no,
+            ModelMap modelMap,
+            @Value("Flight deleted successfully") String message
+    ) {
+        flightService.deleteFlightByNo(no);
+        return "redirect:/manage-flight";
     }
 
     @ModelAttribute("airlines")
