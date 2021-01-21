@@ -7,7 +7,7 @@
 <body>
 <h1>Add Schedule</h1>
 <%--@elvariable id="flightSchedule" type="com.cognizant.airline_ticket_reservation_system.model.FlightSchedule"--%>
-<form:form action="/add-schedule" method="get" modelAttribute="flightSchedule">
+<form:form action="/add-schedule" method="post" modelAttribute="flightSchedule">
     <form:label path="flightNo">
         <spring:message code="label.flightSchedule.flightNo"/>
     </form:label>

@@ -1,10 +1,12 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.time.LocalTime;
 
 @Entity
 public class FlightSchedule {
@@ -14,8 +16,10 @@ public class FlightSchedule {
     private Integer flightNo;
     private String source;
     private String destination;
-    private Date arrivalTime;
-    private Date departureTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime arrivalTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime departureTime;
     private boolean sun;
     private boolean mon;
     private boolean tue;
@@ -56,19 +60,19 @@ public class FlightSchedule {
         this.destination = destination;
     }
 
-    public Date getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public Date getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Date departureTime) {
+    public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
 

@@ -6,8 +6,10 @@ import com.cognizant.airline_ticket_reservation_system.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,9 +24,24 @@ public class FlightScheduleController {
         this.flightService = flightService;
     }
 
+    @GetMapping("/schedule-flight")
+    public String scheduleFlight() {
+        return "schedule-flight";
+    }
+
     @GetMapping("/add-schedule")
     public String addSchedule(@ModelAttribute("flightSchedule") FlightSchedule flightSchedule) {
         return "add-schedule";
+    }
+
+    @PostMapping("/add-schedule")
+    public String addSchedule(
+            @ModelAttribute("flightSchedule") FlightSchedule flightSchedule,
+            BindingResult bindingResult
+    ) {
+        System.out.println(flightSchedule);
+
+        return "redirect:/schedule-flight";
     }
 
     @ModelAttribute("flights")
