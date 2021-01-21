@@ -11,7 +11,7 @@ public class UserRegistration {
     @NotBlank(message = "{error.user.name}")
     private String name;
     @NotBlank(message = "{error.password}")
-    @Pattern(regexp = "^(\\w{6,})?$", message = "{error.user.password.length}")
+    @Pattern(regexp = "^(\\w{6,})?$", message = "{error.user.password.invalid}")
     private String password;
     @NotBlank(message = "{error.user.confirmPassword}")
     private String confirmPassword;

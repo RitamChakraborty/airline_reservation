@@ -4,66 +4,65 @@
 <html>
 <head>
     <title>Forget Password</title>
-    
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-}
 
-* {
-  box-sizing: border-box;
-}
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+        }
 
-.container {
-  padding: 16px;
-  background-color: white;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
+        .container {
+            padding: 16px;
+            background-color: white;
+        }
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
 
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
 
-.submit {
-  background-color: blue;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
+        .submit {
+            background-color: blue;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
 
-.submit :hover {
-  opacity: 1;
-}
-        
-.reset {
-  background-color: blue;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
+        .submit :hover {
+            opacity: 1;
+        }
 
-.reset :hover {
-  opacity: 1;
-}
+        .reset {
+            background-color: blue;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .reset :hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
