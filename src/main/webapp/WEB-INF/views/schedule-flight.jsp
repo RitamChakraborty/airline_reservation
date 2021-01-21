@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,5 +10,6 @@
 </head>
 <body>
 <h1>Schedule Flight</h1>
+<a href="<c:url value="/add-schedule"/>">Add Schedule</a>
 </body>
 </html>

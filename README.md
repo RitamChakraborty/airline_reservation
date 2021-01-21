@@ -2,7 +2,7 @@
 
 ## Contributors
 
-- Afrin K
+- [Afrin Kadher](https://github.com/AfrinKadher)
 - Kunal Goel
 - Pallavi Gupta
 - [Ritam Chakraborty](https://github.com/RitamChakraborty)

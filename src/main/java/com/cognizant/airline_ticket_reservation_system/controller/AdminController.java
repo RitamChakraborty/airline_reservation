@@ -18,11 +18,6 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/schedule-flight")
-    public String scheduleFlight() {
-        return "schedule-flight";
-    }
-
     @GetMapping("/booking-details")
     public String bookingDetails() {
         return "booking-details";
