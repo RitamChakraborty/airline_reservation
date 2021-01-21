@@ -14,29 +14,27 @@
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
 
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: large;
+        }
+
         html, body {
-            height: 100%;
-            width: 100%;
+            height: 80vh;
+            width: 95vw;
         }
 
         h1 {
-            font-family: Raleway;
-            color: LightYellow;
+            font-family: Raleway, serif;
             text-align: center;
-        }
-
-        .box {
-            width: 120px;
-            height: 30px;
-            border: 1px solid #999;
-            font-size: 18px;
-            color: #1c87c9;
-            background-color: #eee;
-            border-radius: 5px;
-            box-shadow: 3px 3px rgba(0, 0, 0, .15);
+            font-size: xx-large;
+            color: white;
         }
 
         body {
+            display: flex;
+            flex-direction: column;
             background-image: url("/images/background.jpg");
             background-size: cover;
             background-repeat: no-repeat;
@@ -44,115 +42,90 @@
             background-attachment: fixed;
         }
 
-        div.transbox1 {
-            margin: 2px 0px 0px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+        #form-container {
+            padding: 8rem;
+            flex: 1 1 auto;
+            display: grid;
+            place-items: center;
+        }
+
+        .heading {
+            border: none;
             border-bottom-right-radius: 80px;
-            border-left: 18px solid rgba(5, 0, 0, 0.8);
-            background-image: linear-gradient(to right, rgba(25, 25, 112, 0.7),
+            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),
             rgba(0, 255, 255, 0.18));
             background-color: rgb(139, 69, 19);
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
-            border-collapse: separate;
-            padding: 15px 45px 18px;
+            padding: 1rem;
         }
 
-        #transbox2 {
-            overflow: hidden;
-            width: 18%;
-            height: 25%;
-            border-radius: 100px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.27);
-            border-collapse: separate;
-            padding: 45px 15px 65px;
-            background: inherit;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            text-align: center;
-            margin: 300px auto auto;
-        }
-
-        #transbox2:before {
-            width: 400px;
-            height: 550px;
-            content: "";
-            position: absolute;
-            top: -25px;
-            left: -25px;
-            bottom: 0;
-            right: 0;
-            background: inherit;
-            box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.2);
-            filter: blur(3px);
-        }
-
-        a:link {
-            color: yellow;
-            display: block;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 5px 10px;
-            margin: 20px 0;
-            border-radius: 15px;
-            position: relative;
-            color: #ecf0f1;
-        }
-
-        #button-7 {
-            -webkit-perspective: 50px;
-            -moz-perspective: 50px;
-            -ms-perspective: 50px;
-            perspective: 50px;
-            background-color: rgba(60, 100, 255);
-            -webkit-transition: all 0.6s ease-in-out;
-            -o-transition: all 0.6s ease-in-out;
-            transition: all 0.6s ease-in-out;
+        .form-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
         }
 
         form {
-            text-align: center;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            display: grid;
+            place-items: center;
+            font-size: medium;
         }
 
-        #button-7:hover {
-            -webkit-transform: rotateX(360deg);
-            -ms-transform: rotateX(360deg);
-            -o-transform: rotateX(360deg);
-            transform: rotateX(360deg);
+        form * {
+            margin: 2rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        select, option {
+            padding: 0.25rem;
+            margin: 0;
+            font-size: medium;
+        }
+
+        #role-message {
+            font-size: xx-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        #role {
+            border: none;
+            outline: none;
+            background-color: lightgrey;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        #submit-btn {
+            font-size: large;
+            padding: 0.5rem 1rem;
+            background-color: dodgerblue;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
 <%--@elvariable id="roleSelection" type="com.cognizant.airline_ticket_reservation_system.model.RoleSelection"--%>
-<div class="transbox1">
+<header class="heading">
     <h1>Airline Ticket Reservation System</h1>
-</div>
-<div id="transbox2">
-    <form:form action="/login" method="get" modelAttribute="roleSelection">
-        <form:label path="role">
-            <br>
-            <spring:message code="label.selectRole"/>
-        </form:label>
-        <br>
-        <br>
-        <br>
-        <form:select path="role" items="${ roles }" id="role" class="box">
-        </form:select>
-        <br>
-        <br>
-        <br>
-        <button type="submit" class="btn" id="button-7">Select Role
-            &amp; Submit
-        </button>
-    </form:form>
+</header>
+<div id="form-container">
+    <div class="form-card">
+        <form:form action="/login" method="get" modelAttribute="roleSelection">
+            <form:label path="role" id="role-message">
+                <spring:message code="label.selectRole"/>
+            </form:label>
+            <form:select path="role" items="${ roles }" id="role" class="box">
+            </form:select>
+            <button type="submit" id="submit-btn">Choose</button>
+        </form:form>
+    </div>
 </div>
 </body>
 </html>
