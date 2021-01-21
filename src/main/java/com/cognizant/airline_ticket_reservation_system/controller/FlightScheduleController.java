@@ -76,4 +76,9 @@ public class FlightScheduleController {
     private List<String> destinations(@Value("#{'${flightSchedule.destinations}'.split(',')}") List<String> destinations) {
         return destinations;
     }
+
+    @ModelAttribute("flightSchedules")
+    public List<FlightSchedule> flightSchedules() {
+        return flightScheduleService.getFlightSchedules();
+    }
 }

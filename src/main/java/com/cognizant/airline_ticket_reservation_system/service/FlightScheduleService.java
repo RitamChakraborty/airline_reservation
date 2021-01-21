@@ -5,6 +5,8 @@ import com.cognizant.airline_ticket_reservation_system.model.FlightSchedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FlightScheduleService {
     private FlightScheduleDao flightScheduleDao;
@@ -16,5 +18,9 @@ public class FlightScheduleService {
 
     public void saveFlightSchedule(FlightSchedule flightSchedule) {
         flightScheduleDao.save(flightSchedule);
+    }
+
+    public List<FlightSchedule> getFlightSchedules() {
+        return (List<FlightSchedule>) flightScheduleDao.findAll();
     }
 }
