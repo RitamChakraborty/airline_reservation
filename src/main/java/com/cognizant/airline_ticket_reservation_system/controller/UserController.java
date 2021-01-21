@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("/user-home")
     public String userHome(
             @RequestParam("id") Integer id,
-            @RequestParam("msg") String message,
+            @RequestParam(value = "msg", required = false) String message,
             ModelMap modelMap
     ) {
         User user = userService.getUserById(id);
