@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,9 +44,13 @@ public class FlightScheduleController {
 
     @PostMapping("/add-schedule")
     public String addSchedule(
-            @ModelAttribute("flightSchedule") FlightSchedule flightSchedule,
+            @Valid @ModelAttribute("flightSchedule") FlightSchedule flightSchedule,
             BindingResult bindingResult
     ) {
+        if (bindingResult.hasErrors()) {
+            return "add-schedule";
+        }
+
         flightScheduleService.saveFlightSchedule(flightSchedule);
         return "redirect:/schedule-flight";
     }

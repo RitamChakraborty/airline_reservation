@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Add Schedule</title>
@@ -27,11 +28,13 @@
         <spring:message code="label.flightSchedule.arrivalTime"/>
     </form:label>
     <form:input path="arrivalTime" type="time"/>
+    <form:errors path="arrivalTime"/>
     <br>
     <form:label path="departureTime">
         <spring:message code="label.flightSchedule.departureTime"/>
     </form:label>
     <form:input path="departureTime" type="time"/>
+    <from:errors path="departureTime"/>
     <br>
     <form:label path="sun">
         <spring:message code="label.flightSchedule.sun"/>

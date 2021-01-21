@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Entity
@@ -16,8 +17,10 @@ public class FlightSchedule {
     private Integer flightNo;
     private String source;
     private String destination;
+    @NotNull(message = "{flightSchedule.arrivalTime}")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
+    @NotNull(message = "{flightSchedule.departureTime}")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime departureTime;
     private boolean sun;
