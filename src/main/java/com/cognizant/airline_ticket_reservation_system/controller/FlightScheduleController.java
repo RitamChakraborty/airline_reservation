@@ -2,6 +2,7 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.Flight;
 import com.cognizant.airline_ticket_reservation_system.model.FlightSchedule;
+import com.cognizant.airline_ticket_reservation_system.service.FlightScheduleService;
 import com.cognizant.airline_ticket_reservation_system.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,10 +19,16 @@ import java.util.Map;
 @Controller
 public class FlightScheduleController {
     private FlightService flightService;
+    private FlightScheduleService flightScheduleService;
 
     @Autowired
     public void setFlightService(FlightService flightService) {
         this.flightService = flightService;
+    }
+
+    @Autowired
+    public void setFlightScheduleService(FlightScheduleService flightScheduleService) {
+        this.flightScheduleService = flightScheduleService;
     }
 
     @GetMapping("/schedule-flight")
@@ -39,8 +46,7 @@ public class FlightScheduleController {
             @ModelAttribute("flightSchedule") FlightSchedule flightSchedule,
             BindingResult bindingResult
     ) {
-        System.out.println(flightSchedule);
-
+        flightScheduleService.saveFlightSchedule(flightSchedule);
         return "redirect:/schedule-flight";
     }
 
