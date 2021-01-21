@@ -9,8 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width = device-width, initial-scale = 1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>Airline Ticket Reservation system</title>
+    <link rel="stylesheet" href="/styles/styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
 
@@ -21,15 +21,7 @@
         }
 
         html, body {
-            height: 80vh;
-            width: 95vw;
-        }
-
-        h1 {
-            font-family: Raleway, serif;
-            text-align: center;
-            font-size: xx-large;
-            color: white;
+            width: 100%;
         }
 
         body {
@@ -42,6 +34,21 @@
             background-attachment: fixed;
         }
 
+        header {
+            border: none;
+            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7), rgba(0, 255, 255, 0.18));
+            background-color: rgb(139, 69, 19);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
+            padding: 1rem;
+        }
+
+        h1 {
+            font-family: Raleway, serif;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+
         #form-container {
             padding: 8rem;
             flex: 1 1 auto;
@@ -49,19 +56,9 @@
             place-items: center;
         }
 
-        .heading {
-            border: none;
-            border-bottom-right-radius: 80px;
-            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),
-            rgba(0, 255, 255, 0.18));
-            background-color: rgb(139, 69, 19);
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
-            padding: 1rem;
-        }
-
         .form-card {
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
+            padding: 0 2rem;
             border-radius: 10px;
         }
 
@@ -81,6 +78,10 @@
             padding: 0.25rem;
             margin: 0;
             font-size: medium;
+        }
+
+        select:after {
+            padding: 0.25rem;
         }
 
         #role-message {

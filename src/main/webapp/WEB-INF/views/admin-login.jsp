@@ -11,31 +11,161 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Home</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: large;
+        }
+
+        html, body {
+            width: 100%;
+        }
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-image: url("/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            background-attachment: fixed;
+        }
+
+        header {
+            border: none;
+            border-bottom-right-radius: 80px;
+            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),
+            rgba(0, 255, 255, 0.18));
+            background-color: rgb(139, 69, 19);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
+            padding: 1rem;
+        }
+
+        h1 {
+            font-family: Raleway, serif;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+
+        #form-container {
+            padding: 8rem;
+            flex: 1 1 auto;
+            display: grid;
+            place-items: center;
+        }
+
+        .form-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        select, option {
+            padding: 0.25rem;
+            margin: 0;
+            font-size: medium;
+        }
+
+        form label {
+            padding-bottom: 0.5rem;
+            color: darkslategrey;
+            font-size: large;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            background-color: lightgrey;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .error-text {
+            color: crimson;
+            font-size: medium;
+            font-family: monospace;
+            padding: 0.25rem;
+        }
+
+        .global-error-text {
+            padding: 0.5rem;
+            font-family: monospace;
+            color: red;
+        }
+
+        .submit-buttons-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .submit-buttons-container input {
+            margin: 0 0.25rem;
+        }
+
+        #submit-btn {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        #reset-btn {
+            background-color: green;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<h1>Admin Login</h1>
+<header>
+    <h1>Admin Login</h1>
+</header>
 <%--@elvariable id="admin" type="com.cognizant.airline_ticket_reservation_system.model.Admin"--%>
-<form:form action="/admin-home" method="post" modelAttribute="admin">
-    <form:label path="username">
-        <spring:message code="label.username"/>
-    </form:label>
-    <form:input path="username" id="username"/>
-    <form:errors path="username" cssClass="ui-state-error-text"/>
-    <br>
-    <form:label path="password">
-        <spring:message code="label.password"/>
-    </form:label>
-    <form:password path="password" id="password"/>
-    <form:errors path="password" cssClass="ui-state-error-text"/>
-    <br>
-    <c:if test="${ not empty errorMessage}">
-        <p>
-            <%= request.getAttribute("errorMessage") %>
-        </p>
-    </c:if>
-    <input type="submit" value="Login">
-    <input type="reset" value="Reset">
-</form:form>
+<div id="form-container">
+    <div class="form-card">
+        <form:form action="/admin-home" method="post" modelAttribute="admin">
+            <form:label path="username">
+                <spring:message code="label.username"/>
+            </form:label>
+            <form:input path="username" id="username"/>
+            <form:errors path="username" cssClass="error-text"/>
+            <br>
+            <form:label path="password">
+                <spring:message code="label.password"/>
+            </form:label>
+            <form:password path="password" id="password"/>
+            <form:errors path="password" cssClass="error-text"/>
+            <div class="global-error-text">
+                <c:if test="${ not empty errorMessage }">
+                    <p>
+                        <%= request.getAttribute("errorMessage") %>
+                    </p>
+                </c:if>
+            </div>
+            <div class="submit-buttons-container">
+                <input type="submit" value="Login" id="submit-btn">
+                <input type="reset" value="Reset" id="reset-btn">
+            </div>
+        </form:form>
+    </div>
+</div>
 <div class="news-feed">
     News feed will be displayed here
 </div>
