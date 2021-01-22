@@ -30,6 +30,7 @@
             display: flex;
             flex-direction: column;
             /*background-image: url("/images/background.jpg");*/
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             background-size: cover;
             background-repeat: no-repeat;
             vertical-align: middle;
@@ -61,9 +62,10 @@
 
         .form-card {
             /*background-color: rgba(255, 255, 255, 0.9);*/
-            border: 1px solid lightgrey;
             padding: 2rem;
             border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            background-color: white;
         }
 
         form {
@@ -92,7 +94,7 @@
         input {
             border: none;
             outline: none;
-            background-color: #f1f1f1;
+            background-color: #dddddd;
             color: darkslategrey;
             padding: 0.5rem;
             text-align-last: center;
@@ -144,13 +146,13 @@
             <form:label path="username">
                 <spring:message code="label.username"/>
             </form:label>
-            <form:input path="username" id="username"/>
+            <form:input path="username" id="username" placeholder="Enter username"/>
             <form:errors path="username" cssClass="error-text"/>
             <br>
             <form:label path="password">
                 <spring:message code="label.password"/>
             </form:label>
-            <form:password path="password" id="password"/>
+            <form:password path="password" id="password" placeholder="Enter password"/>
             <form:errors path="password" cssClass="error-text"/>
             <div class="global-error-text">
                 <c:if test="${ not empty errorMessage }">

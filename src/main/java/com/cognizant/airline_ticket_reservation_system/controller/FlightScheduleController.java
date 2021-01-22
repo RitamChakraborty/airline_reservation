@@ -61,7 +61,10 @@ public class FlightScheduleController {
         List<Flight> flightList = flightService.getFlights();
 
         for (Flight flight : flightList) {
-            flightMap.put(flight.getNo(), flight.toString());
+            String string = "Airline: " + flight.getAirline() + ", " +
+                    "Model: " + flight.getModel() + ", " +
+                    "Type: " + flight.getType();
+            flightMap.put(flight.getNo(), string);
         }
 
         return flightMap;
