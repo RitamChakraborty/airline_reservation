@@ -142,7 +142,7 @@
 <%--@elvariable id="admin" type="com.cognizant.airline_ticket_reservation_system.model.Admin"--%>
 <div id="form-container">
     <div class="form-card">
-        <form:form action="/admin-home" method="post" modelAttribute="admin">
+        <form:form action="/admin-login" method="post" modelAttribute="admin">
             <form:label path="username">
                 <spring:message code="label.username"/>
             </form:label>

@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <h1>Welcome Admin</h1>
+    <h1>Welcome Admin (${ param.username })</h1>
 </header>
 <nav>
     <ul>
