@@ -10,14 +10,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Home</title>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="/styles/styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
 
         * {
-            margin: 0;
-            padding: 0;
+            margin: 0.25rem;
+            padding: 0.25rem;
+            border-collapse: collapse;
             font-size: large;
         }
 
@@ -40,8 +41,8 @@
         header {
             border: none;
             background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),
-            rgba(0, 255, 255, 0.18));
-            background-color: rgb(139, 69, 19);
+            rgba(0, 255, 255, 0.48));
+            background-color: rgb(0, 89, 19);
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
             padding: 1rem;
         }

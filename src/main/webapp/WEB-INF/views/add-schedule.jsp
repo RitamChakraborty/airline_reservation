@@ -4,9 +4,32 @@
 <html>
 <head>
     <title>Add Schedule</title>
+    <style>
+        * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+            border-collapse: collapse;
+        }
+        header {
+            border: none;
+            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7), rgba(0, 255, 255, 0.18));
+            background-color: rgb(139, 69, 19);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
+            padding: 1rem;
+        }
+
+        h1 {
+            font-family: Raleway, serif;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<h1>Add Schedule</h1>
+<header class="heading">
+    <h1>Add Schedule</h1>
+</header>
 <%--@elvariable id="flightSchedule" type="com.cognizant.airline_ticket_reservation_system.model.FlightSchedule"--%>
 <form:form action="/add-schedule" method="post" modelAttribute="flightSchedule">
     <form:label path="flightNo">
