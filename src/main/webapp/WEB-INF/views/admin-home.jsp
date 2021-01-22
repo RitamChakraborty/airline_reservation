@@ -30,13 +30,16 @@
             <a href="<c:url value="/user-details"/>">User Details</a>
         </li>
         <li>
-            <button class="logout">Logout</button>
+            <a href="<c:url value="/add-news"/>">Add News</a>
+        </li>
+        <li>
+            <a href="<c:url value="/"/>">Logout</a>
         </li>
     </ul>
 </nav>
 <article>
     <div class="news-feed">
-        News feed will be displayed here
+
     </div>
 </article>
 </body>

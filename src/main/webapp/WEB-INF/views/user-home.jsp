@@ -29,11 +29,10 @@
             <a href="<c:url value="/history"/>">History</a>
         </li>
         <li>
-            <a href="<c:url value="/view-profile?id=${ user.id }"/>">View
-                Profile</a>
+            <a href="<c:url value="/view-profile?id=${ user.id }"/>">View Profile</a>
         </li>
         <li>
-            <button class="logout">Logout</button>
+            <a href="<c:url value="/"/>">Logout</a>
         </li>
     </ul>
 </nav>
