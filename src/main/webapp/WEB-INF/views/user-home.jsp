@@ -36,10 +36,8 @@
         </li>
     </ul>
 </nav>
-<article>
-    <div class="news-feed">
-        News feed will be displayed here
-    </div>
-</article>
+<div class="news-feed">
+    News feed will be displayed here
+</div>
 </body>
 </html>

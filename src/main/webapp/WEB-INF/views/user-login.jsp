@@ -38,8 +38,5 @@
 </form:form>
 <a href="<c:url value="/user-registration"/>">Sign Up</a>
 <a href="<c:url value="/forget-password"/>">Forget Password</a>
-<div class="news-feed">
-    News feed will be displayed here
-</div>
 </body>
 </html>

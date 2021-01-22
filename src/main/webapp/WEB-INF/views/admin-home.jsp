@@ -39,7 +39,7 @@
 </nav>
 <article>
     <div class="news-feed">
-
+        News feed will be shown here
     </div>
 </article>
 </body>

@@ -128,5 +128,8 @@
         </form:form>
     </div>
 </div>
+<div class="news-feed">
+    News feed will be displayed here
+</div>
 </body>
 </html>
