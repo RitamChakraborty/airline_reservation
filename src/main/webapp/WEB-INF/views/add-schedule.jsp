@@ -4,10 +4,53 @@
 <html>
 <head>
     <title>Add Schedule</title>
+    <style>
+        * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+            border-collapse: collapse;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            /*background-image: url("/images/background.jpg");*/
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            background-attachment: fixed;
+        }
+        header {
+            border: none;
+            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7), rgba(0, 255, 255, 0.18));
+            background-color: rgb(139, 69, 19);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
+            padding: 1rem;
+        }
+
+        h1 {
+            font-family: Raleway, serif;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+        div.card {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 30px -10px grey;
+            place-items: center;
+            font-size: medium;
+            margin: 2rem;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
-<h1>Add Schedule</h1>
+<header class="heading">
+    <h1>Add Schedule</h1>
+</header>
 <%--@elvariable id="flightSchedule" type="com.cognizant.airline_ticket_reservation_system.model.FlightSchedule"--%>
+<div class=card>
 <form:form action="/add-schedule" method="post" modelAttribute="flightSchedule">
     <form:label path="flightNo">
         <spring:message code="label.flightSchedule.flightNo"/>
@@ -74,5 +117,6 @@
     <input type="submit" value="Schedule">
     <input type="reset" value="Reset">
 </form:form>
+</div>
 </body>
 </html>

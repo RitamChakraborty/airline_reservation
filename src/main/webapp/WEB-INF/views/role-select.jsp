@@ -15,19 +15,18 @@
         @import url('https://fonts.googleapis.com/css?family=Raleway');
 
         * {
-            margin: 0;
-            padding: 0;
+            margin: 0.25rem;
+            padding: 0.25rem;
+            border-collapse: collapse;
             font-size: large;
         }
-
         html, body {
             width: 100%;
         }
-
         body {
             display: flex;
             flex-direction: column;
-            background-image: url("/images/background.jpg");
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             background-size: cover;
             background-repeat: no-repeat;
             vertical-align: middle;
@@ -60,6 +59,8 @@
             background-color: rgba(255, 255, 255, 0.9);
             padding: 0 2rem;
             border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+
         }
 
         form {
@@ -67,6 +68,7 @@
             place-items: center;
             font-size: medium;
         }
+
 
         form * {
             margin: 2rem;
