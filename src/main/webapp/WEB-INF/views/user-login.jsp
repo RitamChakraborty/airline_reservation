@@ -10,33 +10,165 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Home</title>
+    <title>User Login</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: large;
+        }
+
+        html, body {
+            width: 100%;
+        }
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            background-attachment: fixed;
+        }
+
+        header {
+            border: none;
+            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),
+            rgba(0, 255, 255, 0.18));
+            background-color: rgb(139, 69, 19);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
+            padding: 1rem;
+        }
+
+        h1 {
+            font-family: Raleway, serif;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+
+        #form-container {
+            padding: 8rem;
+            flex: 1 1 auto;
+            display: grid;
+            place-items: center;
+        }
+
+        .form-card {
+            /*background-color: rgba(255, 255, 255, 0.9);*/
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            background-color: white;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        select, option {
+            padding: 0.25rem;
+            margin: 0;
+            font-size: medium;
+        }
+
+        form label {
+            padding-bottom: 0.5rem;
+            color: darkslategrey;
+            font-size: large;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .ui-state-error-text {
+            color: crimson;
+            font-size: medium;
+            font-family: monospace;
+            padding: 0.25rem;
+        }
+
+        .global-error-text {
+            padding: 0.5rem;
+            font-family: monospace;
+            color: red;
+        }
+
+        .submit-buttons-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .submit-buttons-container input {
+            margin: 0 0.25rem;
+        }
+
+        #submit-btn {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        #reset-btn {
+            background-color: green;
+            color: white;
+        }
+</style>
 </head>
 <body>
-<h1>User Login</h1>
+<header>
+		<h1>User Login</h1>
+</header>
 <%--@elvariable id="userLogin" type="com.cognizant.airline_ticket_reservation_system.model.UserLogin"--%>
+<div id="form-container">
+    <div class="form-card">
 <form:form action="/user-validation" method="post" modelAttribute="userLogin">
     <form:label path="id">
         <spring:message code="label.user.id"/>
     </form:label>
-    <form:input path="id" id="user-id"/>
+    <form:input path="id" id="user-id" placeholder="Enter user ID"/>
     <form:errors path="id" cssClass="ui-state-error-text"/>
     <br>
     <form:label path="password">
         <spring:message code="label.password"/>
     </form:label>
-    <form:password path="password" id="password"/>
+    <form:password path="password" id="password" placeholder="Enter password"/>
     <form:errors path="password" cssClass="ui-state-error-text"/>
-    <br>
+    <div class="global-error-text">
     <c:if test="${ not empty errorMessage }">
         <p>
             <%= request.getAttribute("errorMessage") %>
         </p>
     </c:if>
-    <input type="submit" value="Login">
-    <input type="reset" value="Reset">
-</form:form>
-<a href="<c:url value="/user-registration"/>">Sign Up</a>
-<a href="<c:url value="/forget-password"/>">Forget Password</a>
+	    </div>
+	    <div class="submit-buttons-container">
+	    <input type="submit" value="Login" id="submit-btn">
+	    <input type="reset" value="Reset" id="reset-btn">
+	    </div>
+	</form:form>
+	<br>
+	<a href="<c:url value="/user-registration"/>">Sign Up </a><br>  
+	<a href="<c:url value="/forget-password"/>">Forget Password</a>
+	</div>
+</div>
 </body>
 </html>
