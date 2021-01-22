@@ -30,7 +30,7 @@
             <a href="<c:url value="/user-details"/>">User Details</a>
         </li>
         <li>
-            <a href="<c:url value="/add-news"/>">Add News</a>
+            <a href="<c:url value="/add-news?username=${ param.username }"/>">Add News</a>
         </li>
         <li>
             <a href="<c:url value="/"/>">Logout</a>
