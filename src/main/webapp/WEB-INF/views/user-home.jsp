@@ -23,7 +23,7 @@
             <a href="<c:url value="/"/>">Home</a>
         </li>
         <li>
-            <a href="<c:url value="/book-ticket"/>">Book Ticket</a>
+            <a href="<c:url value="/flight-search"/>">Book Ticket</a>
         </li>
         <li>
             <a href="<c:url value="/history"/>">History</a>
