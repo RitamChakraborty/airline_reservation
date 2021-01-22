@@ -132,43 +132,43 @@
             background-color: green;
             color: white;
         }
-</style>
+    </style>
 </head>
 <body>
 <header>
-		<h1>User Login</h1>
+    <h1>User Login</h1>
 </header>
 <%--@elvariable id="userLogin" type="com.cognizant.airline_ticket_reservation_system.model.UserLogin"--%>
 <div id="form-container">
     <div class="form-card">
-<form:form action="/user-validation" method="post" modelAttribute="userLogin">
-    <form:label path="id">
-        <spring:message code="label.user.id"/>
-    </form:label>
-    <form:input path="id" id="user-id" placeholder="Enter user ID"/>
-    <form:errors path="id" cssClass="ui-state-error-text"/>
-    <br>
-    <form:label path="password">
-        <spring:message code="label.password"/>
-    </form:label>
-    <form:password path="password" id="password" placeholder="Enter password"/>
-    <form:errors path="password" cssClass="ui-state-error-text"/>
-    <div class="global-error-text">
-    <c:if test="${ not empty errorMessage }">
-        <p>
-            <%= request.getAttribute("errorMessage") %>
-        </p>
-    </c:if>
-	    </div>
-	    <div class="submit-buttons-container">
-	    <input type="submit" value="Login" id="submit-btn">
-	    <input type="reset" value="Reset" id="reset-btn">
-	    </div>
-	</form:form>
-	<br>
-	<a href="<c:url value="/user-registration"/>">Sign Up </a><br>  
-	<a href="<c:url value="/forget-password"/>">Forget Password</a>
-	</div>
+        <form:form action="/user-validation" method="post" modelAttribute="userLogin">
+            <form:label path="id">
+                <spring:message code="label.user.id"/>
+            </form:label>
+            <form:input path="id" id="user-id" placeholder="Enter user ID"/>
+            <form:errors path="id" cssClass="ui-state-error-text"/>
+            <br>
+            <form:label path="password">
+                <spring:message code="label.password"/>
+            </form:label>
+            <form:password path="password" id="password" placeholder="Enter password"/>
+            <form:errors path="password" cssClass="ui-state-error-text"/>
+            <div class="global-error-text">
+                <c:if test="${ not empty errorMessage }">
+                    <p>
+                        <%= request.getAttribute("errorMessage") %>
+                    </p>
+                </c:if>
+            </div>
+            <div class="submit-buttons-container">
+                <input type="submit" value="Login" id="submit-btn">
+                <input type="reset" value="Reset" id="reset-btn">
+            </div>
+        </form:form>
+        <br>
+        <a href="<c:url value="/user-registration"/>">Sign Up </a><br>
+        <a href="<c:url value="/forget-password"/>">Forget Password</a>
+    </div>
 </div>
 </body>
 </html>

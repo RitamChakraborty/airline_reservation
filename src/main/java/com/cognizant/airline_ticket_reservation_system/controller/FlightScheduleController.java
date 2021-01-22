@@ -52,6 +52,7 @@ public class FlightScheduleController {
         }
 
         flightScheduleService.saveFlightSchedule(flightSchedule);
+
         return "redirect:/schedule-flight";
     }
 
