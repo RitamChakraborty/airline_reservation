@@ -1,9 +1,7 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
-import com.cognizant.airline_ticket_reservation_system.model.User;
-import com.cognizant.airline_ticket_reservation_system.model.UserChangePassword;
-import com.cognizant.airline_ticket_reservation_system.model.UserDetailsUpdate;
-import com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword;
+import com.cognizant.airline_ticket_reservation_system.model.*;
+import com.cognizant.airline_ticket_reservation_system.service.NewsFeedService;
 import com.cognizant.airline_ticket_reservation_system.service.UserService;
 import com.cognizant.airline_ticket_reservation_system.validator.UserChangePasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @PropertySource("classpath:messages.properties")
 public class UserController {
     private UserService userService;
     private UserChangePasswordValidator userChangePasswordValidator;
+    private NewsFeedService newsFeedService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -33,6 +33,11 @@ public class UserController {
     @Autowired
     public void setUserChangePasswordValidator(UserChangePasswordValidator userChangePasswordValidator) {
         this.userChangePasswordValidator = userChangePasswordValidator;
+    }
+
+    @Autowired
+    public void setNewsFeedService(NewsFeedService newsFeedService) {
+        this.newsFeedService = newsFeedService;
     }
 
     @PostMapping("/user-home")
@@ -194,5 +199,10 @@ public class UserController {
         userService.updateUser(user);
 
         return "redirect:/user-home?id=" + id + "&msg=" + message;
+    }
+
+    @ModelAttribute("newsFeeds")
+    public List<NewsFeed> newsFeeds() {
+        return newsFeedService.getNewsFeeds();
     }
 }

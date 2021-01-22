@@ -36,8 +36,23 @@
         </li>
     </ul>
 </nav>
-<div class="news-feed">
-    News feed will be displayed here
+<div>
+    <h2>All News Feeds</h2>
+    <c:choose>
+        <c:when test="${ not empty newsFeeds }">
+            <ol>
+                <c:forEach var="newsFeed" items="${ newsFeeds }">
+                    <li>
+                        <p>News : ${ newsFeed.news }</p>
+                        <p>Date : ${ newsFeed.date }</p>
+                    </li>
+                </c:forEach>
+            </ol>
+        </c:when>
+        <c:otherwise>
+            No news available
+        </c:otherwise>
+    </c:choose>
 </div>
 </body>
 </html>
