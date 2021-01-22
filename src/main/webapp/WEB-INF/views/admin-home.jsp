@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <h1>Welcome Admin</h1>
+    <h1>Welcome Admin (${ param.username })</h1>
 </header>
 <nav>
     <ul>
@@ -30,17 +30,30 @@
             <a href="<c:url value="/user-details"/>">User Details</a>
         </li>
         <li>
-            <a href="<c:url value="/add-news"/>">Add News</a>
+            <a href="<c:url value="/add-news?username=${ param.username }"/>">Add News</a>
         </li>
         <li>
             <a href="<c:url value="/"/>">Logout</a>
         </li>
     </ul>
 </nav>
-<article>
-    <div class="news-feed">
-        News feed will be shown here
-    </div>
-</article>
+<div>
+    <h2>All News Feeds</h2>
+    <c:choose>
+        <c:when test="${ not empty newsFeeds }">
+            <ol>
+                <c:forEach var="newsFeed" items="${ newsFeeds }">
+                    <li>
+                        <p>News : ${ newsFeed.news }</p>
+                        <p>Date : ${ newsFeed.date }</p>
+                    </li>
+                </c:forEach>
+            </ol>
+        </c:when>
+        <c:otherwise>
+            No news available
+        </c:otherwise>
+    </c:choose>
+</div>
 </body>
 </html>

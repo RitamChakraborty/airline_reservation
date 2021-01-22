@@ -52,7 +52,7 @@ public class LoginControllerTest {
 
         String errorMessage = "error-message";
         String expected = "admin-home";
-        String actual = loginController.adminHome(admin1, bindingResult1, modelMap, errorMessage);
+        String actual = loginController.adminLogin(admin1, bindingResult1, modelMap, errorMessage);
 
         Assert.assertEquals(expected, actual);
     }
@@ -63,7 +63,7 @@ public class LoginControllerTest {
 
         String errorMessage = "error-message";
         String expected = "admin-login";
-        String actual = loginController.adminHome(admin1, bindingResult1, modelMap, errorMessage);
+        String actual = loginController.adminLogin(admin1, bindingResult1, modelMap, errorMessage);
 
         Assert.assertEquals(expected, actual);
     }
@@ -74,7 +74,7 @@ public class LoginControllerTest {
 
         String errorMessage = "error-message";
         String expected = "admin-login";
-        String actual = loginController.adminHome(admin1, bindingResult2, modelMap, errorMessage);
+        String actual = loginController.adminLogin(admin1, bindingResult2, modelMap, errorMessage);
 
         Assert.assertEquals(expected, actual);
     }

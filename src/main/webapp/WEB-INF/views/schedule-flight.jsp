@@ -1,5 +1,4 @@
 <%@ page import="com.cognizant.airline_ticket_reservation_system.model.FlightSchedule" %>
-<%@ page import="java.util.List" %>
 <%@ page import="java.util.StringJoiner" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
@@ -24,13 +23,13 @@
     </style>
 </head>
 <body>
-<%!
-    int index = 0;
-%>
 <h1>Schedule Flight</h1>
 <a href="<c:url value="/add-schedule"/>">Add Schedule</a>
 <c:choose>
     <c:when test="${ not empty flightSchedules }">
+        <%!
+            int index = 0;
+        %>
         <table>
             <thead>
             <tr>
@@ -54,7 +53,7 @@
                     <td>${ flightSchedule.departureTime }</td>
                     <td>
                         <%
-                            FlightSchedule flightSchedule = ((List<FlightSchedule>) request.getAttribute("flightSchedules")).get(index);
+                            FlightSchedule flightSchedule = (FlightSchedule) pageContext.getAttribute("flightSchedule");
                             StringJoiner stringJoiner = new StringJoiner(", ");
 
                             if (flightSchedule.isSun()) {
@@ -79,7 +78,6 @@
                                 stringJoiner.add("Sat");
                             }
 
-                            ++index;
                             out.print(stringJoiner.toString());
                         %>
                     </td>

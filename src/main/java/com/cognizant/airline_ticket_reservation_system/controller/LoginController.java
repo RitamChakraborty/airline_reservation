@@ -53,8 +53,8 @@ public class LoginController {
         return "admin-login";
     }
 
-    @PostMapping("/admin-home")
-    public String adminHome(
+    @PostMapping("/admin-login")
+    public String adminLogin(
             @Valid @ModelAttribute("admin") Admin admin,
             BindingResult bindingResult,
             ModelMap modelMap,
@@ -67,7 +67,7 @@ public class LoginController {
         boolean validAdmin = loginService.validAdmin(admin);
 
         if (validAdmin) {
-            return "admin-home";
+            return "redirect:/admin-home?username=" + admin.getUsername();
         } else {
             modelMap.addAttribute("errorMessage", errorMessage);
             return "admin-login";
