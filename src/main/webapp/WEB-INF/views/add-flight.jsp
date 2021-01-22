@@ -3,6 +3,12 @@
 <html>
 <head>
     <title>Add Flight</title>
+    <style>
+
+
+
+
+    </style>
 </head>
 <body>
 <h1>
