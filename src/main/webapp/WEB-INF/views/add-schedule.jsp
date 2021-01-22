@@ -5,11 +5,9 @@
 <head>
     <title>Add Schedule</title>
     <style>
-        * {
-            margin: 0.25rem;
-            padding: 0.25rem;
-            border-collapse: collapse;
-        }
+         * {
+  box-sizing: border-box;
+}
         body {
             display: flex;
             flex-direction: column;
@@ -34,88 +32,235 @@
             font-size: xx-large;
             color: white;
         }
-        div.card {
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 15px 30px -10px grey;
-            place-items: center;
-            font-size: medium;
-            margin: 2rem;
-            text-align: center;
+          input[type=text], select {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          resize: vertical;
+        }
+        input[type=time], input {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          
+        }
+          input[type=checkbox] {
+              width: auto 
+        }
+        label.one {
+          padding: 12px 12px 12px 0;
+          display: inline-block;
+        }
+        input[type=submit] {
+          background-color: dodgerblue;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          
+        }
+         input[type=submit]:hover {
+          background-color: dodgerblue;
+        }
+        
+        
+        input[type=reset] {
+          background-color:green;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
         }
 
+        input[type=reset]:hover {
+          background-color: green;
+        }
+        
+        div.card {
+            border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+          margin: auto;
+        }
+ .col-1 {
+          float: left;
+          width: 25%;
+          margin-top: 6px;
+        }
+
+        .col-2 {
+          float: left;
+          width: 75%;
+          margin-top: 6px;
+        }
+        .col-3 {
+          float: left;
+            margin: 5px 0px;
+          width: 75%;
+          
+        }
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        .submit-buttons-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .submit-buttons-container input {
+            margin: 0 3.5rem;
+        }
+      
+        
+        
     </style>
 </head>
 <body>
 <header class="heading">
     <h1>Add Schedule</h1>
 </header>
-<%--@elvariable id="flightSchedule" type="com.cognizant.airline_ticket_reservation_system.model.FlightSchedule"--%>
-<div class=card>
-<form:form action="/add-schedule" method="post" modelAttribute="flightSchedule">
-    <form:label path="flightNo">
-        <spring:message code="label.flightSchedule.flightNo"/>
-    </form:label>
-    <form:select path="flightNo" items="${ flights }"/>
     <br>
-    <form:label path="source">
+    <br>
+    <br>
+    <br>
+<%--@elvariable id="flightSchedule" type="com.cognizant.airline_ticket_reservation_system.model.FlightSchedule"--%>
+<div class="card">
+<form:form action="/add-schedule" method="post" modelAttribute="flightSchedule">
+    <div class="row">
+    <div class="col-1">
+    <form:label path="flightNo" class="one">
+        <spring:message code="label.flightSchedule.flightNo"/>
+       
+    </form:label>
+         </div>
+    <div class="col-2">
+    
+    <form:select path="flightNo" items="${ flights }"/>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-1">
+    <form:label path="source" class="one">
         <spring:message code="label.flightSchedule.source"/>
     </form:label>
+        </div>
+    <div class="col-2">
     <form:select path="source" items="${ sources }"/>
-    <br>
-    <form:label path="destination">
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
+    <form:label path="destination" class="one">
         <spring:message code="label.flightSchedule.destination"/>
     </form:label>
+        </div>
+    <div class="col-2">
     <form:select path="destination" items="${ destinations }"/>
-    <br>
-    <form:label path="arrivalTime">
+   </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
+    <form:label path="arrivalTime" class="one">
         <spring:message code="label.flightSchedule.arrivalTime"/>
     </form:label>
+        </div>
+    <div class="col-2">
     <form:input path="arrivalTime" type="time"/>
     <form:errors path="arrivalTime"/>
-    <br>
-    <form:label path="departureTime">
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
+    <form:label path="departureTime" class="one">
         <spring:message code="label.flightSchedule.departureTime"/>
     </form:label>
+        </div>
+    <div class="col-2">
     <form:input path="departureTime" type="time"/>
     <from:errors path="departureTime"/>
-    <br>
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
     <form:label path="sun">
         <spring:message code="label.flightSchedule.sun"/>
     </form:label>
+        </div>
+    <div class="col-3">
     <form:checkbox path="sun"/>
-    <br>
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
     <form:label path="mon">
         <spring:message code="label.flightSchedule.mon"/>
     </form:label>
+        </div>
+    <div class="col-3">
     <form:checkbox path="mon"/>
-    <br>
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
     <form:label path="tue">
         <spring:message code="label.flightSchedule.tue"/>
     </form:label>
+        </div>
+    <div class="col-3">
     <form:checkbox path="tue"/>
-    <br>
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
     <form:label path="wed">
         <spring:message code="label.flightSchedule.wed"/>
     </form:label>
+        </div>
+    <div class="col-3">
     <form:checkbox path="wed"/>
-    <br>
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
     <form:label path="thu">
         <spring:message code="label.flightSchedule.thu"/>
     </form:label>
+        </div>
+    <div class="col-3">
     <form:checkbox path="thu"/>
-    <br>
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
     <form:label path="fri">
         <spring:message code="label.flightSchedule.fri"/>
     </form:label>
+        </div>
+    <div class="col-3">
     <form:checkbox path="fri"/>
-    <br>
+    </div>
+    </div>
+        <div class="row">
+    <div class="col-1">
     <form:label path="sat">
         <spring:message code="label.flightSchedule.sat"/>
     </form:label>
+        </div>
+    <div class="col-3">
     <form:checkbox path="sat"/>
+            </div>
+    </div>
     <br>
+     <div class="submit-buttons-container">
     <input type="submit" value="Schedule">
     <input type="reset" value="Reset">
+    </div>
 </form:form>
 </div>
 </body>
