@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Manage Flight</title>
     <style>
-        body {
+         body {
             display: flex;
             flex-direction: column;
             background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -74,19 +74,19 @@
             background-color: red;
             color: white;
         }
-
+          
         * {
             margin: 0.25rem;
             padding: 0.25rem;
             border-collapse: collapse;
         }
-
-
+        
+        
 
         #flight {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
         }
 
         #flight td, #flight th {
@@ -94,7 +94,7 @@
             padding: 8px;
         }
 
-        #flight tr:nth-child(even){
+        #flight tr:nth-child(even){ 
             background-color: #f2f2f2;
         }
 
@@ -117,11 +117,11 @@
         alert('${ param.msg }');
     </script>
 </c:if>
-<header>
-    <h1>
-        Manage Flight
-    </h1>
-</header>
+    <header>
+<h1>
+    Manage Flight
+</h1>
+    </header>
 <nav>
     <a href="<c:url value="/add-flight"/>" class="one">Add Flight</a>
 </nav>
