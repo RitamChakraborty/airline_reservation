@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class NewsFeedController {
@@ -47,6 +48,9 @@ public class NewsFeedController {
 
     @ModelAttribute("newsFeeds")
     public List<NewsFeed> newsFeeds() {
-        return newsFeedService.getNewsFeeds();
+        return newsFeedService.getNewsFeeds()
+                .stream()
+                .sorted((n1, n2) -> -n1.getDate().compareTo(n2.getDate()))
+                .collect(Collectors.toList());
     }
 }

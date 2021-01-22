@@ -22,6 +22,7 @@ values ('1', 'Source_1', 'Destination_1', '01:00:00', '02:00:00', 1, 0, 0, 1, 1,
 
 
 insert into news_feed(news, date)
-values ('Very bad news', '2021-01-22'),
+values ('Some flights have been lost in Bermuda Triangle', '2021-01-21'),
+       ('Very bad news', '2021-01-22'),
        ('Stay positive after such a bad news', '2021-01-23'),
        ('Hope for something good', '2021-01-24');

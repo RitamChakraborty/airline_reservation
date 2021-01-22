@@ -27,9 +27,6 @@
 <a href="<c:url value="/add-schedule"/>">Add Schedule</a>
 <c:choose>
     <c:when test="${ not empty flightSchedules }">
-        <%!
-            int index = 0;
-        %>
         <table>
             <thead>
             <tr>

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @PropertySource("classpath:messages.properties")
@@ -203,6 +205,9 @@ public class UserController {
 
     @ModelAttribute("newsFeeds")
     public List<NewsFeed> newsFeeds() {
-        return newsFeedService.getNewsFeeds();
+        return newsFeedService.getNewsFeeds()
+                .stream()
+                .filter(newsFeed -> newsFeed.getDate().compareTo(LocalDate.now()) >= 0)
+                .collect(Collectors.toList());
     }
 }
