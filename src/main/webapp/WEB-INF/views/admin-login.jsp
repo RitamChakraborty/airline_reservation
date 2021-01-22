@@ -29,7 +29,7 @@
         body {
             display: flex;
             flex-direction: column;
-            background-image: url("/images/background.jpg");
+            /*background-image: url("/images/background.jpg");*/
             background-size: cover;
             background-repeat: no-repeat;
             vertical-align: middle;
@@ -38,7 +38,6 @@
 
         header {
             border: none;
-            border-bottom-right-radius: 80px;
             background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),
             rgba(0, 255, 255, 0.18));
             background-color: rgb(139, 69, 19);
@@ -61,7 +60,8 @@
         }
 
         .form-card {
-            background-color: rgba(255, 255, 255, 0.9);
+            /*background-color: rgba(255, 255, 255, 0.9);*/
+            border: 1px solid lightgrey;
             padding: 2rem;
             border-radius: 10px;
         }
@@ -92,7 +92,7 @@
         input {
             border: none;
             outline: none;
-            background-color: lightgrey;
+            background-color: #f1f1f1;
             color: darkslategrey;
             padding: 0.5rem;
             text-align-last: center;

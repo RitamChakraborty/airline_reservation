@@ -1,3 +1,6 @@
+<%@ page import="com.cognizant.airline_ticket_reservation_system.model.FlightSchedule" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.StringJoiner" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -7,8 +10,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Schedule Flight</title>
+    <style>
+        * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+            border-collapse: collapse;
+        }
+
+        table, tr, th, td {
+            border: 1px solid lightgrey;
+        }
+
+    </style>
 </head>
 <body>
+<%!
+    int index = 0;
+%>
 <h1>Schedule Flight</h1>
 <a href="<c:url value="/add-schedule"/>">Add Schedule</a>
 <c:choose>
@@ -36,32 +54,33 @@
                     <td>${ flightSchedule.departureTime }</td>
                     <td>
                         <%
-                            //                            FlightSchedule flightSchedule = (FlightSchedule) request.getAttribute("flightSchedule");
-//                            StringJoiner stringJoiner = new StringJoiner(" ,");
-//
-//                            if (flightSchedule.isSun()) {
-//                                stringJoiner.add("Sun");
-//                            }
-//                            if (flightSchedule.isMon()) {
-//                                stringJoiner.add("Mon");
-//                            }
-//                            if (flightSchedule.isThu()) {
-//                                stringJoiner.add("Tue");
-//                            }
-//                            if (flightSchedule.isWed()) {
-//                                stringJoiner.add("Wed");
-//                            }
-//                            if (flightSchedule.isThu()) {
-//                                stringJoiner.add("Thu");
-//                            }
-//                            if (flightSchedule.isFri()) {
-//                                stringJoiner.add("Fri");
-//                            }
-//                            if (flightSchedule.isSat()) {
-//                                stringJoiner.add("Sat");
-//                            }
-//
-//                            out.print(stringJoiner.toString());
+                            FlightSchedule flightSchedule = ((List<FlightSchedule>) request.getAttribute("flightSchedules")).get(index);
+                            StringJoiner stringJoiner = new StringJoiner(", ");
+
+                            if (flightSchedule.isSun()) {
+                                stringJoiner.add("Sun");
+                            }
+                            if (flightSchedule.isMon()) {
+                                stringJoiner.add("Mon");
+                            }
+                            if (flightSchedule.isThu()) {
+                                stringJoiner.add("Tue");
+                            }
+                            if (flightSchedule.isWed()) {
+                                stringJoiner.add("Wed");
+                            }
+                            if (flightSchedule.isThu()) {
+                                stringJoiner.add("Thu");
+                            }
+                            if (flightSchedule.isFri()) {
+                                stringJoiner.add("Fri");
+                            }
+                            if (flightSchedule.isSat()) {
+                                stringJoiner.add("Sat");
+                            }
+
+                            ++index;
+                            out.print(stringJoiner.toString());
                         %>
                     </td>
                 </tr>

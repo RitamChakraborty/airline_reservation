@@ -12,3 +12,10 @@ values ('British Airways', 'Boing 777', 'International', 200, 50),
        ('Lufthansa', 'Airbus A380', 'International', 500, 200),
        ('Emirates', 'Boing 747', 'International', 250, 75),
        ('IndiGo', 'Airbus A300', 'Domestic', '50', 10);
+
+insert into flight_schedule(flight_no, source, destination, arrival_time, departure_time, sun, mon, tue, wed, thu, fri,
+                            sat)
+values ('1', 'Source_1', 'Destination_1', '01:00:00', '02:00:00', 1, 0, 0, 1, 1, 0, 0),
+       ('2', 'Source_2', 'Destination_3', '02:00:00', '05:00:00', 0, 1, 0, 1, 1, 1, 1),
+       ('3', 'Source_3', 'Destination_4', '03:00:00', '06:00:00', 0, 1, 0, 1, 0, 1, 0),
+       ('4', 'Source_4', 'Destination_2', '04:00:00', '08:00:00', 1, 0, 1, 0, 1, 0, 1);

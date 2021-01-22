@@ -38,7 +38,6 @@
             outline: none;
         }
 
-
         .sign {
             background-color: blue;
             color: white;
