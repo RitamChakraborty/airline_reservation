@@ -1,8 +1,10 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
+import com.cognizant.airline_ticket_reservation_system.model.Flight;
 import com.cognizant.airline_ticket_reservation_system.model.FlightSchedule;
 import com.cognizant.airline_ticket_reservation_system.model.FlightSearch;
 import com.cognizant.airline_ticket_reservation_system.service.FlightScheduleService;
+import com.cognizant.airline_ticket_reservation_system.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,16 @@ import java.util.List;
 @Controller
 public class BookTicketController {
     private FlightScheduleService flightScheduleService;
+    private FlightService flightService;
 
     @Autowired
     public void setFlightScheduleService(FlightScheduleService flightScheduleService) {
         this.flightScheduleService = flightScheduleService;
+    }
+
+    @Autowired
+    public void setFlightService(FlightService flightService) {
+        this.flightService = flightService;
     }
 
     @GetMapping("/flight-search")
@@ -42,8 +50,16 @@ public class BookTicketController {
         }
 
         List<FlightSchedule> flightSchedules = flightScheduleService.getFlightSchedulesByDateSourceDestination(flightSearch);
-        System.out.println(flightSchedules);
 
+        for (FlightSchedule flightSchedule : flightSchedules) {
+            Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
+            flightSchedule.setFlight(flight);
+        }
+
+        if (!flightSchedules.isEmpty()) {
+            modelMap.addAttribute("flightsFound", true);
+            modelMap.addAttribute("flightSchedules", flightSchedules);
+        }
 
         return "flight-search";
     }

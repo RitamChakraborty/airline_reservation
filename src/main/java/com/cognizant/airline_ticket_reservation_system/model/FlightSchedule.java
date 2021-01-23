@@ -2,10 +2,7 @@ package com.cognizant.airline_ticket_reservation_system.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
@@ -15,6 +12,8 @@ public class FlightSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer flightNo;
+    @Transient
+    private Flight flight;
     private String source;
     private String destination;
     @NotNull(message = "{flightSchedule.arrivalTime}")
@@ -133,6 +132,14 @@ public class FlightSchedule {
 
     public void setSat(boolean sat) {
         this.sat = sat;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     @Override
