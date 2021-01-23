@@ -71,13 +71,10 @@
     }
 %>
 <header>
-    <h1>Welcome Admin (${ admin.username })</h1>
+    <h1>Welcome Admin (${ sessionScope.admin.username })</h1>
 </header>
 <nav>
     <ul>
-        <li>
-            <a href="<c:url value="/"/>">Home</a>
-        </li>
         <li>
             <a href="<c:url value="/manage-flight"/>">Manage Flight</a>
         </li>
@@ -91,7 +88,7 @@
             <a href="<c:url value="/user-details"/>">User Details</a>
         </li>
         <li>
-            <a href="<c:url value="/add-news?username=${ param.username }"/>">Add News</a>
+            <a href="<c:url value="/add-news"/>">Add News</a>
         </li>
         <li>
         <li style="float:right"><a href="<c:url value="/logout"/>">Logout</a>

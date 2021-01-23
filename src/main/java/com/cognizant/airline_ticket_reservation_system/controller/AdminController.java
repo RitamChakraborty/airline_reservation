@@ -1,6 +1,5 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
-import com.cognizant.airline_ticket_reservation_system.model.Admin;
 import com.cognizant.airline_ticket_reservation_system.model.NewsFeed;
 import com.cognizant.airline_ticket_reservation_system.model.User;
 import com.cognizant.airline_ticket_reservation_system.service.AdminService;
@@ -11,9 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,15 +38,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin-home")
-    public String adminHome(
-            @RequestParam(value = "username", required = false) String userName,
-            ModelMap modelMap,
-            HttpServletRequest httpServletRequest
-    ) {
-        Admin admin = (Admin) httpServletRequest.getSession().getAttribute("admin");
-        modelMap.addAttribute("admin", admin);
-
-        return "admin-home";
+    public ModelAndView adminHome() {
+        return new ModelAndView("admin/admin-home");
     }
 
     @GetMapping("/booking-details")

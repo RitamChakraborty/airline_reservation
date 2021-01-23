@@ -10,7 +10,7 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Airline Ticket Reservation system</title>
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/static/styles/styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
 
@@ -20,6 +20,7 @@
             border-collapse: collapse;
             font-size: large;
         }
+
         html, body {
             width: 100%;
         }

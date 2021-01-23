@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,31 +51,38 @@ public class LoginController {
     }
 
     @GetMapping("/admin-login")
-    public String adminLogin(@ModelAttribute("admin") Admin admin) {
-        return "admin-login";
+    public ModelAndView adminLogin(@ModelAttribute("admin") Admin admin) {
+        return new ModelAndView("login/admin-login");
     }
 
     @PostMapping("/admin-login")
-    public String adminLogin(
+    public ModelAndView adminLogin(
             @Valid @ModelAttribute("admin") Admin admin,
             BindingResult bindingResult,
-            ModelMap modelMap,
+            ModelAndView modelAndView,
             HttpServletRequest request,
             @Value("${error.admin.invalidCredentials}") String errorMessage
     ) {
         if (bindingResult.hasErrors()) {
-            return "admin-login";
+            modelAndView.setViewName("login/admin-login");
+            return modelAndView;
         }
 
+        // Validating user
         boolean validAdmin = loginService.validAdmin(admin);
 
         if (!validAdmin) {
-            modelMap.addAttribute("errorMessage", errorMessage);
-            return "admin-login";
+            modelAndView.addObject("errorMessage", errorMessage);
+            modelAndView.setViewName("login/admin-login");
+
+            return modelAndView;
         }
 
+        // Setting session attribute
         request.getSession().setAttribute("admin", admin);
-        return "redirect:/admin-home";
+        modelAndView.setViewName("redirect:/admin-home");
+
+        return modelAndView;
     }
 
     @GetMapping("/user-login")

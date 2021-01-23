@@ -10,15 +10,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="/styles/styles.css">
+    <title>User Login</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
 
         * {
-            margin: 0.25rem;
-            padding: 0.25rem;
-            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
             font-size: large;
         }
 
@@ -30,7 +29,6 @@
         body {
             display: flex;
             flex-direction: column;
-            /*background-image: url("/images/background.jpg");*/
             background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             background-size: cover;
             background-repeat: no-repeat;
@@ -41,8 +39,8 @@
         header {
             border: none;
             background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),
-            rgba(0, 255, 255, 0.48));
-            background-color: rgb(0, 89, 19);
+            rgba(0, 255, 255, 0.18));
+            background-color: rgb(139, 69, 19);
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
             padding: 1rem;
         }
@@ -102,7 +100,7 @@
             border-radius: 4px;
         }
 
-        .error-text {
+        .ui-state-error-text {
             color: crimson;
             font-size: medium;
             font-family: monospace;
@@ -138,23 +136,23 @@
 </head>
 <body>
 <header>
-    <h1>Admin Login</h1>
+    <h1>User Login</h1>
 </header>
-<%--@elvariable id="admin" type="com.cognizant.airline_ticket_reservation_system.model.Admin"--%>
+<%--@elvariable id="userLogin" type="com.cognizant.airline_ticket_reservation_system.model.UserLogin"--%>
 <div id="form-container">
     <div class="form-card">
-        <form:form action="/admin-login" method="post" modelAttribute="admin">
-            <form:label path="username">
-                <spring:message code="label.username"/>
+        <form:form action="/user-login" method="post" modelAttribute="userLogin">
+            <form:label path="id">
+                <spring:message code="label.user.id"/>
             </form:label>
-            <form:input path="username" id="username" placeholder="Enter username"/>
-            <form:errors path="username" cssClass="error-text"/>
+            <form:input path="id" type="number" id="user-id" placeholder="Enter user ID"/>
+            <form:errors path="id" cssClass="ui-state-error-text"/>
             <br>
             <form:label path="password">
                 <spring:message code="label.password"/>
             </form:label>
             <form:password path="password" id="password" placeholder="Enter password"/>
-            <form:errors path="password" cssClass="error-text"/>
+            <form:errors path="password" cssClass="ui-state-error-text"/>
             <div class="global-error-text">
                 <c:if test="${ not empty errorMessage }">
                     <p>
@@ -167,6 +165,9 @@
                 <input type="reset" value="Reset" id="reset-btn">
             </div>
         </form:form>
+        <br>
+        <a href="<c:url value="/user-registration"/>">Sign Up </a><br>
+        <a href="<c:url value="/forget-password"/>">Forget Password</a>
     </div>
 </div>
 </body>
