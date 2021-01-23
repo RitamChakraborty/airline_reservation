@@ -37,7 +37,7 @@ public class AdminController {
         this.newsFeedService = newsFeedService;
     }
 
-    @GetMapping("/admin-home")
+    @GetMapping("/admin/admin-home")
     public ModelAndView adminHome() {
         return new ModelAndView("admin/admin-home");
     }

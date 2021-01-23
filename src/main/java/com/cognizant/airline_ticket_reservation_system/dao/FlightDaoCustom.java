@@ -20,8 +20,8 @@ public class FlightDaoCustom {
                 flight.getAirline(),
                 flight.getModel(),
                 flight.getType(),
-                flight.getSeatsEconomy(),
-                flight.getSeatsBusiness(),
+                flight.getEconomySeats(),
+                flight.getBusinessSeats(),
                 flight.getNo()
         );
     }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,32 +25,38 @@ public class FlightController {
         this.flightService = flightService;
     }
 
-    @GetMapping("/manage-flight")
-    public String manageFlight(@RequestParam(value = "msg", required = false) String message, ModelMap modelMap) {
+    @GetMapping("/admin/manage-flight")
+    public ModelAndView manageFlight(@RequestParam(value = "msg", required = false) String message, ModelAndView modelAndView) {
+        // Get flight from the database
         List<Flight> flights = flightService.getFlights();
-        modelMap.addAttribute("flights", flights);
+        modelAndView.addObject("flights", flights);
+        modelAndView.setViewName("admin/manage-flight");
 
-        return "manage-flight";
+        return modelAndView;
     }
 
-    @GetMapping("/add-flight")
-    public String addFlight(@ModelAttribute("flight") Flight flight) {
-        return "add-flight";
+    @GetMapping("/admin/add-flight")
+    public ModelAndView addFlight(@ModelAttribute("flight") Flight flight) {
+        return new ModelAndView("admin/add-flight");
     }
 
-    @PostMapping("/add-flight")
-    public String addFlightPost(
+    @PostMapping("/admin/add-flight")
+    public ModelAndView addFlightPost(
             @Valid @ModelAttribute("flight") Flight flight,
             BindingResult bindingResult,
-            ModelMap modelMap,
+            ModelAndView modelAndView,
             @Value("${flight.additionSuccessful}") String message
     ) {
         if (bindingResult.hasErrors()) {
-            return "add-flight";
+            modelAndView.setViewName("admin/add-flight");
+            return modelAndView;
         }
 
+        // Save new flight in the database
         flightService.addFlight(flight);
-        return "redirect:/manage-flight?msg=" + message;
+        modelAndView.setViewName(String.format("redirect:/admin/manage-flight?msg=%s", message));
+
+        return modelAndView;
     }
 
     @GetMapping("/update-flight")

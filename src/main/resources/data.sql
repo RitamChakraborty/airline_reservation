@@ -7,7 +7,7 @@ values ('k.afrin', 'Afrin Kardashian', 'kardashian.afrin@gmail.com', 'Saltlake C
        ('g.pallavi', 'Pallavi Gupta', 'gupta.pallavi@gmail.com', 'Austin, Tx', '7654321098'),
        ('m.shuktika', 'Shuktika Mahanty', 'mathanty.shuktika@gmail.com', 'Mountain View, CA', '6543210987');
 
-insert into flight(airline, model, type, seats_economy, seats_business)
+insert into flight(airline, model, type, economy_seats, business_seats)
 values ('British Airways', 'Boing 777', 'International', 200, 50),
        ('Lufthansa', 'Airbus A380', 'International', 500, 200),
        ('Emirates', 'Boing 747', 'International', 250, 75),

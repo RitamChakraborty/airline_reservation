@@ -117,13 +117,14 @@
         alert('${ param.msg }');
     </script>
 </c:if>
-    <header>
-<h1>
-    Manage Flight
-</h1>
-    </header>
+<header>
+    <h1>
+        Manage Flight
+    </h1>
+</header>
 <nav>
-    <a href="<c:url value="/add-flight"/>" class="one">Add Flight</a>
+    <a href="<c:url value="/admin/admin-home"/>" class="one">Home</a>
+    <a href="<c:url value="/admin/add-flight"/>" class="one">Add Flight</a>
 </nav>
 <c:choose>
     <c:when test="${ not empty flights }">
@@ -146,8 +147,8 @@
                     <td>${ flight.airline }</td>
                     <td>${ flight.model }</td>
                     <td>${ flight.type }</td>
-                    <td>${ flight.seatsEconomy }</td>
-                    <td>${ flight.seatsBusiness }</td>
+                    <td>${ flight.economySeats }</td>
+                    <td>${ flight.businessSeats }</td>
                     <td>
                         <a href="<c:url value="/update-flight?no=${ flight.no }"/>" class="two">Update</a>
                         <a href="<c:url value="/delete-flight?no=${ flight.no }"/>" class="three">Delete</a>

@@ -80,7 +80,7 @@ public class LoginController {
 
         // Setting session attribute
         request.getSession().setAttribute("admin", admin);
-        modelAndView.setViewName("redirect:/admin-home");
+        modelAndView.setViewName("redirect:/admin/admin-home");
 
         return modelAndView;
     }

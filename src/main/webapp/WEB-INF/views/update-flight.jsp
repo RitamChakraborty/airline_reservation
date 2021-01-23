@@ -145,40 +145,40 @@
         </div>
     <div class="row">
         <div class="col-25">
-    <form:label path="type" class="one">
-        <spring:message code="label.flight.type"/>
-        </div>
-            <div class="col-75">
-    </form:label>
-    <form:select path="type" items="${ types }" value="${ flight.type }"/>
-        </div>
-        </div>
-    <div class="row">
-        <div class="col-25">
-    <form:label path="seatsEconomy">
-        <spring:message code="label.flight.seatsEconomy"/>
-        </div>
-            <div class="col-75">
-    </form:label>
-    <form:input path="seatsEconomy" value="${ flight.seatsEconomy }"/>
-    <form:errors path="seatsEconomy"/>
-        </div>
-        </div>
-        <div class="row">
-    <div class="col-25">
-    <form:label path="seatsBusiness">
-        <spring:message code="label.flight.seatsBusiness"/>
+            <form:label path="type" class="one">
+            <spring:message code="label.flight.type"/>
         </div>
         <div class="col-75">
-    </form:label>
-    <form:input path="seatsBusiness" value="${ flight.seatsBusiness }"/>
-    <form:errors path="seatsBusiness"/>
-            </div>
+            </form:label>
+            <form:select path="type" items="${ types }" value="${ flight.type }"/>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <form:label path="economySeats">
+            <spring:message code="label.flight.economySeats"/>
+        </div>
+        <div class="col-75">
+            </form:label>
+            <form:input path="economySeats" value="${ flight.economySeats }"/>
+            <form:errors path="economySeats"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <form:label path="businessSeats">
+            <spring:message code="label.flight.businessSeats"/>
+        </div>
+        <div class="col-75">
+            </form:label>
+            <form:input path="businessSeats" value="${ flight.businessSeats }"/>
+            <form:errors path="businessSeats"/>
+        </div>
+    </div>
     <br>
-        <div class="submit-buttons-container">
-    <input type="submit" value="Update">
-    <input type="reset" value="Reset">
+    <div class="submit-buttons-container">
+        <input type="submit" value="Update">
+        <input type="reset" value="Reset">
     </div>
 </form:form>
     </div>

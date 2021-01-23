@@ -49,8 +49,8 @@
                             <td>${ flightSchedule.flight.airline }</td>
                             <td>${ flightSchedule.flight.model }</td>
                             <td>${ flightSchedule.flight.type }</td>
-                            <td>${ flightSchedule.flight.seatsEconomy }</td>
-                            <td>${ flightSchedule.flight.seatsBusiness }</td>
+                            <td>${ flightSchedule.flight.economySeats }</td>
+                            <td>${ flightSchedule.flight.businessSeats }</td>
                             <td><a href="/book-flight?${ flightSchedule.id }">Select</a></td>
                         </tr>
                         </tbody>

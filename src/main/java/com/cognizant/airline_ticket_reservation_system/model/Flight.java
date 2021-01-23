@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -15,12 +16,14 @@ public class Flight {
     private String airline;
     private String model;
     private String type;
-    @NotNull(message = "{flight.seatsEconomy}")
-    @PositiveOrZero(message = "{flight.seatsEconomy.negative}")
-    private Integer seatsEconomy;
-    @NotNull(message = "{flight.seatsBusiness}")
-    @PositiveOrZero(message = "{flight.seatsBusiness.negative}")
-    private Integer seatsBusiness;
+    @NotNull(message = "{error.flight.economySeats}")
+    @Digits(integer = 3, fraction = 0, message = "{error.flight.economySeats.float}")
+    @PositiveOrZero(message = "{error.flight.economySeats.negative}")
+    private Integer economySeats;
+    @NotNull(message = "{error.flight.businessSeats}")
+    @Digits(integer = 3, fraction = 0, message = "{error.flight.businessSeats.float}")
+    @PositiveOrZero(message = "{error.flight.businessSeats.negative}")
+    private Integer businessSeats;
 
     public Integer getNo() {
         return no;
@@ -54,20 +57,20 @@ public class Flight {
         this.type = type;
     }
 
-    public Integer getSeatsEconomy() {
-        return seatsEconomy;
+    public Integer getEconomySeats() {
+        return economySeats;
     }
 
-    public void setSeatsEconomy(Integer seatsEconomy) {
-        this.seatsEconomy = seatsEconomy;
+    public void setEconomySeats(Integer economySeats) {
+        this.economySeats = economySeats;
     }
 
-    public Integer getSeatsBusiness() {
-        return seatsBusiness;
+    public Integer getBusinessSeats() {
+        return businessSeats;
     }
 
-    public void setSeatsBusiness(Integer seatsBusiness) {
-        this.seatsBusiness = seatsBusiness;
+    public void setBusinessSeats(Integer businessSeats) {
+        this.businessSeats = businessSeats;
     }
 
     @Override
@@ -77,8 +80,8 @@ public class Flight {
                 ", airline='" + airline + '\'' +
                 ", model='" + model + '\'' +
                 ", type='" + type + '\'' +
-                ", seatsEconomy=" + seatsEconomy +
-                ", seatsBusiness=" + seatsBusiness +
+                ", economySeats=" + economySeats +
+                ", businessSeats=" + businessSeats +
                 '}';
     }
 }

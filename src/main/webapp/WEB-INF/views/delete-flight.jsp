@@ -127,33 +127,32 @@
         <spring:message code="label.flight.type"/>
                 </div>
             <div class="col-2">
-        <span>: ${ flight.type }</span>
-                </div>
+                <span>: ${ flight.type }</span>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-1">
+            <spring:message code="label.flight.economySeats"/>
+        </div>
+        <div class="col-2">
+            <span>: ${ flight.economySeats }</span>
+        </div>
     </div>
-    
-        <div class="row">
-            <div class="col-1">
-        <spring:message code="label.flight.seatsEconomy"/>
-                </div>
-            <div class="col-2">
-        <span>: ${ flight.seatsEconomy }</span>
-                </div>
+
+
+    <div class="row">
+        <div class="col-1">
+            <spring:message code="label.flight.businessSeats"/>
+        </div>
+        <div class="col-2">
+            <span>: ${ flight.businessSeats }</span>
+        </div>
     </div>
-    
-    
-   
-        <div class="row">
-            <div class="col-1">
-        <spring:message code="label.flight.seatsBusiness"/>
-                </div>
-            <div class="col-2">
-        <span>: ${ flight.seatsBusiness }</span>
-                </div>
-    </div>
-   
+
 
     <div class="submit-buttons-container">
-    <input type="submit" value="Delete">
+        <input type="submit" value="Delete">
     </div>
 </form:form>
     </div>
