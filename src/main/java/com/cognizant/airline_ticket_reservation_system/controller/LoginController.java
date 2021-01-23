@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @PropertySource("classpath:messages.properties")
@@ -88,6 +89,7 @@ public class LoginController {
             @Valid @ModelAttribute("userLogin") UserLogin userLogin,
             BindingResult bindingResult,
             ModelMap modelMap,
+            HttpServletRequest request,
             @Value("${error.admin.invalidCredentials}") String errorMessage
     ) {
         if (bindingResult.hasErrors()) {
@@ -99,10 +101,11 @@ public class LoginController {
         if (user == null) {
             modelMap.addAttribute("errorMessage", errorMessage);
             return "user-login";
-        } else {
-            modelMap.addAttribute("user", user);
-            return "forward:/user-home";
         }
+
+        request.getSession().setAttribute("user", user);
+
+        return "redirect:/user-home";
     }
 
     @GetMapping("/user-registration")
@@ -115,6 +118,7 @@ public class LoginController {
             @Valid @ModelAttribute("userRegistration") UserRegistration userRegistration,
             BindingResult bindingResult,
             ModelMap modelMap,
+            HttpServletRequest request,
             @Value("${error.user.confirmPassword.notEqual}") String errorMessage
     ) {
         if (bindingResult.hasErrors()) {
@@ -130,16 +134,23 @@ public class LoginController {
         user.setEmail(userRegistration.getEmail());
         user.setAddress(userRegistration.getAddress());
         user.setPhone(userRegistration.getPhone());
+        user.setSecretQuestion(userRegistration.getSecretQuestion());
+        user.setAnswer(userRegistration.getAnswer());
 
         userDao.save(user);
-        modelMap.addAttribute("user", user);
+        request.getSession().setAttribute("user", user);
 
-        return "forward:/user-home";
+        return "redirect:/user-home";
     }
 
     @GetMapping("/logout")
     public RedirectView logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return new RedirectView("/");
+    }
+
+    @ModelAttribute("secretQuestions")
+    public List<String> secretQuestions(@Value("#{'${user.secretQuestions}'.split(',')}") List<String> secretQuestions) {
+        return secretQuestions;
     }
 }

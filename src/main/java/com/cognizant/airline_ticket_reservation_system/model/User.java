@@ -28,6 +28,9 @@ public class User {
     @NotBlank(message = "{error.user.phone}")
     @Pattern(regexp = "^(\\d{10})?$", message = "{error.user.phone.invalid}")
     private String phone;
+    private String secretQuestion;
+    @NotBlank(message = "${error.user.answer}")
+    private String answer;
 
     public Integer getId() {
         return id;
@@ -77,31 +80,53 @@ public class User {
         this.phone = phone;
     }
 
+    public String getSecretQuestion() {
+        return secretQuestion;
+    }
+
+    public void setSecretQuestion(String secretQuestion) {
+        this.secretQuestion = secretQuestion;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
         return getId().equals(user.getId()) &&
+                getPassword().equals(user.getPassword()) &&
                 getName().equals(user.getName()) &&
                 getEmail().equals(user.getEmail()) &&
                 getAddress().equals(user.getAddress()) &&
-                getPhone().equals(user.getPhone());
+                getPhone().equals(user.getPhone()) &&
+                getSecretQuestion().equals(user.getSecretQuestion()) &&
+                getAnswer().equals(user.getAnswer());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getEmail(), getAddress(), getPhone());
+        return Objects.hash(getId(), getPassword(), getName(), getEmail(), getAddress(), getPhone(), getSecretQuestion(), getAnswer());
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
+                ", secretQuestion='" + secretQuestion + '\'' +
+                ", answer='" + answer + '\'' +
                 '}';
     }
 }

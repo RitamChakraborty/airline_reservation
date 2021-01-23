@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +25,7 @@
             background-color: white;
         }
 
-        input[type=text], input[type=password] {
+        input[type=text], input[type=password], select {
             width: 100%;
             padding: 15px;
             margin: 5px 0 22px 0;
@@ -77,17 +78,6 @@
     <form:input path="name" placeholder="Enter Name"/>
     <form:errors path="name"/>
     <br>
-    <spring:message code="label.password"/>
-    <form:password path="password" placeholder="Enter Password"/>
-    <form:errors path="password"/>
-    <br>
-    <spring:message code="label.user.confirmPassword"/>
-    <form:password path="confirmPassword" placeholder="Re-enter Password"/>
-    <form:errors path="confirmPassword"/>
-    <c:if test="${ not empty errorMessage}">
-        <span>${ errorMessage }</span>
-    </c:if>
-    <br>
     <spring:message code="label.user.email"/>
     <form:input path="email" placeholder="Enter Email"/>
     <form:errors path="email"/>
@@ -99,6 +89,28 @@
     <spring:message code="label.user.phone"/>
     <form:input path="phone" placeholder="Enter Phone Number"/>
     <form:errors path="phone"/>
+    <br>
+    <spring:message code="label.password"/>
+    <form:password path="password" placeholder="Enter Password"/>
+    <form:errors path="password"/>
+    <br>
+    <spring:message code="label.user.confirmPassword"/>
+    <form:password path="confirmPassword" placeholder="Re-enter Password"/>
+    <form:errors path="confirmPassword"/>
+    <c:if test="${ not empty errorMessage}">
+        <span>${ errorMessage }</span>
+    </c:if>
+    <br>
+    <form:label path="secretQuestion">
+        <spring:message code="label.user.secretQuestion"/>
+    </form:label>
+    <form:select path="secretQuestion" items="${ secretQuestions }"/>
+    <br>
+    <form:label path="answer">
+        <spring:message code="label.user.answer"/>
+    </form:label>
+    <form:input path="answer" placeholder="Answer of the secret question"/>
+    <input:errors path="answer"/>
     <br>
     <input type="submit" value="Sign Up" class="sign">
     <input type="reset" value="Reset" class="reset">

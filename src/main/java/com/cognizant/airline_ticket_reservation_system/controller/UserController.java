@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
@@ -43,17 +44,24 @@ public class UserController {
     }
 
     @PostMapping("/user-home")
-    public String userHomePost() {
+    public String userHomePost(
+            ModelMap modelMap,
+            HttpServletRequest request
+    ) {
+        User user = (User) request.getSession().getAttribute("user");
+        modelMap.addAttribute("user", user);
+
         return "user-home";
     }
 
     @GetMapping("/user-home")
     public String userHome(
-            @RequestParam("id") Integer id,
+            @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "msg", required = false) String message,
-            ModelMap modelMap
+            ModelMap modelMap,
+            HttpServletRequest request
     ) {
-        User user = userService.getUserById(id);
+        User user = (User) request.getSession().getAttribute("user");
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("msg", message);
 

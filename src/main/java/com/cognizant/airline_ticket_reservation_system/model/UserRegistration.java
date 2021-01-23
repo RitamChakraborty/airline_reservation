@@ -11,7 +11,7 @@ public class UserRegistration {
     @NotBlank(message = "{error.user.name}")
     private String name;
     @NotBlank(message = "{error.password}")
-    @Pattern(regexp = "^(\\w{6,})?$", message = "{error.user.password.invalid}")
+    @Pattern(regexp = "^(?=.*?[#?!@$%^&*-]).{6,}$", message = "{error.user.password.invalid}")
     private String password;
     @NotBlank(message = "{error.user.confirmPassword}")
     private String confirmPassword;
@@ -23,6 +23,9 @@ public class UserRegistration {
     @NotBlank(message = "{error.user.phone}")
     @Pattern(regexp = "^(\\d{10})?$", message = "{error.user.phone.invalid}")
     private String phone;
+    private String secretQuestion;
+    @NotBlank(message = "{error.user.answer}")
+    private String answer;
 
     public String getName() {
         return name;
@@ -72,6 +75,22 @@ public class UserRegistration {
         this.phone = phone;
     }
 
+    public String getSecretQuestion() {
+        return secretQuestion;
+    }
+
+    public void setSecretQuestion(String secretQuestion) {
+        this.secretQuestion = secretQuestion;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
     @Override
     public String toString() {
         return "UserRegistration{" +
@@ -81,6 +100,8 @@ public class UserRegistration {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
+                ", secretQuestion='" + secretQuestion + '\'' +
+                ", answer='" + answer + '\'' +
                 '}';
     }
 }
