@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -45,9 +46,16 @@ public class BookTicketController {
             BindingResult bindingResult,
             ModelMap modelMap
     ) {
+        if (flightSearch.getDate() != null && flightSearch.getDate().compareTo(LocalDate.now()) < 0) {
+            bindingResult.rejectValue("date", "error.flightSearch.date.past");
+        }
+
         if (bindingResult.hasErrors()) {
+            modelMap.addAttribute("showFlight", false);
             return "flight-search";
         }
+
+        modelMap.addAttribute("showFlight", true);
 
         List<FlightSchedule> flightSchedules = flightScheduleService.getFlightSchedulesByDateSourceDestination(flightSearch);
 
