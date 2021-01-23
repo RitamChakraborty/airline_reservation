@@ -1,7 +1,10 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.dao.UserDao;
-import com.cognizant.airline_ticket_reservation_system.model.*;
+import com.cognizant.airline_ticket_reservation_system.model.RoleSelection;
+import com.cognizant.airline_ticket_reservation_system.model.User;
+import com.cognizant.airline_ticket_reservation_system.model.UserLogin;
+import com.cognizant.airline_ticket_reservation_system.model.UserRegistration;
 import com.cognizant.airline_ticket_reservation_system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,50 +41,15 @@ public class LoginController {
 
         switch (role) {
             case "Admin": {
-                return "redirect:/admin-login";
+                return "redirect:/admin/admin-login";
             }
             case "User": {
-                return "redirect:/user-login";
+                return "redirect:/admin/user-login";
             }
             default: {
                 return "error";
             }
         }
-    }
-
-    @GetMapping("/admin-login")
-    public ModelAndView adminLogin(@ModelAttribute("admin") Admin admin) {
-        return new ModelAndView("login/admin-login");
-    }
-
-    @PostMapping("/admin-login")
-    public ModelAndView adminLogin(
-            @Valid @ModelAttribute("admin") Admin admin,
-            BindingResult bindingResult,
-            ModelAndView modelAndView,
-            HttpServletRequest request,
-            @Value("${error.admin.invalidCredentials}") String errorMessage
-    ) {
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("login/admin-login");
-            return modelAndView;
-        }
-
-        // Validating user
-        boolean validAdmin = loginService.validAdmin(admin);
-
-        if (!validAdmin) {
-            modelAndView.addObject("errorMessage", errorMessage);
-            modelAndView.setViewName("login/admin-login");
-
-            return modelAndView;
-        }
-
-        // Setting session attribute
-        request.getSession().setAttribute("admin", admin);
-        modelAndView.setViewName("redirect:/admin/admin-home");
-
-        return modelAndView;
     }
 
     @GetMapping("/user-login")

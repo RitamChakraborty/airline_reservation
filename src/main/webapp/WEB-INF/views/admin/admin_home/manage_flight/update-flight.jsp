@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title>Add Flight</title>
+    <title>Update Flight</title>
     <style>
         body {
             display: flex;
@@ -114,17 +114,15 @@
 </head>
 <body>
 <header>
-    <h1>
-        Add Flight
-    </h1>
+    <h1>Update Flight</h1>
 </header>
-<%--@elvariable id="flight" type="com.cognizant.airline_ticket_reservation_system.model.Flight"--%>
 <br>
 <br>
 <br>
 <br>
 <div class="container">
-    <form:form action="/admin/add-flight" method="post" modelAttribute="flight">
+    <form:form action="/admin/admin-home/manage-flight/update-flight" method="post" modelAttribute="flight">
+
         <div class="row">
             <div class="col-25">
                 <form:label path="airline" class="one">
@@ -132,7 +130,7 @@
             </div>
             <div class="col-75">
                 </form:label>
-                <form:select path="airline" items="${ airlines }"/>
+                <form:select path="airline" items="${ airlines }" value="${ flight.airline }"/>
             </div>
         </div>
         <div class="row">
@@ -142,7 +140,7 @@
             </div>
             <div class="col-75">
                 </form:label>
-                <form:select path="model" items="${ models }"/>
+                <form:select path="model" items="${ models }" value="${ flight.model }"/>
             </div>
         </div>
         <div class="row">
@@ -152,7 +150,7 @@
             </div>
             <div class="col-75">
                 </form:label>
-                <form:select path="type" items="${ types }"/>
+                <form:select path="type" items="${ types }" value="${ flight.type }"/>
             </div>
         </div>
         <div class="row">
@@ -162,7 +160,7 @@
             </div>
             <div class="col-75">
                 </form:label>
-                <form:input path="economySeats" type="number" pattern="^\d+$"/>
+                <form:input path="economySeats" value="${ flight.economySeats }"/>
                 <form:errors path="economySeats"/>
             </div>
         </div>
@@ -173,13 +171,13 @@
             </div>
             <div class="col-75">
                 </form:label>
-                <form:input path="businessSeats" type="number" pattern="^\d+$"/>
+                <form:input path="businessSeats" value="${ flight.businessSeats }"/>
                 <form:errors path="businessSeats"/>
             </div>
         </div>
         <br>
         <div class="submit-buttons-container">
-            <input type="submit" value="Add Flight">
+            <input type="submit" value="Update">
             <input type="reset" value="Reset">
         </div>
     </form:form>

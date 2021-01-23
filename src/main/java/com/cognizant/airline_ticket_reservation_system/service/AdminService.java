@@ -17,4 +17,10 @@ public class AdminService {
     public Admin getAdminByUsername(String username) {
         return adminDao.findById(username).orElse(null);
     }
+
+    public boolean validAdmin(Admin admin) {
+        return adminDao.findById(admin.getUsername())
+                .map(value -> value.equals(admin))
+                .orElse(false);
+    }
 }

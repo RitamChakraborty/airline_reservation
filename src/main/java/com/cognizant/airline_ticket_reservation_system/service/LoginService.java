@@ -1,8 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.service;
 
-import com.cognizant.airline_ticket_reservation_system.dao.AdminDao;
 import com.cognizant.airline_ticket_reservation_system.dao.UserDao;
-import com.cognizant.airline_ticket_reservation_system.model.Admin;
 import com.cognizant.airline_ticket_reservation_system.model.User;
 import com.cognizant.airline_ticket_reservation_system.model.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +11,7 @@ import java.util.Optional;
 
 @Service
 public class LoginService {
-    private AdminDao adminDao;
     private UserDao userDao;
-
-    @Autowired
-    public void setAdminDao(AdminDao adminDao) {
-        this.adminDao = adminDao;
-    }
 
     @Autowired
     public void setUserDao(UserDao userDao) {
@@ -28,12 +20,6 @@ public class LoginService {
 
     public List<User> getUsers() {
         return (List<User>) userDao.findAll();
-    }
-
-    public boolean validAdmin(Admin admin) {
-        return adminDao.findById(admin.getUsername())
-                .map(value -> value.equals(admin))
-                .orElse(false);
     }
 
     public User getValidateUser(UserLogin userLogin) {

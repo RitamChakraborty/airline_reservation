@@ -25,41 +25,41 @@ public class FlightController {
         this.flightService = flightService;
     }
 
-    @GetMapping("/admin/manage-flight")
+    @GetMapping("/admin/admin-home/manage-flight")
     public ModelAndView manageFlight(@RequestParam(value = "msg", required = false) String message, ModelAndView modelAndView) {
         // Get flight from the database
         List<Flight> flights = flightService.getFlights();
         modelAndView.addObject("flights", flights);
-        modelAndView.setViewName("admin/manage-flight");
+        modelAndView.setViewName("admin/admin_home/manage-flight");
 
         return modelAndView;
     }
 
-    @GetMapping("/admin/add-flight")
+    @GetMapping("/admin/admin-home/manage-flight/add-flight")
     public ModelAndView addFlight(@ModelAttribute("flight") Flight flight) {
-        return new ModelAndView("admin/add-flight");
+        return new ModelAndView("admin/admin_home/manage_flight/add-flight");
     }
 
-    @PostMapping("/admin/add-flight")
-    public ModelAndView addFlightPost(
+    @PostMapping("/admin/admin-home/manage-flight/add-flight")
+    public ModelAndView addFlight(
             @Valid @ModelAttribute("flight") Flight flight,
             BindingResult bindingResult,
             ModelAndView modelAndView,
             @Value("${flight.additionSuccessful}") String message
     ) {
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("admin/add-flight");
+            modelAndView.setViewName("admin/admin_home/manage_flight/add-flight");
             return modelAndView;
         }
 
         // Save new flight in the database
         flightService.addFlight(flight);
-        modelAndView.setViewName(String.format("redirect:/admin/manage-flight?msg=%s", message));
+        modelAndView.setViewName(String.format("redirect:/admin/admin-home/manage-flight?msg=%s", message));
 
         return modelAndView;
     }
 
-    @GetMapping("/update-flight")
+    @GetMapping("/admin/admin-home/manage-flight/update-flight")
     public String updateFlight(
             @RequestParam("no") Integer no,
             @ModelAttribute("flight") Flight flight,
@@ -67,12 +67,11 @@ public class FlightController {
     ) {
         Flight flightFromDatabase = flightService.getFlightByNo(no);
         modelMap.addAttribute("flight", flightFromDatabase);
-        modelMap.addAttribute("no", no);
 
         return "update-flight";
     }
 
-    @PostMapping("/update-flight")
+    @PostMapping("/admin/admin-home/manage-flight/update-flight")
     public String updateFlight(
             @RequestParam("no") Integer no,
             @Valid @ModelAttribute("flight") Flight flight,
@@ -90,7 +89,7 @@ public class FlightController {
         return "redirect:/manage-flight?msg=" + message;
     }
 
-    @GetMapping("/delete-flight")
+    @GetMapping("/admin/admin-home/manage-flight/delete-flight")
     public String deleteFlight(
             @RequestParam("no") Integer no,
             ModelMap modelMap
@@ -102,7 +101,7 @@ public class FlightController {
         return "delete-flight";
     }
 
-    @PostMapping("/delete-flight")
+    @PostMapping("/admin/admin-home/manage-flight/delete-flight")
     public String deleteFlight(
             @RequestParam("no") Integer no,
             ModelMap modelMap,

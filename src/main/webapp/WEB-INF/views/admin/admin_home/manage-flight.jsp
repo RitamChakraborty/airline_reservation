@@ -124,7 +124,7 @@
 </header>
 <nav>
     <a href="<c:url value="/admin/admin-home"/>" class="one">Home</a>
-    <a href="<c:url value="/admin/add-flight"/>" class="one">Add Flight</a>
+    <a href="<c:url value="/admin/admin-home/manage-flight/add-flight"/>" class="one">Add Flight</a>
 </nav>
 <c:choose>
     <c:when test="${ not empty flights }">
@@ -150,8 +150,10 @@
                     <td>${ flight.economySeats }</td>
                     <td>${ flight.businessSeats }</td>
                     <td>
-                        <a href="<c:url value="/update-flight?no=${ flight.no }"/>" class="two">Update</a>
-                        <a href="<c:url value="/delete-flight?no=${ flight.no }"/>" class="three">Delete</a>
+                        <a href="<c:url value="/admin/admin-home/manage-flight/update-flight?no=${ flight.no }"/>"
+                           class="two">Update</a>
+                        <a href="<c:url value="/admin/admin-home/manage-flight/delete-flight?no=${ flight.no }"/>"
+                           class="three">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

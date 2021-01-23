@@ -76,7 +76,7 @@
 <nav>
     <ul>
         <li>
-            <a href="<c:url value="/admin/manage-flight"/>">Manage Flight</a>
+            <a href="<c:url value="/admin/admin-home/manage-flight"/>">Manage Flight</a>
         </li>
         <li>
             <a href="<c:url value="/schedule-flight"/>">Schedule Flight</a>
