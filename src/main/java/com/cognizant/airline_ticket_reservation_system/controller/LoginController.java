@@ -12,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -58,6 +60,7 @@ public class LoginController {
             @Valid @ModelAttribute("admin") Admin admin,
             BindingResult bindingResult,
             ModelMap modelMap,
+            HttpServletRequest request,
             @Value("${error.admin.invalidCredentials}") String errorMessage
     ) {
         if (bindingResult.hasErrors()) {
@@ -66,12 +69,13 @@ public class LoginController {
 
         boolean validAdmin = loginService.validAdmin(admin);
 
-        if (validAdmin) {
-            return "redirect:/admin-home?username=" + admin.getUsername();
-        } else {
+        if (!validAdmin) {
             modelMap.addAttribute("errorMessage", errorMessage);
             return "admin-login";
         }
+
+        request.getSession().setAttribute("admin", admin);
+        return "redirect:/admin-home";
     }
 
     @GetMapping("/user-login")
@@ -131,5 +135,11 @@ public class LoginController {
         modelMap.addAttribute("user", user);
 
         return "forward:/user-home";
+    }
+
+    @GetMapping("/logout")
+    public RedirectView logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return new RedirectView("/");
     }
 }
