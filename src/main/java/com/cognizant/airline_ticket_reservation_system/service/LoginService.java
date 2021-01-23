@@ -36,7 +36,7 @@ public class LoginService {
                 .orElse(false);
     }
 
-    public User validateUser(UserLogin userLogin) {
+    public User getValidateUser(UserLogin userLogin) {
         Optional<User> userOptional = userDao.findById(userLogin.getId());
         return userOptional.filter(user -> user.getPassword().equals(userLogin.getPassword()))
                 .orElse(null);

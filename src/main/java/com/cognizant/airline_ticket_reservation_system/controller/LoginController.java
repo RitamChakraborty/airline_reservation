@@ -79,8 +79,8 @@ public class LoginController {
         return "user-login";
     }
 
-    @PostMapping("/user-validation")
-    public String userValidation(
+    @PostMapping("/user-login")
+    public String userLogin(
             @Valid @ModelAttribute("userLogin") UserLogin userLogin,
             BindingResult bindingResult,
             ModelMap modelMap,
@@ -90,7 +90,7 @@ public class LoginController {
             return "user-login";
         }
 
-        User user = loginService.validateUser(userLogin);
+        User user = loginService.getValidateUser(userLogin);
 
         if (user == null) {
             modelMap.addAttribute("errorMessage", errorMessage);

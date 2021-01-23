@@ -141,11 +141,11 @@
 <%--@elvariable id="userLogin" type="com.cognizant.airline_ticket_reservation_system.model.UserLogin"--%>
 <div id="form-container">
     <div class="form-card">
-        <form:form action="/user-validation" method="post" modelAttribute="userLogin">
+        <form:form action="/user-login" method="post" modelAttribute="userLogin">
             <form:label path="id">
                 <spring:message code="label.user.id"/>
             </form:label>
-            <form:input path="id" id="user-id" placeholder="Enter user ID"/>
+            <form:input path="id" type="number" id="user-id" placeholder="Enter user ID"/>
             <form:errors path="id" cssClass="ui-state-error-text"/>
             <br>
             <form:label path="password">
