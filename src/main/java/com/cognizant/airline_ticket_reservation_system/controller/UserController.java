@@ -88,12 +88,14 @@ public class UserController {
 
     @GetMapping("/update-details")
     public String updateDetails(
-            @RequestParam("id") Integer id,
+            @RequestParam(value = "id", required = false) Integer id,
             @ModelAttribute("userDetailsUpdate") UserDetailsUpdate userDetailsUpdate,
-            ModelMap modelMap
+            ModelMap modelMap,
+            HttpServletRequest request
     ) {
-        User user = userService.getUserById(id);
-        modelMap.addAttribute("id", id);
+        User user = (User) request.getSession().getAttribute("user");
+        Integer userId = user.getId();
+        modelMap.addAttribute("id", userId);
         modelMap.addAttribute("user", user);
 
         return "update-details";
@@ -101,36 +103,42 @@ public class UserController {
 
     @PostMapping("/update-details")
     public String updateDetailsPost(
-            @RequestParam("id") Integer id,
+            @RequestParam(value = "id", required = false) Integer id,
             @Valid @ModelAttribute("userDetailsUpdate") UserDetailsUpdate userDetailsUpdate,
             BindingResult bindingResult,
             ModelMap modelMap,
+            HttpServletRequest request,
             @Value("${user.error.noUpdateError}") String noUpdateError,
             @Value("${user.updateSuccessful}") String message
     ) {
-        modelMap.addAttribute("id", id);
-
         if (bindingResult.hasErrors()) {
             return "update-details";
         }
 
-        User user = new User();
-        user.setId(id);
-        user.setName(userDetailsUpdate.getName());
-        user.setEmail(userDetailsUpdate.getEmail());
-        user.setAddress(userDetailsUpdate.getAddress());
-        user.setPhone(userDetailsUpdate.getPhone());
+        User sessionUser = (User) request.getSession().getAttribute("user");
+        User updatedUser = new User();
+        updatedUser.setId(sessionUser.getId());
+        updatedUser.setName(userDetailsUpdate.getName());
+        updatedUser.setEmail(userDetailsUpdate.getEmail());
+        updatedUser.setAddress(userDetailsUpdate.getAddress());
+        updatedUser.setPhone(userDetailsUpdate.getPhone());
+        updatedUser.setSecretQuestion(sessionUser.getSecretQuestion());
+        updatedUser.setAnswer(sessionUser.getAnswer());
+
+        System.out.println(updatedUser);
 
         User previousUser = userService.getUserById(id);
 
-        if (previousUser.equals(user)) {
+        if (previousUser.equals(updatedUser)) {
             modelMap.addAttribute("noUpdateError", noUpdateError);
             return "update-details";
         }
 
-        userService.updateUser(user);
+        userService.updateUser(updatedUser);
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user", updatedUser);
 
-        return "redirect:/user-home?id=" + id + "&msg=" + message;
+        return "redirect:/user-home?msg=" + message;
     }
 
     @GetMapping("/change-password")
@@ -149,6 +157,7 @@ public class UserController {
             @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
             BindingResult bindingResult,
             ModelMap modelMap,
+            HttpServletRequest request,
             @Value("${user.updatePasswordSuccessfully}") String message
     ) {
         modelMap.addAttribute("id", id);
@@ -166,8 +175,10 @@ public class UserController {
 
         user.setPassword(newPassword);
         userService.updateUser(user);
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user", user);
 
-        return "redirect:/user-home?id=" + id + "&msg=" + message;
+        return "redirect:/user-home?msg=" + message;
     }
 
     @GetMapping("/forget-password")
@@ -208,7 +219,7 @@ public class UserController {
         user.setPassword(newPassword);
         userService.updateUser(user);
 
-        return "redirect:/user-home?id=" + id + "&msg=" + message;
+        return "redirect:/user-home?msg=" + message;
     }
 
     @ModelAttribute("newsFeeds")

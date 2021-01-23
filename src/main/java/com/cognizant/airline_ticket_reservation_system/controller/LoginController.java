@@ -5,7 +5,6 @@ import com.cognizant.airline_ticket_reservation_system.model.*;
 import com.cognizant.airline_ticket_reservation_system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@PropertySource("classpath:messages.properties")
 public class LoginController {
     private LoginService loginService;
     private UserDao userDao;
@@ -103,6 +101,8 @@ public class LoginController {
             return "user-login";
         }
 
+        System.out.println(user);
+
         request.getSession().setAttribute("user", user);
 
         return "redirect:/user-home";
@@ -138,6 +138,7 @@ public class LoginController {
         user.setAnswer(userRegistration.getAnswer());
 
         userDao.save(user);
+        User databaseUser;
         request.getSession().setAttribute("user", user);
 
         return "redirect:/user-home";

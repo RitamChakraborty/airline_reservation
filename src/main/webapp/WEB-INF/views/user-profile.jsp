@@ -15,10 +15,10 @@
 </p>
 <p>Phone No: ${ user.phone }
 </p>
-<a href="<c:url value="/update-details?id=${ user.id }"/>">
+<a href="<c:url value="/update-details"/>">
     <button>Update Details</button>
 </a>
-<a href="<c:url value="/change-password?id=${ user.id }"/>">
+<a href="<c:url value="/change-password"/>">
     <button>Change Password</button>
 </a>
 </body>

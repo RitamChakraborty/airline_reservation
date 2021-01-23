@@ -7,7 +7,7 @@
 <body>
 <h1>Change Password</h1>
 <%--@elvariable id="userChangePassword" type="com.cognizant.airline_ticket_reservation_system.model.UserChangePassword"--%>
-<form:form action="/change-password?id=${ id }" method="post" modelAttribute="userChangePassword">
+<form:form action="/change-password" method="post" modelAttribute="userChangePassword">
     <form:label path="previousPassword">
         <spring:message code="label.userChangePassword.previousPassword"/>
     </form:label>
