@@ -5,7 +5,6 @@ import com.cognizant.airline_ticket_reservation_system.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +29,7 @@ public class FlightController {
         // Get flight from the database
         List<Flight> flights = flightService.getFlights();
         modelAndView.addObject("flights", flights);
+        modelAndView.addObject("msg", message);
         modelAndView.setViewName("admin/admin_home/manage-flight");
 
         return modelAndView;
@@ -60,55 +60,64 @@ public class FlightController {
     }
 
     @GetMapping("/admin/admin-home/manage-flight/update-flight")
-    public String updateFlight(
+    public ModelAndView updateFlight(
             @RequestParam("no") Integer no,
             @ModelAttribute("flight") Flight flight,
-            ModelMap modelMap
+            ModelAndView modelAndView
     ) {
+        // Get flight from database by flight no
         Flight flightFromDatabase = flightService.getFlightByNo(no);
-        modelMap.addAttribute("flight", flightFromDatabase);
+        modelAndView.addObject("flight", flightFromDatabase);
+        modelAndView.setViewName("admin/admin_home/manage_flight/update-flight");
 
-        return "update-flight";
+        return modelAndView;
     }
 
     @PostMapping("/admin/admin-home/manage-flight/update-flight")
-    public String updateFlight(
+    public ModelAndView updateFlight(
             @RequestParam("no") Integer no,
             @Valid @ModelAttribute("flight") Flight flight,
             BindingResult bindingResult,
-            ModelMap modelMap,
+            ModelAndView modelAndView,
             @Value("${flight.updateSuccessful}") String message
     ) {
         if (bindingResult.hasErrors()) {
-            return "update-flight";
+            modelAndView.setViewName("admin/admin_home/manage_flight/update-flight");
+            return modelAndView;
         }
 
         flight.setNo(no);
+        // Update flight in the database
         flightService.updateFlight(flight);
+        modelAndView.setViewName(String.format("redirect:/admin/admin-home/manage-flight?msg=%s", message));
 
-        return "redirect:/manage-flight?msg=" + message;
+        return modelAndView;
     }
 
     @GetMapping("/admin/admin-home/manage-flight/delete-flight")
-    public String deleteFlight(
+    public ModelAndView deleteFlight(
             @RequestParam("no") Integer no,
-            ModelMap modelMap
+            ModelAndView modelAndView
     ) {
+        // Get flight from the database
         Flight flight = flightService.getFlightByNo(no);
-        modelMap.addAttribute("flight", flight);
-        modelMap.addAttribute("no", no);
+        modelAndView.addObject("flight", flight);
+        modelAndView.setViewName("admin/admin_home/manage_flight/delete-flight");
 
-        return "delete-flight";
+        return modelAndView;
     }
 
     @PostMapping("/admin/admin-home/manage-flight/delete-flight")
-    public String deleteFlight(
+    public ModelAndView deleteFlight(
             @RequestParam("no") Integer no,
-            ModelMap modelMap,
+            ModelAndView modelAndView,
             @Value("${flight.deleteSuccessful}") String message
     ) {
+        // Delete flight from the database
         flightService.deleteFlightByNo(no);
-        return "redirect:/manage-flight?msg=" + message;
+        modelAndView.setViewName(String.format("redirect:/admin/admin-home/manage-flight?msg=%s", message));
+
+        return modelAndView;
     }
 
     @ModelAttribute("airlines")

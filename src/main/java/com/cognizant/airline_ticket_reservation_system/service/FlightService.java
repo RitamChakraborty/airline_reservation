@@ -1,7 +1,7 @@
 package com.cognizant.airline_ticket_reservation_system.service;
 
 import com.cognizant.airline_ticket_reservation_system.dao.FlightDao;
-import com.cognizant.airline_ticket_reservation_system.dao.FlightDaoCustom;
+import com.cognizant.airline_ticket_reservation_system.dao.FlightDaoImpl;
 import com.cognizant.airline_ticket_reservation_system.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class FlightService {
     private FlightDao flightDao;
-    private FlightDaoCustom flightDaoCustom;
+    private FlightDaoImpl flightDaoImpl;
 
     @Autowired
     public void setFlightDao(FlightDao flightDao) {
@@ -19,8 +19,8 @@ public class FlightService {
     }
 
     @Autowired
-    public void setFlightDaoCustom(FlightDaoCustom flightDaoCustom) {
-        this.flightDaoCustom = flightDaoCustom;
+    public void setFlightDaoImpl(FlightDaoImpl flightDaoImpl) {
+        this.flightDaoImpl = flightDaoImpl;
     }
 
     public void addFlight(Flight flight) {
@@ -33,7 +33,7 @@ public class FlightService {
     }
 
     public void updateFlight(Flight flight) {
-        flightDaoCustom.update(flight);
+        flightDaoImpl.update(flight);
     }
 
     public void deleteFlightByNo(Integer no) {

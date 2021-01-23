@@ -108,8 +108,6 @@
         .submit-buttons-container input {
             margin: 0 2rem;
         }
-
-
     </style>
 </head>
 <body>
@@ -121,8 +119,9 @@
 <br>
 <br>
 <div class="container">
-    <form:form action="/admin/admin-home/manage-flight/update-flight" method="post" modelAttribute="flight">
-
+    <%--@elvariable id="flight" type="com.cognizant.airline_ticket_reservation_system.model.Flight"--%>
+    <form:form action="/admin/admin-home/manage-flight/update-flight?no=${ param.no }" method="post"
+               modelAttribute="flight">
         <div class="row">
             <div class="col-25">
                 <form:label path="airline" class="one">

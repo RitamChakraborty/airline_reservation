@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FlightDaoCustom {
+public class FlightDaoImpl {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -16,7 +16,7 @@ public class FlightDaoCustom {
 
     public void update(Flight flight) {
         jdbcTemplate.update(
-                "update flight set airline = ?, model = ?, type = ?, seats_economy = ?, seats_business = ? where no = ?",
+                "update flight set airline = ?, model = ?, type = ?, economy_seats = ?, business_seats = ? where no = ?",
                 flight.getAirline(),
                 flight.getModel(),
                 flight.getType(),
