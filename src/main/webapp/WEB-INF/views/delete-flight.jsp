@@ -14,6 +14,10 @@
             vertical-align: middle;
             background-attachment: fixed;
         }
+         * {
+  box-sizing: border-box;
+             font-family: Raleway, sans-serif; 
+}
 
         header {
             border: none;
@@ -22,6 +26,7 @@
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
             padding: 1rem;
         }
+         
 
         h1 {
             font-family: Raleway, serif;
@@ -29,7 +34,7 @@
             font-size: xx-large;
             color: white;
         }
-  P { text-align: center }
+ 
          input[type=submit] {
           background-color: red;
           color: white;
@@ -58,6 +63,23 @@
         .submit-buttons-container input {
             margin: 0 3.5rem;
         }
+         
+         .col-1 {
+          float: left;
+          width: 35%;
+          margin-top: 6px;
+        }
+
+        .col-2 {
+          float: left;
+          width: 65%;
+          margin-top: 6px;
+        }
+          .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
 
     </style>
 </head>
@@ -69,32 +91,67 @@
     <br>
     <br>
     <br>
-    <div class="container">
+   <div class="container">
 <form:form action="/delete-flight?no=${ no }">
-    <p>
+    
+        <div class="row">
+            <div class="col-1">
         <spring:message code="label.flight.no"/>
+            </div>
+            <div class="col-2">
         <span>: ${ flight.no }</span>
-    </p>
-    <p>
+            </div>
+    </div>
+   
+    
+        <div class="row">
+            <div class="col-1">
         <spring:message code="label.flight.airline"/>
+                </div>
+            <div class="col-2">
         <span>: ${ flight.airline }</span>
-    </p>
-    <p>
+                </div>
+    </div>
+    
+        <div class="row">
+            <div class="col-1">
         <spring:message code="label.flight.model"/>
+                </div>
+            <div class="col-2">
         <span>: ${ flight.model }</span>
-    </p>
-    <p>
+                </div>
+    </div>
+    
+        <div class="row">
+            <div class="col-1">
         <spring:message code="label.flight.type"/>
+                </div>
+            <div class="col-2">
         <span>: ${ flight.type }</span>
-    </p>
-    <p>
+                </div>
+    </div>
+    
+        <div class="row">
+            <div class="col-1">
         <spring:message code="label.flight.seatsEconomy"/>
+                </div>
+            <div class="col-2">
         <span>: ${ flight.seatsEconomy }</span>
-    </p>
-    <p>
+                </div>
+    </div>
+    
+    
+   
+        <div class="row">
+            <div class="col-1">
         <spring:message code="label.flight.seatsBusiness"/>
+                </div>
+            <div class="col-2">
         <span>: ${ flight.seatsBusiness }</span>
-    </p>
+                </div>
+    </div>
+   
+
     <div class="submit-buttons-container">
     <input type="submit" value="Delete">
     </div>
