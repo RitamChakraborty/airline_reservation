@@ -58,14 +58,18 @@ public class UserController {
             @Value("${error.admin.invalidCredentials}") String errorMessage
     ) {
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("user/user-login");
+            modelAndView.setViewName("user/user-login");
+            return modelAndView;
         }
 
         User user = userService.getValidateUser(userLogin);
 
         if (user == null) {
+            System.out.println(errorMessage);
             modelAndView.addObject("errorMessage", errorMessage);
-            return new ModelAndView("user/user-login");
+            modelAndView.setViewName("user/user-login");
+
+            return modelAndView;
         }
 
         request.getSession().setAttribute("user", user);
