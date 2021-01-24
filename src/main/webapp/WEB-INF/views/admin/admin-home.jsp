@@ -67,7 +67,7 @@
     response.setDateHeader("Expires", 0);
 
     if (session.getAttribute("admin") == null) {
-        response.sendRedirect("/");
+        response.sendRedirect("/logout");
     }
 %>
 <header>

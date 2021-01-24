@@ -14,7 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -113,16 +113,15 @@ public class LoginController {
         user.setAnswer(userRegistration.getAnswer());
 
         userDao.save(user);
-        User databaseUser;
         request.getSession().setAttribute("user", user);
 
         return "redirect:/user-home";
     }
 
     @GetMapping("/logout")
-    public RedirectView logout(HttpServletRequest request) {
+    public ModelAndView logout(HttpServletRequest request) {
         request.getSession().invalidate();
-        return new RedirectView("/");
+        return new ModelAndView("logout");
     }
 
     @ModelAttribute("secretQuestions")
