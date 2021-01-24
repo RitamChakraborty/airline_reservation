@@ -212,60 +212,6 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/change-password")
-    public String changePassword(
-            @RequestParam("id") Integer id,
-            @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
-            ModelMap modelMap
-    ) {
-        modelMap.addAttribute("id", id);
-        return "change-password";
-    }
-
-    @PostMapping("/change-password")
-    public String changePasswordPost(
-            @RequestParam("id") Integer id,
-            @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
-            BindingResult bindingResult,
-            ModelMap modelMap,
-            HttpServletRequest request,
-            @Value("${user.updatePasswordSuccessfully}") String message
-    ) {
-        modelMap.addAttribute("id", id);
-
-        User user = userService.getUserById(id);
-        String password = user.getPassword();
-        String newPassword = userChangePassword.getNewPassword();
-        userChangePassword.setOriginalPassword(password);
-
-        userChangePasswordValidator.validate(userChangePassword, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "change-password";
-        }
-
-        user.setPassword(newPassword);
-        userService.updateUser(user);
-        request.getSession().removeAttribute("user");
-        request.getSession().setAttribute("user", user);
-
-        return "redirect:/user-home?msg=" + message;
-    }
-
-    @GetMapping("/user/user-home")
-    public ModelAndView userHome(
-            @RequestParam(value = "msg", required = false) String message,
-            ModelAndView modelAndView,
-            HttpServletRequest request
-    ) {
-        User user = (User) request.getSession().getAttribute("user");
-        modelAndView.addObject("user", user);
-        modelAndView.addObject("msg", message);
-        modelAndView.setViewName("user/user-home");
-
-        return modelAndView;
-    }
-
     @GetMapping("/book-ticket")
     public String bookTicket() {
         return "book-ticket";
@@ -276,12 +222,9 @@ public class UserController {
         return "history";
     }
 
-    @GetMapping("/view-profile")
-    public String viewProfile(@RequestParam("id") Integer id, ModelMap modelMap) {
-        User user = userService.getUserById(id);
-        modelMap.addAttribute("user", user);
-
-        return "user-profile";
+    @GetMapping("/user/user-home/view-profile")
+    public ModelAndView viewProfile() {
+        return new ModelAndView("user/user_home/user-profile");
     }
 
     @GetMapping("/update-details")
@@ -337,6 +280,60 @@ public class UserController {
         request.getSession().setAttribute("user", updatedUser);
 
         return "redirect:/user-home?msg=" + message;
+    }
+
+    @GetMapping("/change-password")
+    public String changePassword(
+            @RequestParam("id") Integer id,
+            @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
+            ModelMap modelMap
+    ) {
+        modelMap.addAttribute("id", id);
+        return "change-password";
+    }
+
+    @PostMapping("/change-password")
+    public String changePasswordPost(
+            @RequestParam("id") Integer id,
+            @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
+            BindingResult bindingResult,
+            ModelMap modelMap,
+            HttpServletRequest request,
+            @Value("${user.updatePasswordSuccessfully}") String message
+    ) {
+        modelMap.addAttribute("id", id);
+
+        User user = userService.getUserById(id);
+        String password = user.getPassword();
+        String newPassword = userChangePassword.getNewPassword();
+        userChangePassword.setOriginalPassword(password);
+
+        userChangePasswordValidator.validate(userChangePassword, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "change-password";
+        }
+
+        user.setPassword(newPassword);
+        userService.updateUser(user);
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user", user);
+
+        return "redirect:/user-home?msg=" + message;
+    }
+
+    @GetMapping("/user/user-home")
+    public ModelAndView userHome(
+            @RequestParam(value = "msg", required = false) String message,
+            ModelAndView modelAndView,
+            HttpServletRequest request
+    ) {
+        User user = (User) request.getSession().getAttribute("user");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("msg", message);
+        modelAndView.setViewName("user/user-home");
+
+        return modelAndView;
     }
 
     @ModelAttribute("genders")

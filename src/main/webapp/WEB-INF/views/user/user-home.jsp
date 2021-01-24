@@ -98,7 +98,7 @@
             <a href="<c:url value="/history"/>">History</a>
         </li>
         <li>
-            <a href="<c:url value="/view-profile?id=${ user.id }"/>">View Profile</a>
+            <a href="<c:url value="/user/user-home/view-profile"/>">View Profile</a>
         </li>
         <li>
         <li style="float:right"><a href="<c:url value="/logout"/>">Logout</a>

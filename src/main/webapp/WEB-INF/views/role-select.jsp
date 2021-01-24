@@ -125,8 +125,7 @@
             <form:label path="role" id="role-message">
                 <spring:message code="label.selectRole"/>
             </form:label>
-            <form:select path="role" items="${ roles }" id="role" class="box">
-            </form:select>
+            <form:select path="role" items="${ roles }" id="role" class="box"/>
             <button type="submit" id="submit-btn">Choose</button>
         </form:form>
     </div>

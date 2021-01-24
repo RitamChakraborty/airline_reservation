@@ -146,13 +146,13 @@
                 <spring:message code="label.user.id"/>
             </form:label>
             <form:input path="id" type="number" id="user-id" placeholder="Enter user ID"/>
-            <form:errors path="id" cssClass="ui-state-error-text"/>
+            <form:errors path="id"/>
             <br>
             <form:label path="password">
                 <spring:message code="label.password"/>
             </form:label>
             <form:password path="password" id="password" placeholder="Enter password"/>
-            <form:errors path="password" cssClass="ui-state-error-text"/>
+            <form:errors path="password"/>
             <div class="global-error-text">
                 <c:if test="${ not empty errorMessage }">
                     <p>
