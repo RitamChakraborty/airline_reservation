@@ -24,19 +24,60 @@
 </head>
 <body>
 <h1>Schedule Flight</h1>
-<a href="<c:url value="/add-schedule"/>">Add Schedule</a>
+<a href="<c:url value="/admin/admin-home"/>">Home</a>
+<c:choose>
+    <c:when test="${ not empty flights }">
+        <table id="flight">
+            <caption>Flights</caption>
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>Airline</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Economy Seats</th>
+                <th>Business Seats</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="flight" items="${ flights }">
+                <tr>
+                    <td>${ flight.no }</td>
+                    <td>${ flight.airline }</td>
+                    <td>${ flight.model }</td>
+                    <td>${ flight.type }</td>
+                    <td>${ flight.economySeats }</td>
+                    <td>${ flight.businessSeats }</td>
+                    <td>
+                        <c:url var="addSchedule" value="/admin/admin-home/schedule-flight/add-schedule">
+                            <c:param name="no" value="${ flight.no }"/>
+                        </c:url>
+                        <a href="${ addSchedule }">Schedule</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:when>
+    <c:otherwise>
+        <p>Not flights available</p>
+    </c:otherwise>
+</c:choose>
 <c:choose>
     <c:when test="${ not empty flightSchedules }">
         <%!
             int index = 0;
         %>
         <table>
+            <caption>Scheduled Flights</caption>
             <thead>
             <tr>
                 <th>Flight ID</th>
                 <th>Flight No</th>
                 <th>Source</th>
                 <th>Destination</th>
+                <td>Cost</td>
                 <th>Arrival Time</th>
                 <th>Departure Time</th>
                 <th>Dates</th>
@@ -49,6 +90,7 @@
                     <td>${ flightSchedule.flightNo }</td>
                     <td>${ flightSchedule.source }</td>
                     <td>${ flightSchedule.destination }</td>
+                    <td>${ flightSchedule.cost }</td>
                     <td>${ flightSchedule.arrivalTime }</td>
                     <td>${ flightSchedule.departureTime }</td>
                     <td>

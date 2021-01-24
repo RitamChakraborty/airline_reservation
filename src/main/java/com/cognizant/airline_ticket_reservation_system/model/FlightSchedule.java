@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalTime;
 
 @Entity
@@ -16,10 +17,13 @@ public class FlightSchedule {
     private Flight flight;
     private String source;
     private String destination;
-    @NotNull(message = "{flightSchedule.arrivalTime}")
+    @NotNull(message = "{error.flightSchedule.cost}")
+    @PositiveOrZero(message = "{error.flightSchedule.negative}")
+    private Integer cost;
+    @NotNull(message = "{error.flightSchedule.arrivalTime}")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
-    @NotNull(message = "{flightSchedule.departureTime}")
+    @NotNull(message = "{error.flightSchedule.departureTime}")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime departureTime;
     private boolean sun;
@@ -60,6 +64,14 @@ public class FlightSchedule {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 
     public LocalTime getArrivalTime() {
@@ -147,8 +159,10 @@ public class FlightSchedule {
         return "FlightSchedule{" +
                 "id=" + id +
                 ", flightNo=" + flightNo +
+                ", flight=" + flight +
                 ", source='" + source + '\'' +
                 ", destination='" + destination + '\'' +
+                ", cost=" + cost +
                 ", arrivalTime=" + arrivalTime +
                 ", departureTime=" + departureTime +
                 ", sun=" + sun +

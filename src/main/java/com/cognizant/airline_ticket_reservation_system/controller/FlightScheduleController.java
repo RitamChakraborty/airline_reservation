@@ -11,11 +11,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class FlightScheduleController {
@@ -32,43 +32,53 @@ public class FlightScheduleController {
         this.flightScheduleService = flightScheduleService;
     }
 
-    @GetMapping("/schedule-flight")
-    public String scheduleFlight() {
-        return "schedule-flight";
+    @GetMapping("/admin/admin-home/schedule-flight")
+    public ModelAndView scheduleFlight() {
+        return new ModelAndView("admin/admin_home/schedule-flight");
     }
 
-    @GetMapping("/add-schedule")
-    public String addSchedule(@ModelAttribute("flightSchedule") FlightSchedule flightSchedule) {
-        return "add-schedule";
+    @GetMapping("/admin/admin-home/schedule-flight/add-schedule")
+    public ModelAndView addSchedule(
+            @RequestParam("no") Integer flightNo,
+            @ModelAttribute("flightSchedule") FlightSchedule flightSchedule,
+            ModelAndView modelAndView
+    ) {
+        Flight flight = flightService.getFlightByNo(flightNo);
+        String flightBuilder = "Airline : " + flight.getAirline() +
+                ", Model : " + flight.getModel() +
+                ", Type : " + flight.getType();
+        modelAndView.addObject("flight", flightBuilder);
+        modelAndView.setViewName("admin/admin_home/schedule_flight/add-schedule");
+
+        return modelAndView;
     }
 
-    @PostMapping("/add-schedule")
-    public String addSchedule(
+    @PostMapping("/admin/admin-home/schedule-flight/add-schedule")
+    public ModelAndView addSchedule(
+            @RequestParam("no") Integer flightNo,
             @Valid @ModelAttribute("flightSchedule") FlightSchedule flightSchedule,
             BindingResult bindingResult
     ) {
+        // Check if departure time is equal or before arrival time
+        if (flightSchedule.getArrivalTime() != null && flightSchedule.getDepartureTime() != null) {
+            if (flightSchedule.getArrivalTime().compareTo(flightSchedule.getDepartureTime()) >= 0) {
+                bindingResult.rejectValue("departureTime", "error.flightSchedule.departureTime.equalOrBeforeArrival");
+            }
+        }
+        System.out.println(flightSchedule);
+
+
         if (bindingResult.hasErrors()) {
-            return "add-schedule";
+            return new ModelAndView("admin/admin_home/schedule_flight/add-schedule");
         }
 
+        System.out.println(flightSchedule);
+
+        flightSchedule.setFlightNo(flightNo);
+        // Save flight schedule in the database
         flightScheduleService.saveFlightSchedule(flightSchedule);
 
-        return "redirect:/schedule-flight";
-    }
-
-    @ModelAttribute("flights")
-    private Map<Integer, String> flights() {
-        Map<Integer, String> flightMap = new LinkedHashMap<>();
-        List<Flight> flightList = flightService.getFlights();
-
-        for (Flight flight : flightList) {
-            String string = "Airline: " + flight.getAirline() + ", " +
-                    "Model: " + flight.getModel() + ", " +
-                    "Type: " + flight.getType();
-            flightMap.put(flight.getNo(), string);
-        }
-
-        return flightMap;
+        return new ModelAndView("redirect:/admin/admin-home/schedule-flight");
     }
 
     @ModelAttribute("sources")
@@ -79,6 +89,11 @@ public class FlightScheduleController {
     @ModelAttribute("destinations")
     private List<String> destinations(@Value("#{'${flightSchedule.destinations}'.split(',')}") List<String> destinations) {
         return destinations;
+    }
+
+    @ModelAttribute("flights")
+    public List<Flight> flights() {
+        return flightService.getFlights();
     }
 
     @ModelAttribute("flightSchedules")

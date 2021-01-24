@@ -79,7 +79,7 @@
             <a href="<c:url value="/admin/admin-home/manage-flight"/>">Manage Flight</a>
         </li>
         <li>
-            <a href="<c:url value="/schedule-flight"/>">Schedule Flight</a>
+            <a href="<c:url value="/admin/admin-home/schedule-flight"/>">Schedule Flight</a>
         </li>
         <li>
             <a href="<c:url value="/booking-details"/>">Booking Details</a>
