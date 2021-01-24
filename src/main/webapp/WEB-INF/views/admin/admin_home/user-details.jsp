@@ -32,6 +32,8 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
                 <th>Email</th>
                 <th>Address</th>
                 <th>Phone No</th>
@@ -42,6 +44,8 @@
                 <tr>
                     <td>${ user.id }</td>
                     <td>${ user.name }</td>
+                    <td>${ user.age }</td>
+                    <td>${ user.gender }</td>
                     <td>${ user.email }</td>
                     <td>${ user.address }</td>
                     <td>${ user.phone }</td>

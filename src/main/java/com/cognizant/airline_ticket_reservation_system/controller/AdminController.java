@@ -9,7 +9,6 @@ import com.cognizant.airline_ticket_reservation_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -88,12 +87,13 @@ public class AdminController {
         return "booking-details";
     }
 
-    @GetMapping("/user-details")
-    public String userDetails(ModelMap modelMap) {
+    @GetMapping("/admin/admin-home/user-details")
+    public ModelAndView userDetails(ModelAndView modelAndView) {
         List<User> userList = userService.getUsers();
-        modelMap.addAttribute("userList", userList);
+        modelAndView.addObject("userList", userList);
+        modelAndView.setViewName("admin/admin_home/user-details");
 
-        return "user-details";
+        return modelAndView;
     }
 
     @ModelAttribute("newsFeeds")

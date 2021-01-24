@@ -85,7 +85,7 @@
             <a href="<c:url value="/booking-details"/>">Booking Details</a>
         </li>
         <li>
-            <a href="<c:url value="/user-details"/>">User Details</a>
+            <a href="<c:url value="/admin/admin-home/user-details"/>">User Details</a>
         </li>
         <li>
             <a href="<c:url value="/add-news"/>">Add News</a>
