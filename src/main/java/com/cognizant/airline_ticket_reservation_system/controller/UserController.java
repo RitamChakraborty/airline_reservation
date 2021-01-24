@@ -128,6 +128,90 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping("user/forget-password")
+    public ModelAndView forgetPassword(@ModelAttribute("userForgetPassword") UserForgetPassword userForgetPassword) {
+        return new ModelAndView("user/forget-password");
+    }
+
+    @PostMapping("user/forget-password")
+    public ModelAndView forgetPassword(
+            @Valid @ModelAttribute("userForgetPassword") UserForgetPassword userForgetPassword,
+            BindingResult bindingResult,
+            ModelAndView modelAndView,
+            HttpServletRequest request,
+            @Value("${user.updatePasswordSuccessfully}") String message
+    ) {
+        System.out.println(userForgetPassword);
+
+        if (userForgetPassword.getId() != null) {
+            User user = userService.getUserById(userForgetPassword.getId());
+
+            if (user == null) {
+                // User id does not exists
+                bindingResult.rejectValue("id", "error.user.id.notExists");
+            } else {
+                if (
+                        !userForgetPassword.getAnswer().isBlank() &&
+                                !userForgetPassword.getSecretQuestion().isBlank() &&
+                                !userForgetPassword.getAnswer().isBlank() &&
+                                !userForgetPassword.getEmail().isBlank() &&
+                                !userForgetPassword.getPhone().isBlank() &&
+                                !userForgetPassword.getNewPassword().isBlank() &&
+                                !userForgetPassword.getConfirmPassword().isBlank()
+                ) {
+                    if (!userForgetPassword.getSecretQuestion().equals(user.getSecretQuestion())) {
+                        // Secret question does not match
+                        bindingResult.rejectValue("secretQuestion", "error.user.secretQuestion.noMatch");
+                    } else {
+                        if (!userForgetPassword.getAnswer().toLowerCase().equals(user.getAnswer())) {
+                            // Answer does not match
+                            bindingResult.rejectValue("answer", "error.user.answer.noMatch");
+                        }
+                    }
+
+                    if (!userForgetPassword.getEmail().equals(user.getEmail())) {
+                        // Email does not match
+                        bindingResult.rejectValue("email", "error.user.email.noMatch");
+                    }
+
+                    if (!userForgetPassword.getPhone().equals(user.getPhone())) {
+                        // Phone no does not match
+                        bindingResult.rejectValue("phone", "error.user.phone.noMatch");
+                    }
+
+                    if (userForgetPassword.getNewPassword().equals(user.getPassword())) {
+                        // New password is equal to the old one
+                        bindingResult.rejectValue("newPassword", "error.user.newPassword.equalsOld");
+                    }
+
+                    if (!userForgetPassword.getNewPassword().equals(userForgetPassword.getConfirmPassword())) {
+                        // New password and confirm password do not match
+                        bindingResult.rejectValue("confirmPassword", "error.user.confirmPassword.notEqual");
+                    }
+                }
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("user/forget-password");
+            return modelAndView;
+        }
+
+        User user = userService.getUserById(userForgetPassword.getId());
+        user.setPassword(userForgetPassword.getNewPassword());
+
+        // Save updated user in database
+        userService.updateUser(user);
+
+        // Reset session value
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user", user);
+
+        modelAndView.setViewName(String.format("redirect:/user/user-home?msg=%s", message));
+
+        return modelAndView;
+    }
+
     @GetMapping("/change-password")
     public String changePassword(
             @RequestParam("id") Integer id,
@@ -164,47 +248,6 @@ public class UserController {
         userService.updateUser(user);
         request.getSession().removeAttribute("user");
         request.getSession().setAttribute("user", user);
-
-        return "redirect:/user-home?msg=" + message;
-    }
-
-    @GetMapping("user/forget-password")
-    public String changePassword(@ModelAttribute("userForgetPassword") UserForgetPassword userForgetPassword) {
-        return "user/forget-password";
-    }
-
-    @PostMapping("user/forget-password")
-    public String changePasswordPost(
-            @Valid @ModelAttribute("userForgetPassword") UserForgetPassword userForgetPassword,
-            BindingResult bindingResult,
-            ModelMap modelMap,
-            @Value("${user.updatePasswordSuccessfully}") String message
-    ) {
-        Integer id = userForgetPassword.getId();
-        if (id != null) {
-            User user = userService.getUserById(id);
-
-            if (user == null) {
-                bindingResult.rejectValue("id", "error.userForgetPassword.id.notExists");
-            }
-        }
-
-        String newPassword = userForgetPassword.getNewPassword();
-        String confirmPassword = userForgetPassword.getConfirmPassword();
-
-        if (newPassword != null && confirmPassword != null) {
-            if (!newPassword.equals(confirmPassword)) {
-                bindingResult.rejectValue("confirmPassword", "error.userChangePassword.confirmPassword.notEqual");
-            }
-        }
-
-        if (bindingResult.hasErrors()) {
-            return "forget-password";
-        }
-
-        User user = userService.getUserById(id);
-        user.setPassword(newPassword);
-        userService.updateUser(user);
 
         return "redirect:/user-home?msg=" + message;
     }

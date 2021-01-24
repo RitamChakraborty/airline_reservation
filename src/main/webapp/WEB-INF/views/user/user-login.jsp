@@ -166,8 +166,8 @@
             </div>
         </form:form>
         <br>
-        <a href="/user/user-registration">Sign Up </a><br>
-        <a href="<c:url value="user/forget-password"/>">Forget Password</a>
+        <a href="<c:url value="/user/user-registration"/>">Sign Up </a><br>
+        <a href="<c:url value="/user/forget-password"/>">Forget Password</a>
     </div>
 </div>
 </body>

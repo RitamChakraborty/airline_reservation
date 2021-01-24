@@ -8,6 +8,9 @@ import javax.validation.constraints.Pattern;
 public class UserForgetPassword {
     @NotNull(message = "{error.id}")
     private Integer id;
+    private String secretQuestion;
+    @NotBlank(message = "{error.user.answer}")
+    private String answer;
     @NotBlank(message = "{error.user.email}")
     @Email(message = "{error.user.email.invalid}")
     private String email;
@@ -15,9 +18,9 @@ public class UserForgetPassword {
     @Pattern(regexp = "^(\\d{10})?$", message = "{error.user.phone.invalid}")
     private String phone;
     @NotBlank(message = "{error.userChangePassword.newPassword}")
-    @Pattern(regexp = "^(.{6,})?$", message = "{error.userChangePassword.newPassword.invalid}")
+    @Pattern(regexp = "^((?=.*?[#?!@$%^&*-.]).{6,})?$", message = "{error.user.password.invalid}")
     private String newPassword;
-    @NotBlank(message = "{error.userChangePassword.confirmPassword}")
+    @NotBlank(message = "{error.user.confirmPassword}")
     private String confirmPassword;
 
     public Integer getId() {
@@ -26,6 +29,22 @@ public class UserForgetPassword {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSecretQuestion() {
+        return secretQuestion;
+    }
+
+    public void setSecretQuestion(String secretQuestion) {
+        this.secretQuestion = secretQuestion;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public String getEmail() {
@@ -64,6 +83,8 @@ public class UserForgetPassword {
     public String toString() {
         return "UserForgetPassword{" +
                 "id=" + id +
+                ", secretQuestion='" + secretQuestion + '\'' +
+                ", answer='" + answer + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", newPassword='" + newPassword + '\'' +

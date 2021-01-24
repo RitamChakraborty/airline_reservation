@@ -20,7 +20,7 @@
             background-color: white;
         }
 
-        input[type=text], input[type=password] {
+        input, select {
             width: 100%;
             padding: 15px;
             margin: 5px 0 22px 0;
@@ -68,12 +68,24 @@
 <body>
 <h1>Forget Password</h1>
 <%--@elvariable id="userForgetPassword" type="com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword"--%>
-<form:form action="/forget-password" method="post" modelAttribute="userForgetPassword">
+<form:form action="/user/forget-password" method="post" modelAttribute="userForgetPassword">
     <form:label path="id">
         <spring:message code="label.user.id"/>
     </form:label>
     <form:input path="id" placeholder="Enter User Id"/>
     <form:errors path="id"/>
+    <br>
+    <form:label path="secretQuestion">
+        <spring:message code="label.user.secretQuestion"/>
+    </form:label>
+    <form:select path="secretQuestion" items="${ secretQuestions }"/>
+    <form:errors path="secretQuestion"/>
+    <br>
+    <form:label path="answer">
+        <spring:message code="label.user.answer"/>
+    </form:label>
+    <form:input path="answer" placeholder="Answer of the secret quetion"/>
+    <form:errors path="answer"/>
     <br>
     <from:label path="email">
         <spring:message code="label.user.email"/>
