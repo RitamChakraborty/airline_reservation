@@ -141,7 +141,7 @@
 <%--@elvariable id="userLogin" type="com.cognizant.airline_ticket_reservation_system.model.UserLogin"--%>
 <div id="form-container">
     <div class="form-card">
-        <form:form action="/user-login" method="post" modelAttribute="userLogin">
+        <form:form action="/user/user-login" method="post" modelAttribute="userLogin">
             <form:label path="id">
                 <spring:message code="label.user.id"/>
             </form:label>
@@ -166,8 +166,8 @@
             </div>
         </form:form>
         <br>
-        <a href="<c:url value="/user-registration"/>">Sign Up </a><br>
-        <a href="<c:url value="/forget-password"/>">Forget Password</a>
+        <a href="/user/user-registration">Sign Up </a><br>
+        <a href="<c:url value="user/forget-password"/>">Forget Password</a>
     </div>
 </div>
 </body>

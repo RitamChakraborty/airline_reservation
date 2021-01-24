@@ -25,7 +25,7 @@
             background-color: white;
         }
 
-        input[type=text], input[type=password], select {
+        input, select {
             width: 100%;
             padding: 15px;
             margin: 5px 0 22px 0;
@@ -34,7 +34,7 @@
             background: #f1f1f1;
         }
 
-        input[type=text]:focus, input[type=password]:focus {
+        input:focus, input[type=password]:focus {
             background-color: #ddd;
             outline: none;
         }
@@ -73,28 +73,51 @@
 <body>
 <h1>User Registration</h1>
 <%--@elvariable id="userRegistration" type="com.cognizant.airline_ticket_reservation_system.model.UserRegistration"--%>
-<form:form action="/user-singup" method="post" modelAttribute="userRegistration">
-    <spring:message code="label.user.name"/>
+<form:form action="/user/user-registration" method="post" modelAttribute="userRegistration">
+    <form:label path="name">
+        <spring:message code="label.user.name"/>
+    </form:label>
     <form:input path="name" placeholder="Enter Name"/>
     <form:errors path="name"/>
     <br>
-    <spring:message code="label.user.email"/>
+    <form:label path="age">
+        <spring:message code="label.user.age"/>
+    </form:label>
+    <form:input path="age" type="number" placeholder="Enter your age (>18)"/>
+    <form:errors path="age"/>
+    <br>
+    <form:label path="gender">
+        <spring:message code="label.user.gender"/>
+    </form:label>
+    <form:select path="gender" items="${ genders }"/>
+    <br>
+    <form:label path="email">
+        <spring:message code="label.user.email"/>
+    </form:label>
     <form:input path="email" placeholder="Enter Email"/>
     <form:errors path="email"/>
     <br>
-    <spring:message code="label.user.address"/>
+    <form:label path="address">
+        <spring:message code="label.user.address"/>
+    </form:label>
     <form:input path="address" placeholder="Enter Address"/>
     <form:errors path="address"/>
     <br>
-    <spring:message code="label.user.phone"/>
+    <form:label path="phone">
+        <spring:message code="label.user.phone"/>
+    </form:label>
     <form:input path="phone" placeholder="Enter Phone Number"/>
     <form:errors path="phone"/>
     <br>
-    <spring:message code="label.password"/>
+    <form:label path="password">
+        <spring:message code="label.password"/>
+    </form:label>
     <form:password path="password" placeholder="Enter Password"/>
     <form:errors path="password"/>
     <br>
-    <spring:message code="label.user.confirmPassword"/>
+    <form:label path="confirmPassword">
+        <spring:message code="label.user.confirmPassword"/>
+    </form:label>
     <form:password path="confirmPassword" placeholder="Re-enter Password"/>
     <form:errors path="confirmPassword"/>
     <c:if test="${ not empty errorMessage}">

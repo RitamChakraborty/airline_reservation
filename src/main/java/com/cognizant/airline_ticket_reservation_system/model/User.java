@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 @Entity
@@ -21,12 +20,13 @@ public class User {
     private String password;
     @NotBlank(message = "{error.user.name}")
     private String name;
+    Integer age;
+    String gender;
     @Email(message = "{error.user.email}")
     private String email;
     @NotBlank(message = "{error.user.address}")
     private String address;
     @NotBlank(message = "{error.user.phone}")
-    @Pattern(regexp = "^(\\d{10})?$", message = "{error.user.phone.invalid}")
     private String phone;
     private String secretQuestion;
     @NotBlank(message = "${error.user.answer}")
@@ -54,6 +54,22 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {
@@ -104,6 +120,8 @@ public class User {
         return getId().equals(user.getId()) &&
                 getPassword().equals(user.getPassword()) &&
                 getName().equals(user.getName()) &&
+                getAge().equals(user.getAge()) &&
+                getGender().equals(user.getGender()) &&
                 getEmail().equals(user.getEmail()) &&
                 getAddress().equals(user.getAddress()) &&
                 getPhone().equals(user.getPhone()) &&
@@ -113,7 +131,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPassword(), getName(), getEmail(), getAddress(), getPhone(), getSecretQuestion(), getAnswer());
+        return Objects.hash(getId(), getPassword(), getName(), getAge(), getGender(), getEmail(), getAddress(), getPhone(), getSecretQuestion(), getAnswer());
     }
 
     @Override
@@ -122,6 +140,8 @@ public class User {
                 "id=" + id +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +

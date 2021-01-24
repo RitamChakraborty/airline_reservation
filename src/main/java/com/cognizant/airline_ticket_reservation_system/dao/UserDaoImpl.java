@@ -6,12 +6,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDaoManual {
+public class UserDaoImpl {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public Integer lastUserId() {
+        String query = "select max(id) from user;";
+        return jdbcTemplate.queryForObject(query, Integer.class);
     }
 
     public void update(User user) {

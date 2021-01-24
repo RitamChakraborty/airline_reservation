@@ -1,7 +1,7 @@
 package com.cognizant.airline_ticket_reservation_system.service;
 
 import com.cognizant.airline_ticket_reservation_system.dao.UserDao;
-import com.cognizant.airline_ticket_reservation_system.dao.UserDaoManual;
+import com.cognizant.airline_ticket_reservation_system.dao.UserDaoImpl;
 import com.cognizant.airline_ticket_reservation_system.model.User;
 import com.cognizant.airline_ticket_reservation_system.model.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class UserService {
     private UserDao userDao;
-    private UserDaoManual userDaoManual;
+    private UserDaoImpl userDaoImpl;
 
     @Autowired
     public void setUserDao(UserDao userDao) {
@@ -21,8 +21,8 @@ public class UserService {
     }
 
     @Autowired
-    public void setUserDaoManual(UserDaoManual userDaoManual) {
-        this.userDaoManual = userDaoManual;
+    public void setUserDaoImpl(UserDaoImpl userDaoImpl) {
+        this.userDaoImpl = userDaoImpl;
     }
 
     public User getValidateUser(UserLogin userLogin) {
@@ -40,7 +40,11 @@ public class UserService {
     }
 
     public void updateUser(User user) {
-        userDaoManual.update(user);
+        userDaoImpl.update(user);
+    }
+
+    public Integer getLastUsersId() {
+        return userDaoImpl.lastUserId();
     }
 
     public List<User> getUsers() {
