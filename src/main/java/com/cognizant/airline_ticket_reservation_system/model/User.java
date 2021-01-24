@@ -6,8 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
@@ -16,20 +15,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotBlank(message = "{error.password}")
     private String password;
-    @NotBlank(message = "{error.user.name}")
-    private String name;
+    @NotNull(message = "{error.user.age}")
+    @Min(value = 19, message = "{error.user.age.young}")
     Integer age;
+    @NotBlank(message = "{error.user.name}")
+    @Size(min = 3, max = 20, message = "{error.user.name.size}")
+    private String name;
     String gender;
     @Email(message = "{error.user.email}")
     private String email;
     @NotBlank(message = "{error.user.address}")
     private String address;
     @NotBlank(message = "{error.user.phone}")
+    @Pattern(regexp = "^(\\d{10})?$")
     private String phone;
     private String secretQuestion;
-    @NotBlank(message = "${error.user.answer}")
     private String answer;
 
     public Integer getId() {

@@ -75,7 +75,7 @@
     response.setDateHeader("Expires", 0);
 
     if (session.getAttribute("user") == null) {
-        response.sendRedirect("/");
+        response.sendRedirect("/logout");
     }
 %>
 <c:if test="${ not empty param.msg}">

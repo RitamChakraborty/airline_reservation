@@ -4,7 +4,15 @@
     <title>Profile</title>
 </head>
 <body>
+<c:if test="${ not empty param.msg }">
+    <script>
+        alert('${ param.msg }');
+    </script>
+</c:if>
 <h1>User Profile</h1>
+<nav>
+    <a href="<c:url value="/user/user-home"/>">Home</a>
+</nav>
 <table>
     <tbody>
     <tr>
@@ -37,10 +45,10 @@
     </tr>
     </tbody>
 </table>
-<a href="<c:url value="/update-details"/>">
+<a href="<c:url value="/user/user-home/view-profile/update-details"/>">
     <button>Update Details</button>
 </a>
-<a href="<c:url value="/change-password"/>">
+<a href="<c:url value="/user/user-home/view-profile/change-password"/>">
     <button>Change Password</button>
 </a>
 </body>

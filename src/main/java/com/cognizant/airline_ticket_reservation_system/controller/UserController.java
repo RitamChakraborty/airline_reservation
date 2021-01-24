@@ -223,66 +223,68 @@ public class UserController {
     }
 
     @GetMapping("/user/user-home/view-profile")
-    public ModelAndView viewProfile() {
-        return new ModelAndView("user/user_home/user-profile");
+    public ModelAndView viewProfile(@RequestParam(value = "msg", required = false) String message, ModelAndView modelAndView) {
+        if (message != null) {
+            modelAndView.addObject("msg", message);
+        }
+
+        modelAndView.setViewName("user/user_home/view-profile");
+
+        return modelAndView;
     }
 
-    @GetMapping("/update-details")
-    public String updateDetails(
-            @RequestParam(value = "id", required = false) Integer id,
-            @ModelAttribute("userDetailsUpdate") UserDetailsUpdate userDetailsUpdate,
-            ModelMap modelMap,
+    @GetMapping("/user/user-home/view-profile/update-details")
+    public ModelAndView updateDetails(@ModelAttribute("user") User user) {
+        return new ModelAndView("user/user_home/view_profile/update-details");
+    }
+
+    @PostMapping("/user/user-home/view-profile/update-details")
+    public ModelAndView updateDetails(
+            @Valid @ModelAttribute("user") User updatedUser,
+            BindingResult bindingResult,
+            ModelAndView modelAndView,
             HttpServletRequest request
     ) {
-        User user = (User) request.getSession().getAttribute("user");
-        Integer userId = user.getId();
-        modelMap.addAttribute("id", userId);
-        modelMap.addAttribute("user", user);
-
-        return "update-details";
-    }
-
-    @PostMapping("/update-details")
-    public String updateDetailsPost(
-            @RequestParam(value = "id", required = false) Integer id,
-            @Valid @ModelAttribute("userDetailsUpdate") UserDetailsUpdate userDetailsUpdate,
-            BindingResult bindingResult,
-            ModelMap modelMap,
-            HttpServletRequest request,
-            @Value("${user.error.noUpdateError}") String noUpdateError,
-            @Value("${user.updateSuccessful}") String message
-    ) {
         if (bindingResult.hasErrors()) {
-            return "update-details";
+            modelAndView.setViewName("user/user_home/view_profile/update-details");
+            return modelAndView;
         }
 
-        User sessionUser = (User) request.getSession().getAttribute("user");
-        User updatedUser = new User();
-        updatedUser.setId(sessionUser.getId());
-        updatedUser.setName(userDetailsUpdate.getName());
-        updatedUser.setEmail(userDetailsUpdate.getEmail());
-        updatedUser.setAddress(userDetailsUpdate.getAddress());
-        updatedUser.setPhone(userDetailsUpdate.getPhone());
-        updatedUser.setSecretQuestion(sessionUser.getSecretQuestion());
-        updatedUser.setAnswer(sessionUser.getAnswer());
+        User user = (User) request.getSession().getAttribute("user");
 
-        System.out.println(updatedUser);
+        if (
+                updatedUser.getName().equals(user.getName()) &&
+                        updatedUser.getAge().equals(user.getAge()) &&
+                        updatedUser.getGender().equals(user.getGender()) &&
+                        updatedUser.getEmail().equals(user.getEmail()) &&
+                        updatedUser.getAddress().equals(user.getAddress()) &&
+                        updatedUser.getPhone().equals(user.getPhone())
+        ) {
+            modelAndView.addObject("message", "No changes found");
+            modelAndView.setViewName("user/user_home/view_profile/update-details");
 
-        User previousUser = userService.getUserById(id);
-
-        if (previousUser.equals(updatedUser)) {
-            modelMap.addAttribute("noUpdateError", noUpdateError);
-            return "update-details";
+            return modelAndView;
         }
 
-        userService.updateUser(updatedUser);
+        // Set changed value the user object
+        user.setName(updatedUser.getName());
+        user.setAge(updatedUser.getAge());
+        user.setGender(updatedUser.getGender());
+        user.setEmail(updatedUser.getEmail());
+        user.setAddress(updatedUser.getAddress());
+        user.setPhone(updatedUser.getPhone());
+        // Save updated user in database
+        userService.updateUser(user);
+        // Change session attribute
         request.getSession().removeAttribute("user");
-        request.getSession().setAttribute("user", updatedUser);
+        request.getSession().setAttribute("user", user);
 
-        return "redirect:/user-home?msg=" + message;
+        modelAndView.setViewName(String.format("redirect:/user/user-home/view-profile?msg=%s", "Details updated successfully"));
+
+        return modelAndView;
     }
 
-    @GetMapping("/change-password")
+    @GetMapping("/user/user-home/view-profile/change-password")
     public String changePassword(
             @RequestParam("id") Integer id,
             @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,

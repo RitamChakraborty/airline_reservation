@@ -21,12 +21,16 @@ public class UserDaoImpl {
 
     public void update(User user) {
         jdbcTemplate.update(
-                "update user set password = ?, name = ?, email = ?, address = ?, phone = ? where id = ?",
+                "update user set password = ?, name = ?, age = ?, gender = ?, email = ?, address = ?, phone = ?, secret_question = ?, answer = ? where id = ?",
                 user.getPassword(),
                 user.getName(),
+                user.getAge(),
+                user.getGender(),
                 user.getEmail(),
                 user.getAddress(),
                 user.getPhone(),
+                user.getSecretQuestion(),
+                user.getAnswer(),
                 user.getId()
         );
     }
