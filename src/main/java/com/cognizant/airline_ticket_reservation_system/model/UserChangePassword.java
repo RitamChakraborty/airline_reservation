@@ -11,7 +11,7 @@ public class UserChangePassword {
     @NotBlank(message = "{error.userChangePassword.previousPassword}")
     private String previousPassword;
     @NotBlank(message = "{error.userChangePassword.newPassword}")
-    @Pattern(regexp = "^(.{6,})?$", message = "{error.userChangePassword.newPassword.invalid}")
+    @Pattern(regexp = "^((?=.*?[#?!@$%^&*-.]).{6,})?$", message = "{error.userChangePassword.newPassword.invalid}")
     private String newPassword;
     @NotBlank(message = "{error.userChangePassword.confirmPassword}")
     private String confirmPassword;

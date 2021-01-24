@@ -3,12 +3,10 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 import com.cognizant.airline_ticket_reservation_system.model.*;
 import com.cognizant.airline_ticket_reservation_system.service.NewsFeedService;
 import com.cognizant.airline_ticket_reservation_system.service.UserService;
-import com.cognizant.airline_ticket_reservation_system.validator.UserChangePasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,17 +24,11 @@ import java.util.stream.Collectors;
 @PropertySource("classpath:messages.properties")
 public class UserController {
     private UserService userService;
-    private UserChangePasswordValidator userChangePasswordValidator;
     private NewsFeedService newsFeedService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    @Autowired
-    public void setUserChangePasswordValidator(UserChangePasswordValidator userChangePasswordValidator) {
-        this.userChangePasswordValidator = userChangePasswordValidator;
     }
 
     @Autowired
@@ -212,6 +204,20 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping("/user/user-home")
+    public ModelAndView userHome(
+            @RequestParam(value = "msg", required = false) String message,
+            ModelAndView modelAndView,
+            HttpServletRequest request
+    ) {
+        User user = (User) request.getSession().getAttribute("user");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("msg", message);
+        modelAndView.setViewName("user/user-home");
+
+        return modelAndView;
+    }
+
     @GetMapping("/book-ticket")
     public String bookTicket() {
         return "book-ticket";
@@ -243,7 +249,8 @@ public class UserController {
             @Valid @ModelAttribute("user") User updatedUser,
             BindingResult bindingResult,
             ModelAndView modelAndView,
-            HttpServletRequest request
+            HttpServletRequest request,
+            @Value("${user.updateSuccessful}") String message
     ) {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("user/user_home/view_profile/update-details");
@@ -279,61 +286,60 @@ public class UserController {
         request.getSession().removeAttribute("user");
         request.getSession().setAttribute("user", user);
 
-        modelAndView.setViewName(String.format("redirect:/user/user-home/view-profile?msg=%s", "Details updated successfully"));
+        modelAndView.setViewName(String.format("redirect:/user/user-home/view-profile?msg=%s", message));
 
         return modelAndView;
     }
 
     @GetMapping("/user/user-home/view-profile/change-password")
-    public String changePassword(
-            @RequestParam("id") Integer id,
+    public ModelAndView changePassword(
             @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
-            ModelMap modelMap
+            ModelAndView modelAndView
     ) {
-        modelMap.addAttribute("id", id);
-        return "change-password";
+        modelAndView.setViewName("user/user_home/view_profile/change-password");
+        return modelAndView;
     }
 
-    @PostMapping("/change-password")
-    public String changePasswordPost(
-            @RequestParam("id") Integer id,
-            @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
+    @PostMapping("/user/user-home/view-profile/change-password")
+    public ModelAndView changePassword(
+            @Valid @ModelAttribute("userChangePassword") UserChangePassword userChangePassword,
             BindingResult bindingResult,
-            ModelMap modelMap,
-            HttpServletRequest request,
-            @Value("${user.updatePasswordSuccessfully}") String message
-    ) {
-        modelMap.addAttribute("id", id);
-
-        User user = userService.getUserById(id);
-        String password = user.getPassword();
-        String newPassword = userChangePassword.getNewPassword();
-        userChangePassword.setOriginalPassword(password);
-
-        userChangePasswordValidator.validate(userChangePassword, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "change-password";
-        }
-
-        user.setPassword(newPassword);
-        userService.updateUser(user);
-        request.getSession().removeAttribute("user");
-        request.getSession().setAttribute("user", user);
-
-        return "redirect:/user-home?msg=" + message;
-    }
-
-    @GetMapping("/user/user-home")
-    public ModelAndView userHome(
-            @RequestParam(value = "msg", required = false) String message,
             ModelAndView modelAndView,
-            HttpServletRequest request
+            HttpServletRequest request,
+            @Value("${user.updatePasswordSuccessful}") String message
     ) {
         User user = (User) request.getSession().getAttribute("user");
-        modelAndView.addObject("user", user);
-        modelAndView.addObject("msg", message);
-        modelAndView.setViewName("user/user-home");
+
+        if (
+                userChangePassword.getPreviousPassword() != null &&
+                        userChangePassword.getNewPassword() != null &&
+                        userChangePassword.getConfirmPassword() != null
+        ) {
+            if (!userChangePassword.getPreviousPassword().equals(user.getPassword())) {
+                bindingResult.rejectValue("previousPassword", "error.userChangePassword.previousPassword.notEquals");
+            }
+            if (userChangePassword.getNewPassword().equals(user.getPassword())) {
+                bindingResult.rejectValue("newPassword", "error.userChangePassword.newPassword.equalsOld");
+            } else {
+                if (!userChangePassword.getNewPassword().equals(userChangePassword.getConfirmPassword())) {
+                    bindingResult.rejectValue("confirmPassword", "error.userChangePassword.confirmPassword.notEquals");
+                }
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("user/user_home/view_profile/change-password");
+            return modelAndView;
+        }
+
+        // Change password of the user object
+        user.setPassword(userChangePassword.getNewPassword());
+        // Save updated user in the database
+        userService.updateUser(user);
+        // Change session attribute
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user", user);
+        modelAndView.setViewName(String.format("redirect:/user/user-home/view-profile?msg=%s", message));
 
         return modelAndView;
     }

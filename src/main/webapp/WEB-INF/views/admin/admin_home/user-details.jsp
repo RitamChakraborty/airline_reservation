@@ -24,7 +24,12 @@
     </style>
 </head>
 <body>
-<h1>User Details</h1>
+<header>
+    <h1>User Details</h1>
+</header>
+<nav>
+    <a href="<c:url value="/admin/admin-home"/>">Home</a>
+</nav>
 <c:choose>
     <c:when test="${ not empty userList}">
         <table>

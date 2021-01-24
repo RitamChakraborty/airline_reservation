@@ -1,13 +1,10 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
-@Component
 @Entity
 public class Admin {
     @Id

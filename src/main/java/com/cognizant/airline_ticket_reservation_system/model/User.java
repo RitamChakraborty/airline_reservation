@@ -1,7 +1,5 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +8,6 @@ import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
-@Component
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
