@@ -5,84 +5,144 @@
 <head>
     <title>Delete Flight</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            border-collapse: collapse;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
             background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             background-size: cover;
             background-repeat: no-repeat;
             vertical-align: middle;
             background-attachment: fixed;
-        }
-
-        * {
-            box-sizing: border-box;
-            font-family: Raleway, sans-serif;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
-            border: none;
             background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7), rgba(0, 255, 255, 0.18));
             background-color: rgb(139, 69, 19);
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
-            padding: 1rem;
-        }
-
-
-        h1 {
+            box-shadow: 0 15px 30px -10px grey;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            padding: 2rem;
             font-family: Raleway, serif;
             text-align: center;
-            font-size: xx-large;
             color: white;
+            height: 7%;
+            display: grid;
+            place-items: center;
         }
 
-        input[type=submit] {
-            background-color: red;
-            color: white;
-            padding: 12px 20px;
+        nav {
+            padding: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: large;
+        }
+
+        nav a {
+            display: inline;
+            text-decoration: none;
+            color: darkslategrey;
+            font-weight: bold;
+            padding: 1.5rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        nav a:hover {
+            padding: 1.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 30px -10px grey;
+        }
+
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 2rem 4rem 1rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
+        .submit-btn {
+            font-size: large;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background-color: tomato;
             border: none;
+            outline: none;
+            color: white;
             border-radius: 4px;
-            cursor: pointer;
-
+            width: 100%;
         }
 
-        input[type=submit]:hover {
-            background-color: red;
+        .reset-btn {
+            font-size: large;
+            padding: 0.5rem 1rem;
+            background-color: forestgreen;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 4px;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         .container {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-            margin: auto;
+            width: 50vw;
+            display: grid;
+            place-items: center;
         }
 
-        .submit-buttons-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+        table * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+            color: darkslategrey;
         }
 
-        .submit-buttons-container input {
-            margin: 0 3.5rem;
+        table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
         }
 
-        .col-1 {
-            float: left;
-            width: 35%;
-            margin-top: 6px;
+        table tr, th, td {
+            border: 1px solid lightgrey;
         }
 
-        .col-2 {
-            float: left;
-            width: 65%;
-            margin-top: 6px;
+        table th {
+            background-color: grey;
+            color: white;
         }
 
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
+        table tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        table th, td {
+            padding: 1rem 0.25rem;
         }
     </style>
 </head>
@@ -90,64 +150,58 @@
 <header>
     <h1>Delete Flight</h1>
 </header>
-<br>
-<br>
-<br>
-<br>
-<div class="container">
-    <form:form action="/admin/admin-home/manage-flight/delete-flight?no=${ param.no }">
-        <div class="row">
-            <div class="col-1">
-                <spring:message code="label.flight.no"/>
-            </div>
-            <div class="col-2">
-                <span>: ${ flight.no }</span>
-            </div>
+<nav>
+    <a href="/admin/admin-home/manage-flight">Manage Flight</a>
+</nav>
+<div class="content">
+    <div class="card">
+        <div class="container">
+            <form:form action="/admin/admin-home/manage-flight/delete-flight?no=${ param.no }">
+                <table>
+                    <caption>Flight Details</caption>
+                    <tbody>
+                    <tr>
+                        <td><spring:message code="label.flight.no"/>
+                        </td>
+                        <td><span>${ flight.no }</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.flight.airline"/>
+                        </td>
+                        <td><span>${ flight.airline }</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.flight.model"/>
+                        </td>
+                        <td><span>${ flight.model }</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.flight.type"/>
+                        </td>
+                        <td><span>${ flight.type }</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.flight.economySeats"/>
+                        </td>
+                        <td><span>${ flight.economySeats }</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><spring:message code="label.flight.businessSeats"/>
+                        </td>
+                        <td><span>${ flight.businessSeats }</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="Delete" class="submit-btn">
+            </form:form>
         </div>
-        <div class="row">
-            <div class="col-1">
-                <spring:message code="label.flight.airline"/>
-            </div>
-            <div class="col-2">
-                <span>: ${ flight.airline }</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <spring:message code="label.flight.model"/>
-            </div>
-            <div class="col-2">
-                <span>: ${ flight.model }</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <spring:message code="label.flight.type"/>
-            </div>
-            <div class="col-2">
-                <span>: ${ flight.type }</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <spring:message code="label.flight.economySeats"/>
-            </div>
-            <div class="col-2">
-                <span>: ${ flight.economySeats }</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <spring:message code="label.flight.businessSeats"/>
-            </div>
-            <div class="col-2">
-                <span>: ${ flight.businessSeats }</span>
-            </div>
-        </div>
-        <div class="submit-buttons-container">
-            <input type="submit" value="Delete">
-        </div>
-    </form:form>
+    </div>
 </div>
 </body>
 </html>

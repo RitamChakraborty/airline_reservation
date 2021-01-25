@@ -8,106 +8,142 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Manage Flight</title>
     <style>
-         body {
-            display: flex;
-            flex-direction: column;
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            border-collapse: collapse;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
             background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             background-size: cover;
             background-repeat: no-repeat;
             vertical-align: middle;
             background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
-            border: none;
-            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7),rgba(0, 255, 255, 0.18));
+            background-image: linear-gradient(to right, rgba(46, 46, 224, 0.7), rgba(0, 255, 255, 0.18));
             background-color: rgb(139, 69, 19);
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.18);
-            padding: 1rem;
-        }
-
-        h1 {
+            box-shadow: 0 15px 30px -10px grey;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            padding: 2rem;
             font-family: Raleway, serif;
             text-align: center;
-            font-size: xx-large;
             color: white;
-        }
-        a.one:link, a.one:visited {
-            background-color: white;
-            color: black;
-            border: 2px solid green;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
+            height: 7%;
+            display: grid;
+            place-items: center;
         }
 
-        a.one:hover, a.one:active {
-            background-color: green;
-            color: white;
-        }
-        a.two:link, a.two:visited {
-            background-color: white;
-            color: black;
-            border: 2px solid dodgerblue;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
+        nav {
+            padding: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: large;
         }
 
-        a.two:hover, a.two:active {
+        nav a {
+            display: inline;
+            text-decoration: none;
+            color: darkslategrey;
+            font-weight: bold;
+            padding: 1.5rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        nav a:hover {
+            padding: 1.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 30px -10px grey;
+        }
+
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 2rem 4rem 0 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
+        .submit-btn {
+            font-size: large;
+            padding: 0.5rem 1rem;
             background-color: dodgerblue;
+            border: none;
+            outline: none;
             color: white;
-        }
-        a.three:link, a.three:visited {
-            background-color: white;
-            color: black;
-            border: 2px solid red;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
+            border-radius: 4px;
+            width: 100%;
         }
 
-        a.three:hover, a.three:active {
-            background-color: red;
+        .reset-btn {
+            font-size: large;
+            padding: 0.5rem 1rem;
+            background-color: forestgreen;
+            border: none;
+            outline: none;
             color: white;
+            border-radius: 4px;
         }
-          
-        * {
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90vw;
+            display: grid;
+            place-items: center;
+        }
+
+        table * {
             margin: 0.25rem;
             padding: 0.25rem;
-            border-collapse: collapse;
-        }
-        
-        
-
-        #flight {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
         }
 
-        #flight td, #flight th {
-            border: 1px solid #ddd;
-            padding: 8px;
+        table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
         }
 
-        #flight tr:nth-child(even){ 
-            background-color: #f2f2f2;
+        table tr, th, td {
+            border: 1px solid lightgrey;
         }
 
-        #flight tr:hover {
-            background-color: #ddd;
-        }
-
-        #flight th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: midnightblue;
+        table th {
+            background-color: grey;
             color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        table th, td {
+            padding: 1rem 0.25rem;
         }
     </style>
 </head>
@@ -126,43 +162,49 @@
     <a href="<c:url value="/admin/admin-home"/>" class="one">Home</a>
     <a href="<c:url value="/admin/admin-home/manage-flight/add-flight"/>" class="one">Add Flight</a>
 </nav>
-<c:choose>
-    <c:when test="${ not empty flights }">
-        <table id="flight">
-            <thead>
-            <tr>
-                <th>NO</th>
-                <th>Airline</th>
-                <th>Model</th>
-                <th>Type</th>
-                <th>Economy Seats</th>
-                <th>Business Seats</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="flight" items="${ flights }">
-                <tr>
-                    <td>${ flight.no }</td>
-                    <td>${ flight.airline }</td>
-                    <td>${ flight.model }</td>
-                    <td>${ flight.type }</td>
-                    <td>${ flight.economySeats }</td>
-                    <td>${ flight.businessSeats }</td>
-                    <td>
-                        <a href="<c:url value="/admin/admin-home/manage-flight/update-flight?no=${ flight.no }"/>"
-                           class="two">Update</a>
-                        <a href="<c:url value="/admin/admin-home/manage-flight/delete-flight?no=${ flight.no }"/>"
-                           class="three">Delete</a>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </c:when>
-    <c:otherwise>
-        <p>Not flights available</p>
-    </c:otherwise>
-</c:choose>
+<div class="content">
+    <div class="card">
+        <div class="container">
+            <table>
+                <c:choose>
+                    <c:when test="${ not empty flights }">
+                        <caption>All Fight</caption>
+                        <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>Airline</th>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Economy Seats</th>
+                            <th>Business Seats</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="flight" items="${ flights }">
+                            <tr>
+                                <td>${ flight.no }</td>
+                                <td>${ flight.airline }</td>
+                                <td>${ flight.model }</td>
+                                <td>${ flight.type }</td>
+                                <td>${ flight.economySeats }</td>
+                                <td>${ flight.businessSeats }</td>
+                                <td>
+                                    <a href="<c:url value="/admin/admin-home/manage-flight/update-flight?no=${ flight.no }"/>"
+                                       class="submit-btn">Update</a>
+                                    <a href="<c:url value="/admin/admin-home/manage-flight/delete-flight?no=${ flight.no }"/>"
+                                       class="reset-btn">Delete</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </c:when>
+                    <c:otherwise>
+                        <caption>Not flights available</caption>
+                    </c:otherwise>
+                </c:choose>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
