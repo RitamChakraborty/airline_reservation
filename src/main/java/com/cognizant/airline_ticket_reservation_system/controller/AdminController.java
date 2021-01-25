@@ -82,9 +82,9 @@ public class AdminController {
         return new ModelAndView("admin/admin-home");
     }
 
-    @GetMapping("/booking-details")
-    public String bookingDetails() {
-        return "booking-details";
+    @GetMapping("/admin/admin-home/booking-details")
+    public ModelAndView bookingDetails() {
+        return new ModelAndView("admin/admin_home/booking-details");
     }
 
     @GetMapping("/admin/admin-home/user-details")

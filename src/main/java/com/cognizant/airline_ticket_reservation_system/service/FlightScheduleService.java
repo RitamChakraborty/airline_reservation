@@ -2,8 +2,8 @@ package com.cognizant.airline_ticket_reservation_system.service;
 
 import com.cognizant.airline_ticket_reservation_system.dao.FlightScheduleDao;
 import com.cognizant.airline_ticket_reservation_system.dao.FlightScheduleDaoImpl;
+import com.cognizant.airline_ticket_reservation_system.model.BookTicket;
 import com.cognizant.airline_ticket_reservation_system.model.FlightSchedule;
-import com.cognizant.airline_ticket_reservation_system.model.FlightSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class FlightScheduleService {
         return (List<FlightSchedule>) flightScheduleDao.findAll();
     }
 
-    public List<FlightSchedule> getFlightSchedulesByDateSourceDestination(FlightSearch flightSearch) {
-        return flightScheduleDaoImpl.getFlightSchedulesByDateSourceDestination(flightSearch);
+    public List<FlightSchedule> getFlightSchedulesByDateSourceDestination(BookTicket bookTicket) {
+        return flightScheduleDaoImpl.getFlightSchedulesByDateSourceDestination(bookTicket);
     }
 }

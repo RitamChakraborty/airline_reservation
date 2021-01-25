@@ -218,14 +218,9 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/book-ticket")
-    public String bookTicket() {
-        return "book-ticket";
-    }
-
-    @GetMapping("/history")
-    public String history() {
-        return "history";
+    @GetMapping("/user/user-home/history")
+    public ModelAndView history() {
+        return new ModelAndView("/user/user_home/history");
     }
 
     @GetMapping("/user/user-home/view-profile")

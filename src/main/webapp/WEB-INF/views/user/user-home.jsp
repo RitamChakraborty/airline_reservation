@@ -213,8 +213,8 @@
     <h2>Welcome ${ user.name }</h2>
 </header>
 <nav>
-    <a href="<c:url value="/book-ticket"/>">Book Ticket</a>
-    <a href="<c:url value="/history"/>">History</a>
+    <a href="/user/user-home/book-ticket">Book Ticket</a>
+    <a href="<c:url value="/user/user-home/history"/>">History</a>
     <a href="<c:url value="/user/user-home/view-profile"/>">View Profile</a>
     <a href="<c:url value="/logout"/>">Logout</a>
 </nav>

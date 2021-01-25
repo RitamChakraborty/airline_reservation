@@ -143,7 +143,7 @@
 <nav>
     <a href="<c:url value="/admin/admin-home/manage-flight"/>">Manage Flight</a>
     <a href="<c:url value="/admin/admin-home/schedule-flight"/>">Schedule Flight</a>
-    <a href="<c:url value="/booking-details"/>">Booking Details</a>
+    <a href="<c:url value="/admin/admin-home/booking-details"/>">Booking Details</a>
     <a href="<c:url value="/admin/admin-home/user-details"/>">User Details</a>
     <a href="<c:url value="/admin/admin-home/add-news"/>">Add News</a>
     <a href="<c:url value="/logout"/>">Logout</a>

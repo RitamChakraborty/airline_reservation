@@ -157,7 +157,6 @@
         form * {
             display: block;
             padding: 0.25rem;
-            margin: 0.25rem;
             text-align: center;
         }
 

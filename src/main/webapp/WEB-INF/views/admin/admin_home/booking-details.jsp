@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,6 +9,11 @@
     <title>Booking Details</title>
 </head>
 <body>
-<h1>Booking Details</h1>
+<header>
+    <h1>Booking Details</h1>
+</header>
+<nav>
+    <a href="<c:url value="/admin/admin-home"/>">Home</a>
+</nav>
 </body>
 </html>
