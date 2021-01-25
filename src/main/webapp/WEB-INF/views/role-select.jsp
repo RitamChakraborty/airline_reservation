@@ -92,9 +92,9 @@
             padding-bottom: 1rem;
         }
 
-        .news-feed td {
+        .news-feed td:nth-child(even) {
             padding: 1rem;
-            background-color: #dddddd;
+            background-color: #eeeeee;
         }
 
         .container {

@@ -131,7 +131,7 @@ public class UserController {
             BindingResult bindingResult,
             ModelAndView modelAndView,
             HttpServletRequest request,
-            @Value("${user.updatePasswordSuccessfully}") String message
+            @Value("${user.updatePasswordSuccessful}") String message
     ) {
         System.out.println(userForgetPassword);
 
