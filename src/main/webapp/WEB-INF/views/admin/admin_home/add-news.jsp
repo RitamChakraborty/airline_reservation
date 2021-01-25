@@ -1,16 +1,9 @@
-<%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" isELIgnored="false" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Details</title>
+    <title>Add News</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -118,7 +111,7 @@
         }
 
         .container {
-            width: 80vw;
+            width: 50vw;
             display: grid;
             place-items: center;
         }
@@ -174,11 +167,30 @@
         form input:focus, select:focus {
             outline: none;
         }
+
+        .news-feed {
+            width: 50vw;
+        }
+
+        .news-feed table {
+            width: 100%;
+        }
+
+        .news-feed table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
+        }
+
+        .news-feed td:nth-child(even) {
+            padding: 1rem;
+            background-color: #eeeeee;
+        }
     </style>
 </head>
 <body>
 <header>
-    <h1>User Details</h1>
+    <h1>Add News</h1>
 </header>
 <nav>
     <a href="<c:url value="/admin/admin-home"/>">Home</a>
@@ -186,39 +198,44 @@
 <div class="content">
     <div class="card">
         <div class="container">
-            <table>
-                <c:choose>
-                    <c:when test="${ not empty userList}">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Phone No</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="user" items="${ userList }">
-                            <tr>
-                                <td>${ user.id }</td>
-                                <td>${ user.name }</td>
-                                <td>${ user.age }</td>
-                                <td>${ user.gender }</td>
-                                <td>${ user.email }</td>
-                                <td>${ user.address }</td>
-                                <td>${ user.phone }</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </c:when>
-                    <c:otherwise>
-                        <caption>User List is empty!</caption>
-                    </c:otherwise>
-                </c:choose>
-            </table>
+            <%--@elvariable id="newsFeed" type="com.cognizant.airline_ticket_reservation_system.model.NewsFeed"--%>
+            <form:form action="/admin/admin-home/add-news" method="post" modelAttribute="newsFeed">
+                <form:label path="date">
+                    <spring:message code="label.newsFeed.date"/>
+                </form:label>
+                <form:input type="date" path="date"/>
+                <form:errors path="date"/>
+                <br>
+                <form:label path="news">
+                    <spring:message code="label.newsFeed.news"/>
+                </form:label>
+                <form:input path="news" placeholder="Enter news title"/>
+                <form:errors path="news"/>
+                <br>
+                <input type="submit" value="Add" class="submit-btn">
+            </form:form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="container">
+            <div class="news-feed">
+                <table>
+                    <c:choose>
+                        <c:when test="${ not empty newsFeeds }">
+                            <caption>News Feed</caption>
+                            <c:forEach var="newsFeed" items="${ newsFeeds }">
+                                <tr>
+                                    <td>${ newsFeed.news }</td>
+                                    <td>${ newsFeed.date }</td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <caption>No news available</caption>
+                        </c:otherwise>
+                    </c:choose>
+                </table>
+            </div>
         </div>
     </div>
 </div>

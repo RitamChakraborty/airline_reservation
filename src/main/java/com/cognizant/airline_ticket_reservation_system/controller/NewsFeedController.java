@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,27 +23,29 @@ public class NewsFeedController {
         this.newsFeedService = newsFeedService;
     }
 
-    @GetMapping("/add-news")
-    public String addNews(
-            @RequestParam("username") String username,
+    @GetMapping("/admin/admin-home/add-news")
+    public ModelAndView addNews(
             @ModelAttribute("newsFeed") NewsFeed newsFeed
     ) {
-        return "add-news";
+        return new ModelAndView("admin/admin_home/add-news");
     }
 
-    @PostMapping("/add-news")
-    public String addNews(
-            @RequestParam("username") String username,
+    @PostMapping("/admin/admin-home/add-news")
+    public ModelAndView addNews(
             @Valid @ModelAttribute("newsFeed") NewsFeed newsFeed,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            ModelAndView modelAndView
     ) {
         if (bindingResult.hasErrors()) {
-            return "add-news";
+            modelAndView.setViewName("admin/admin_home/add-news");
+            return modelAndView;
         }
 
+        // Save news in the database
         newsFeedService.saveNewsFeed(newsFeed);
+        modelAndView.setViewName("redirect:/admin/admin-home/add-news");
 
-        return "redirect:/add-news?username=" + username;
+        return modelAndView;
     }
 
     @ModelAttribute("newsFeeds")
