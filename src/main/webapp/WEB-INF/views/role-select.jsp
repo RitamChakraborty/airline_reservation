@@ -29,6 +29,8 @@
             background-repeat: no-repeat;
             vertical-align: middle;
             background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
@@ -50,6 +52,7 @@
         .content {
             flex: 2;
             display: flex;
+            height: max-content;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
