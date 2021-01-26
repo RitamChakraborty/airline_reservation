@@ -113,19 +113,10 @@
             text-align: center;
         }
 
-        select, option {
+        input, select, option {
             padding: 0.25rem;
             margin: 0;
             font-size: medium;
-        }
-
-        label {
-            font-size: x-large;
-            color: darkslategrey;
-            font-weight: bold;
-        }
-
-        #role {
             border: none;
             outline: none;
             background-color: #dddddd;
@@ -133,6 +124,12 @@
             padding: 0.5rem;
             text-align-last: center;
             border-radius: 4px;
+        }
+
+        label {
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -148,7 +145,7 @@
                 <form:label path="role">
                     <spring:message code="label.selectRole"/>
                 </form:label>
-                <form:select path="role" items="${ roles }" id="role" class="box"/>
+                <form:select path="role" items="${ roles }" class="box"/>
                 <button type="submit" class="submit-btn">Choose</button>
             </form:form>
         </div>

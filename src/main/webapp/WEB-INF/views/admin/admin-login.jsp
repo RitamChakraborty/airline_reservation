@@ -56,32 +56,47 @@
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
+            color: darkslategrey;
         }
 
         .card {
             background-color: rgba(255, 255, 255, 0.7);
             padding: 2rem;
-            margin: 2rem 4rem 0 4rem;
+            margin: 1rem 4rem 0.5rem 4rem;
             border-radius: 10px;
             box-shadow: 0 15px 30px -10px grey;
             width: min-content;
         }
 
-        .submit-btn {
+        nav {
+            padding: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
             font-size: large;
-            padding: 0.5rem 1rem;
-            background-color: dodgerblue;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
-            width: 100%;
         }
 
-        .reset-btn {
+        nav a {
+            display: inline;
+            text-decoration: none;
+            color: darkslategrey;
+            font-weight: bold;
+            padding: 1.5rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        nav a:hover {
+            padding: 1.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 30px -10px grey;
+        }
+
+        .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
-            background-color: forestgreen;
+            background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
@@ -102,43 +117,49 @@
             padding-bottom: 1rem;
         }
 
-        .news-feed td {
+        .news-feed td:nth-child(even) {
             padding: 1rem;
-            background-color: #dddddd;
+            background-color: #eeeeee;
+        }
+
+        .container {
+            width: 25vw;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
         }
 
         form * {
-            padding: 0.5rem;
-            display: block;
-            color: darkslategrey;
+            width: 100%;
             text-align: center;
         }
 
         label {
-            font-size: large;
-            text-align: center;
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
             font-weight: bold;
+        }
+
+        input, select, option {
+            padding: 0.25rem;
+            margin: 0.5rem 1rem;
+            font-size: medium;
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
         }
 
         .error-text {
             font-family: monospace;
             color: tomato;
-        }
-
-        input, select {
-            border: none;
-            outline: none;
-            background-color: #dddddd;
-            border-radius: 4px;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-        }
-
-        .buttons-container {
-            display: flex;
-            justify-content: space-evenly;
         }
     </style>
 </head>
@@ -146,32 +167,35 @@
 <header>
     <h1>Admin Login</h1>
 </header>
+<nav>
+    <a href="<c:url value="/"/>">Home</a>
+</nav>
 <%--@elvariable id="admin" type="com.cognizant.airline_ticket_reservation_system.model.Admin"--%>
 <div class="content">
     <div class="card">
-        <form:form action="/admin/admin-login" method="post" modelAttribute="admin">
-            <form:label path="username">
-                <spring:message code="label.username"/>
-            </form:label>
-            <form:input path="username" id="username" placeholder="Enter username"/>
-            <form:errors path="username" cssClass="error-text"/>
-            <br>
-            <form:label path="password">
-                <spring:message code="label.password"/>
-            </form:label>
-            <form:password path="password" id="password" placeholder="Enter password"/>
-            <form:errors path="password" cssClass="error-text"/>
-            <div class="global-error-text">
-                <c:if test="${ not empty errorMessage }">
-                    <p class="error-text">
-                        <%= request.getAttribute("errorMessage") %>
-                    </p>
-                </c:if>
-            </div>
-            <div class="buttons-container">
+        <div class="container">
+            <form:form action="/admin/admin-login" method="post" modelAttribute="admin">
+                <form:label path="username">
+                    <spring:message code="label.username"/>
+                </form:label>
+                <form:input path="username" id="username" placeholder="Enter username"/>
+                <form:errors path="username" cssClass="error-text"/>
+                <br>
+                <form:label path="password">
+                    <spring:message code="label.password"/>
+                </form:label>
+                <form:password path="password" id="password" placeholder="Enter password"/>
+                <form:errors path="password" cssClass="error-text"/>
+                <div class="global-error-text">
+                    <c:if test="${ not empty errorMessage }">
+                        <p class="error-text">
+                            <%= request.getAttribute("errorMessage") %>
+                        </p>
+                    </c:if>
+                </div>
                 <input type="submit" value="Login" class="submit-btn">
-            </div>
-        </form:form>
+            </form:form>
+        </div>
     </div>
 </div>
 </body>
