@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Book Flight</title>
@@ -7,13 +8,13 @@
     <h1>Book Flight</h1>
 </header>
 <nav>
-    <a href="/user/user-home/book-ticket">Back</a>
+    <a href="<c:url value="/user/user-home/book-ticket"/>">Back</a>
 </nav>
 <div class="content">
     <div class="card">
         <div class="container">
-            ${ flightSchedule }
-            <a href="/user/user-home/book-ticket/payment">
+            ${ sessionScope.flightSchedule }
+            <a href="<c:url value="/user/user-home/book-ticket/payment"/>">
                 <button class="submit-btn">Pay</button>
             </a>
         </div>

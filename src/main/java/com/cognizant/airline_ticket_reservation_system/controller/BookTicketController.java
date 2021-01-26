@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
@@ -75,17 +76,29 @@ public class BookTicketController {
         return modelAndView;
     }
 
-    @GetMapping("/user/user-home/book-flight/{flightScheduleId}")
+    @GetMapping("/user/user-home/book-ticket/book-flight/{flightScheduleId}")
     public ModelAndView modelAndView(
             @PathVariable("flightScheduleId") Integer flightScheduleId,
-            ModelAndView modelAndView
+            ModelAndView modelAndView,
+            HttpServletRequest request
     ) {
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightScheduleId);
         flightSchedule.setFlight(flightService.getFlightByNo(flightSchedule.getFlightNo()));
-        modelAndView.addObject("flightSchedule", flightSchedule);
         modelAndView.setViewName("user/user_home/book_ticket/book-flight");
+        request.getSession().setAttribute("flightSchedule", flightSchedule);
 
         return modelAndView;
+    }
+
+    @GetMapping("/user/user-home/book-ticket/payment")
+    public ModelAndView payment(HttpServletRequest request) {
+        FlightSchedule flightSchedule = (FlightSchedule) request.getSession().getAttribute("flightSchedule");
+        return new ModelAndView("user/user_home/book_ticket/payment");
+    }
+
+    @GetMapping("/user/user-home/book-ticket/payment-successful")
+    public ModelAndView paymentSuccessful() {
+        return new ModelAndView("user/user_home/book_ticket/payment-successful");
     }
 
     @ModelAttribute("sources")

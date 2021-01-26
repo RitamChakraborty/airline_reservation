@@ -1,0 +1,10 @@
+<html>
+<head>
+    <title>Payment</title>
+</head>
+<body>
+<header>
+    <h1>Payment</h1>
+</header>
+</body>
+</html>

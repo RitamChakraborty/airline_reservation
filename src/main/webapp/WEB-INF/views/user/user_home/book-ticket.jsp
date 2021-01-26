@@ -58,7 +58,7 @@
                             <td>${ flightSchedule.flight.type }</td>
                             <td>${ flightSchedule.flight.economySeats }</td>
                             <td>${ flightSchedule.flight.businessSeats }</td>
-                            <td><a href="/user/user-home/book-flight/${ flightSchedule.id }">Book</a></td>
+                            <td><a href="/user/user-home/book-ticket/book-flight/${ flightSchedule.id }">Book</a></td>
                         </tr>
                         </tbody>
                     </c:forEach>
