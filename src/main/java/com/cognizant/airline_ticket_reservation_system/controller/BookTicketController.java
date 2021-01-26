@@ -91,10 +91,33 @@ public class BookTicketController {
     }
 
     @GetMapping("/user/user-home/book-ticket/payment")
-    public ModelAndView payment(HttpServletRequest request) {
-        FlightSchedule flightSchedule = (FlightSchedule) request.getSession().getAttribute("flightSchedule");
+    public ModelAndView payment(
+            // Todo: 9.2. Also add the same annotation here also, because you know ...
+    ) {
         return new ModelAndView("user/user_home/book_ticket/payment");
     }
+
+    // Todo: 8. Add appropriate annotation for post mapping
+    public ModelAndView payment(
+            // Todo: 9.1. Add model attributes to get the input
+            ModelAndView modelAndView,
+            HttpServletRequest request
+    ) {
+        // You can get the cost from the flightSchedule object
+        FlightSchedule flightSchedule = (FlightSchedule) request.getSession().getAttribute("flightSchedule");
+
+        // Todo: 12. Validate the inputs, don't forget about insufficient balance, and that error message will again be taken from message.properties file
+        // Todo: 13. If validations pass reduce the balance in Account class
+        // Todo: 14. Save value in database
+
+        // The page will redirected to payment-successful page if everything go on correctly
+        modelAndView.setViewName("redirect:/user/user-home/book-ticket/payment-successful");
+
+        // Best of luck, here is something which will give you energy to push it through, 🍰
+
+        return modelAndView;
+    }
+
 
     @GetMapping("/user/user-home/book-ticket/payment-successful")
     public ModelAndView paymentSuccessful() {
@@ -110,4 +133,10 @@ public class BookTicketController {
     private List<String> destinations(@Value("#{'${flightSchedule.destinations}'.split(',')}") List<String> destinations) {
         return destinations;
     }
+
+    // Todo: 4. create function which will get the bank name from database
+    // use correct annotation
+    // the function will return a Map of banks, where bank id is the key and bank name is the value
+
+    // Todo: 7. Add insert queries inside data.sql file to insert some banks in the database
 }
