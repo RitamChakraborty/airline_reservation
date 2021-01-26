@@ -43,6 +43,24 @@
             place-items: center;
         }
 
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 1rem 4rem 0.5rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
         nav {
             padding: 1rem;
             display: flex;
@@ -67,112 +85,15 @@
             box-shadow: 0 15px 30px -10px grey;
         }
 
-        .content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            color: darkslategrey;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px -10px grey;
-            width: min-content;
-        }
-
-        .buttons-container {
-            width: 100%;
-            display: flex;
-            justify-content: space-evenly;
-        }
-
         .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
             border-radius: 4px;
-        }
-
-        .reset-btn {
-            font-size: large;
-            margin: 1rem 0;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            width: 25vw;
-            display: grid;
-            place-items: center;
-        }
-
-        table * {
-            margin: 0.25rem;
-            padding: 0.25rem;
-            color: darkslategrey;
-            text-align: center;
-        }
-
-        table caption {
-            font-size: x-large;
-            font-weight: bold;
-            padding-bottom: 1rem;
-        }
-
-        table tr, th, td {
-            border: 1px solid lightgrey;
-        }
-
-        table th {
-            background-color: grey;
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        table th, td {
-            padding: 1rem 0.25rem;
-        }
-
-        form * {
-            display: block;
-            padding: 0.25rem;
-            margin: 0.25rem;
-        }
-
-        form label, .label {
-            font-weight: bold;
-        }
-
-        form input, select {
-            border: none;
-            outline: none;
-            background-color: #dddddd;
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        form input:focus, select:focus {
-            outline: none;
         }
 
         .news-feed {
@@ -193,6 +114,77 @@
             padding: 1rem;
             background-color: #eeeeee;
         }
+
+        .container {
+            width: 75vw;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        input, select, option {
+            padding: 0.25rem;
+            margin: 0.5rem 1rem;
+            font-size: medium;
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            place-items: center;
+        }
+
+        .box {
+            margin: 1rem;
+            padding: 1rem
+            display: grid;
+            place-items: center;
+        }
+
+        .box input, select {
+            width: 90%;
+        }
     </style>
 </head>
 <body>
@@ -206,51 +198,60 @@
     <div class="card">
         <div class="container">
             <%--@elvariable id="userForgetPassword" type="com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword"--%>
-            <form:form action="/user/forget-password" method="post" modelAttribute="userForgetPassword">
-                <form:label path="id">
-                    <spring:message code="label.user.id"/>
-                </form:label>
-                <form:input path="id" placeholder="Enter User Id"/>
-                <form:errors path="id"/>
-                <br>
-                <form:label path="secretQuestion">
-                    <spring:message code="label.user.secretQuestion"/>
-                </form:label>
-                <form:select path="secretQuestion" items="${ secretQuestions }"/>
-                <form:errors path="secretQuestion"/>
-                <br>
-                <form:label path="answer">
-                    <spring:message code="label.user.answer"/>
-                </form:label>
-                <form:input path="answer" placeholder="Answer of the secret quetion"/>
-                <form:errors path="answer"/>
-                <br>
-                <from:label path="email">
-                    <spring:message code="label.user.email"/>
-                </from:label>
-                <form:input path="email" placeholder="Enter Email"/>
-                <form:errors path="email"/>
-                <br>
-                <form:label path="phone">
-                    <spring:message code="label.user.phone"/>
-                </form:label>
-                <form:input path="phone" placeholder="Enter Phone Number"/>
-                <form:errors path="phone"/>
-                <br>
-                <form:label path="newPassword">
-                    <spring:message code="label.userChangePassword.newPassword"/>
-                </form:label>
-                <form:password path="newPassword" placeholder="Enter New Password"/>
-                <form:errors path="newPassword"/>
-                <br>
-                <form:label path="confirmPassword">
-                    <spring:message code="label.userChangePassword.confirmPassword"/>
-                </form:label>
-                <form:password path="confirmPassword" placeholder="Re-enter Password"/>
-                <form:errors path="confirmPassword"/>
-                <br>
-                <input type="submit" value="Submit" class="submit-btn">
-            </form:form>
+                <form:form action="/user/forget-password" method="post" modelAttribute="userForgetPassword">
+                    <div class="box">
+                        <form:label path="id">
+                            <spring:message code="label.user.id"/>
+                        </form:label>
+                        <form:input path="id" placeholder="Enter User Id"/>
+                        <form:errors path="id" cssClass="error-text"/>
+                    </div>
+                    <div class="grid">
+                        <div class="box">
+                            <form:label path="secretQuestion">
+                                <spring:message code="label.user.secretQuestion"/>
+                            </form:label>
+                            <form:select path="secretQuestion" items="${ secretQuestions }"/>
+                            <form:errors path="secretQuestion" cssClass="error-text"/>
+                        </div>
+                        <div class="box">
+                            <form:label path="answer">
+                                <spring:message code="label.user.answer"/>
+                            </form:label>
+                            <form:input path="answer" placeholder="Answer of the secret quetion"/>
+                            <form:errors path="answer" cssClass="error-text"/>
+                        </div>
+                        <div class="box">
+                            <from:label path="email">
+                                <spring:message code="label.user.email"/>
+                            </from:label>
+                            <form:input path="email" placeholder="Enter Email"/>
+                            <form:errors path="email" cssClass="error-text"/>
+                        </div>
+                        <div class="box">
+                            <form:label path="phone">
+                                <spring:message code="label.user.phone"/>
+                            </form:label>
+                            <form:input path="phone" placeholder="Enter Phone Number"/>
+                            <form:errors path="phone" cssClass="error-text"/>
+                        </div>
+                        <div class="box">
+                            <form:label path="newPassword">
+                                <spring:message code="label.userChangePassword.newPassword"/>
+                            </form:label>
+                            <form:password path="newPassword" placeholder="Enter New Password"/>
+                            <form:errors path="newPassword" cssClass="error-text"/>
+                        </div>
+                        <div class="box">
+                            <form:label path="confirmPassword">
+                                <spring:message code="label.userChangePassword.confirmPassword"/>
+                            </form:label>
+                            <form:password path="confirmPassword" placeholder="Re-enter Password"/>
+                            <form:errors path="confirmPassword" cssClass="error-text"/>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit" class="submit-btn">
+                </form:form>
         </div>
     </div>
 </div>
