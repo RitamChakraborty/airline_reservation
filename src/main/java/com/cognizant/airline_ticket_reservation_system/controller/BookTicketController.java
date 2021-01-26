@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,12 +46,14 @@ public class BookTicketController {
             ModelAndView modelAndView
     ) {
         if (bookTicket.getDate() != null && bookTicket.getDate().compareTo(LocalDate.now()) < 0) {
-            bindingResult.rejectValue("date", "error.flightSearch.date.past");
+            bindingResult.rejectValue("date", "error.bookTicket.date.past");
         }
 
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("showFlight", false);
             modelAndView.setViewName("user/user_home/book-ticket");
+
+            return modelAndView;
         }
 
         modelAndView.addObject("showFlight", true);
@@ -68,6 +71,19 @@ public class BookTicketController {
         }
 
         modelAndView.setViewName("/user/user_home/book-ticket");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/user/user-home/book-flight/{flightScheduleId}")
+    public ModelAndView modelAndView(
+            @PathVariable("flightScheduleId") Integer flightScheduleId,
+            ModelAndView modelAndView
+    ) {
+        FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightScheduleId);
+        flightSchedule.setFlight(flightService.getFlightByNo(flightSchedule.getFlightNo()));
+        modelAndView.addObject("flightSchedule", flightSchedule);
+        modelAndView.setViewName("user/user_home/book_ticket/book-flight");
 
         return modelAndView;
     }

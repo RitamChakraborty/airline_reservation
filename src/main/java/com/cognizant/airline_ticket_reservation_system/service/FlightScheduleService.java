@@ -35,4 +35,8 @@ public class FlightScheduleService {
     public List<FlightSchedule> getFlightSchedulesByDateSourceDestination(BookTicket bookTicket) {
         return flightScheduleDaoImpl.getFlightSchedulesByDateSourceDestination(bookTicket);
     }
+
+    public FlightSchedule getFlightScheduleById(Integer flightScheduleId) {
+        return flightScheduleDao.findById(flightScheduleId).orElse(null);
+    }
 }

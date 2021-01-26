@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class BookTicket {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @NotNull(message = "{error.flightSearch.date}")
+    @NotNull(message = "{error.bookTicket.date}")
     private LocalDate date;
     private String source;
     private String destination;
