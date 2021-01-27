@@ -191,17 +191,17 @@
     <h1>Forget Password</h1>
 </header>
 <nav>
-    <a href="<c:url value="/user/user-login"/>">Back</a>
-</nav>
-<div class="content">
+<a href="<c:url value="/">">Back</a>
+    </nav>
+    <div class="content">
     <div class="card">
-        <div class="container">
-            <%--@elvariable id="userForgetPassword" type="com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword"--%>
-                <form:form action="/user/forget-password" method="post" modelAttribute="userForgetPassword">
-                    <div class="box">
-                        <form:label path="id">
-                            <spring:message code="label.user.id"/>
-                        </form:label>
+    <div class="container">
+    <%--@elvariable id="userForgetPassword" type="com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword"--%>
+    <form:form action="/user/forget-password" method="post" modelAttribute="userForgetPassword">
+        <div class="box">
+            <form:label path="id">
+                <spring:message code="label.user.id"/>
+            </form:label>
                         <form:input path="id" placeholder="Enter User Id"/>
                         <form:errors path="id" cssClass="error-text"/>
                     </div>

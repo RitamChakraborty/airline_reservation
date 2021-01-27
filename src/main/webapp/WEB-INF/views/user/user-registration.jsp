@@ -195,17 +195,17 @@
     <h1>User Registration</h1>
 </header>
 <nav>
-    <a href="<c:url value="/user/user-login"/>">Back</a>
+    <a href="<c:url value="/"/>">Back</a>
 </nav>
 <div class="content">
     <div class="card">
         <div class="container">
             <%--@elvariable id="userRegistration" type="com.cognizant.airline_ticket_reservation_system.model.UserRegistration"--%>
-                <form:form action="/user/user-registration" method="post" modelAttribute="userRegistration">
-                    <div class="grid">
-                        <div class="box">
-                            <form:label path="name">
-                                <spring:message code="label.user.name"/>
+            <form:form action="/user/user-registration" method="post" modelAttribute="userRegistration">
+                <div class="grid">
+                    <div class="box">
+                        <form:label path="name">
+                            <spring:message code="label.user.name"/>
                             </form:label>
                             <form:input path="name" placeholder="Enter Name"/>
                             <form:errors path="name" cssClass="error-text"/>

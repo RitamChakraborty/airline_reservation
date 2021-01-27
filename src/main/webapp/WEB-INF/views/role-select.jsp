@@ -44,15 +44,13 @@
             text-align: center;
             color: white;
             height: 7%;
+            display: grid;
             place-items: center;
-            display: flex;
-            flex-direction: column;
         }
 
         .content {
             flex: 2;
             display: flex;
-            height: max-content;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
@@ -62,14 +60,39 @@
         .card {
             background-color: rgba(255, 255, 255, 0.7);
             padding: 2rem;
-            margin: 2rem 4rem 0 4rem;
+            margin: 1rem 4rem 0.5rem 4rem;
             border-radius: 10px;
             box-shadow: 0 15px 30px -10px grey;
             width: min-content;
         }
 
+        nav {
+            padding: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: large;
+        }
+
+        nav a {
+            display: inline;
+            text-decoration: none;
+            color: darkslategrey;
+            font-weight: bold;
+            padding: 1.5rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        nav a:hover {
+            padding: 1.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 30px -10px grey;
+        }
+
         .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
@@ -108,13 +131,19 @@
         }
 
         form * {
-            margin: 2rem;
             width: 100%;
             text-align: center;
         }
 
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
         input, select, option {
-            margin: 0;
+            margin: 0.5rem 1rem;
             font-size: medium;
             border: none;
             outline: none;
@@ -125,10 +154,41 @@
             border-radius: 4px;
         }
 
-        label {
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .news-feed {
+            width: 50vw;
+        }
+
+        .news-feed table {
+            width: 100%;
+        }
+
+        .news-feed table caption {
             font-size: x-large;
-            color: darkslategrey;
             font-weight: bold;
+            padding-bottom: 1rem;
+        }
+
+        .news-feed td:nth-child(even) {
+            padding: 1rem;
+            background-color: #eeeeee;
         }
     </style>
 </head>
@@ -145,8 +205,58 @@
                     <spring:message code="label.selectRole"/>
                 </form:label>
                 <form:select path="role" items="${ roles }" class="box"/>
-                <button type="submit" class="submit-btn">Choose</button>
             </form:form>
+            <div id="admin-login">
+                <form:form action="/admin/admin-login" method="post" modelAttribute="admin">
+                    <form:label path="username">
+                        <spring:message code="label.username"/>
+                    </form:label>
+                    <form:input path="username" id="username" placeholder="Enter username"/>
+                    <form:errors path="username" cssClass="error-text"/>
+                    <br>
+                    <form:label path="password">
+                        <spring:message code="label.password"/>
+                    </form:label>
+                    <form:password path="password" id="password" placeholder="Enter password"/>
+                    <form:errors path="password" cssClass="error-text"/>
+                    <div class="global-error-text">
+                        <c:if test="${ not empty errorMessage }">
+                            <p class="error-text">
+                                <%= request.getAttribute("errorMessage") %>
+                            </p>
+                        </c:if>
+                    </div>
+                    <input type="submit" value="Login" class="submit-btn">
+                </form:form>
+            </div>
+            <div id="user-login" hidden>
+                <form:form action="/user/user-login" method="post" modelAttribute="userLogin">
+                    <form:label path="id">
+                        <spring:message code="label.user.id"/>
+                    </form:label>
+                    <form:input path="id" type="number" id="user-id" placeholder="Enter user ID"/>
+                    <form:errors path="id" cssClass="error-text"/>
+                    <br>
+                    <form:label path="password">
+                        <spring:message code="label.password"/>
+                    </form:label>
+                    <form:password path="password" id="password" placeholder="Enter password"/>
+                    <form:errors path="password" cssClass="error-text"/>
+                    <div class="global-error-text">
+                        <c:if test="${ not empty errorMessage }">
+                            <p class="error-text">
+                                <%= request.getAttribute("errorMessage") %>
+                            </p>
+                        </c:if>
+                    </div>
+                    <input type="submit" value="Login" class="submit-btn">
+                </form:form>
+                <br>
+                <div class="container1">
+                    <a href="<c:url value="/user/user-registration"/>">Sign Up</a><br>
+                    <a href="<c:url value="/user/forget-password"/>">Forget Password</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card">
@@ -170,5 +280,22 @@
         </div>
     </div>
 </div>
+<script>
+    const _admin_login_div = document.getElementById("admin-login");
+    const _user_login_div = document.getElementById("user-login");
+    const _role_select = document.getElementById("role");
+
+    _role_select.onchange = () => {
+        const role = _role_select.value;
+
+        if (role === "Admin") {
+            _admin_login_div.hidden = false;
+            _user_login_div.hidden = true;
+        } else if (role === "User") {
+            _admin_login_div.hidden = true;
+            _user_login_div.hidden = false;
+        }
+    }
+</script>
 </body>
 </html>
