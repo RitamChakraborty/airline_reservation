@@ -138,7 +138,6 @@
         }
 
         input, select, option {
-            padding: 0.25rem;
             margin: 0.5rem 1rem;
             font-size: medium;
             border: none;
@@ -177,7 +176,7 @@
 
         .box {
             margin: 1rem;
-            padding: 1rem
+            padding: 1rem;
             display: grid;
             place-items: center;
         }

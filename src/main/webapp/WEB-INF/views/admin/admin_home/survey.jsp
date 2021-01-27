@@ -1,15 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" isELIgnored="false" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width = device-width, initial-scale = 1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Airline Ticket Reservation system</title>
+    <title>Survey</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -44,15 +36,13 @@
             text-align: center;
             color: white;
             height: 7%;
+            display: grid;
             place-items: center;
-            display: flex;
-            flex-direction: column;
         }
 
         .content {
             flex: 2;
             display: flex;
-            height: max-content;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
@@ -62,14 +52,39 @@
         .card {
             background-color: rgba(255, 255, 255, 0.7);
             padding: 2rem;
-            margin: 2rem 4rem 0 4rem;
+            margin: 1rem 4rem 0.5rem 4rem;
             border-radius: 10px;
             box-shadow: 0 15px 30px -10px grey;
             width: min-content;
         }
 
+        nav {
+            padding: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: large;
+        }
+
+        nav a {
+            display: inline;
+            text-decoration: none;
+            color: darkslategrey;
+            font-weight: bold;
+            padding: 1.5rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        nav a:hover {
+            padding: 1.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 15px 30px -10px grey;
+        }
+
         .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
@@ -108,13 +123,19 @@
         }
 
         form * {
-            margin: 2rem;
             width: 100%;
             text-align: center;
         }
 
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
         input, select, option {
-            margin: 0;
+            margin: 0.5rem 1rem;
             font-size: medium;
             border: none;
             outline: none;
@@ -125,50 +146,19 @@
             border-radius: 4px;
         }
 
-        label {
-            font-size: x-large;
-            color: darkslategrey;
-            font-weight: bold;
+        .error-text {
+            font-family: monospace;
+            color: tomato;
         }
     </style>
 </head>
 <body>
-<%--@elvariable id="roleSelection" type="com.cognizant.airline_ticket_reservation_system.model.RoleSelection"--%>
 <header>
-    <h1>Airline Ticket Reservation System</h1>
+    <h1>Survey</h1>
 </header>
-<div class="content">
-    <div class="card">
-        <div class="container">
-            <form:form action="/login" method="get" modelAttribute="roleSelection">
-                <form:label path="role">
-                    <spring:message code="label.selectRole"/>
-                </form:label>
-                <form:select path="role" items="${ roles }" class="box"/>
-                <button type="submit" class="submit-btn">Choose</button>
-            </form:form>
-        </div>
-    </div>
-    <div class="card">
-        <div class="news-feed">
-            <table>
-                <c:choose>
-                    <c:when test="${ not empty newsFeeds }">
-                        <caption>News Feed</caption>
-                        <c:forEach var="newsFeed" items="${ newsFeeds }">
-                            <tr>
-                                <td>${ newsFeed.news }</td>
-                                <td>${ newsFeed.date }</td>
-                            </tr>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <caption>No news available</caption>
-                    </c:otherwise>
-                </c:choose>
-            </table>
-        </div>
-    </div>
-</div>
+<nav>
+    <a href="<c:url value="/admin/admin-home"/>">Home</a>
+    <a href="<c:url value="/admin/admin-home/survey/create-survey"/>">Create Survey</a>
+</nav>
 </body>
 </html>
