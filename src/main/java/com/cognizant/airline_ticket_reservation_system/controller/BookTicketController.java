@@ -3,6 +3,7 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 import com.cognizant.airline_ticket_reservation_system.model.BookTicket;
 import com.cognizant.airline_ticket_reservation_system.model.Flight;
 import com.cognizant.airline_ticket_reservation_system.model.FlightSchedule;
+import com.cognizant.airline_ticket_reservation_system.model.PassengerSeats;
 import com.cognizant.airline_ticket_reservation_system.service.FlightScheduleService;
 import com.cognizant.airline_ticket_reservation_system.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,7 @@ public class BookTicketController {
     @GetMapping("/user/user-home/book-ticket/book-flight/{flightScheduleId}")
     public ModelAndView modelAndView(
             @PathVariable("flightScheduleId") Integer flightScheduleId,
+            @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
             ModelAndView modelAndView,
             HttpServletRequest request
     ) {
@@ -86,6 +88,18 @@ public class BookTicketController {
         flightSchedule.setFlight(flightService.getFlightByNo(flightSchedule.getFlightNo()));
         modelAndView.setViewName("user/user_home/book_ticket/book-flight");
         request.getSession().setAttribute("flightSchedule", flightSchedule);
+
+        return modelAndView;
+    }
+
+    @PostMapping("/user/user-home/book-ticket/passenger-entry")
+    public ModelAndView passengerSeats(
+            @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
+            ModelAndView modelAndView,
+            BindingResult bindingResult
+    ) {
+        modelAndView.addObject("totalPassenger", passengerSeats.getTotalPassengerCount());
+        modelAndView.setViewName("user/user_home/book_ticket/book_flight/passenger-entry");
 
         return modelAndView;
     }
