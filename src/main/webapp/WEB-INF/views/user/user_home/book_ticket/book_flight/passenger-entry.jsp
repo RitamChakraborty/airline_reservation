@@ -89,6 +89,13 @@
         if (validForm) {
             const body = JSON.stringify(passengers);
             console.log(body);
+            // fetch("http://localhost:8080/user/user-home/book-ticket/passengers-details", {
+            //     method: 'POST',
+            //     body: body,
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // }).then(response => response.json());
         }
     }
 </script>
