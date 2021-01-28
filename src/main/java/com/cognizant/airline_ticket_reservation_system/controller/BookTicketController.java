@@ -1,8 +1,7 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.*;
-import com.cognizant.airline_ticket_reservation_system.service.AccountService;
-import com.cognizant.airline_ticket_reservation_system.service.BankService;
+import com.cognizant.airline_ticket_reservation_system.service.FlightBookingService;
 import com.cognizant.airline_ticket_reservation_system.service.FlightScheduleService;
 import com.cognizant.airline_ticket_reservation_system.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,7 @@ import java.util.List;
 public class BookTicketController {
     private FlightScheduleService flightScheduleService;
     private FlightService flightService;
-    private BankService bankService;
-    private AccountService accountService;
+    private FlightBookingService flightBookingService;
 
     @Autowired
     public void setFlightScheduleService(FlightScheduleService flightScheduleService) {
@@ -36,13 +34,8 @@ public class BookTicketController {
     }
 
     @Autowired
-    public void setBankService(BankService bankService) {
-        this.bankService = bankService;
-    }
-
-    @Autowired
-    public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
+    public void setFlightBookingService(FlightBookingService flightBookingService) {
+        this.flightBookingService = flightBookingService;
     }
 
     @GetMapping("/user/user-home/book-ticket")
@@ -100,6 +93,8 @@ public class BookTicketController {
 
         // Todo: Check in the database if there is any flight with same details present in the database
         // If so then update the seats number according to it
+        FlightBooking flightBooking = flightBookingService.findFlightBookingByFlightScheduledIdAndDate(flightScheduleId, date);
+
 
         Ticket ticket = new Ticket();
         ticket.setUser(user);

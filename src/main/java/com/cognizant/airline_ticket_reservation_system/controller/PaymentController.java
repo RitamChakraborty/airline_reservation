@@ -54,8 +54,6 @@ public class PaymentController {
             @ModelAttribute("bankAccount") BankAccount bankAccount,
             HttpServletRequest request
     ) {
-        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
-        System.out.println(ticket);
         return new ModelAndView("user/user_home/book_ticket/payment");
     }
 
