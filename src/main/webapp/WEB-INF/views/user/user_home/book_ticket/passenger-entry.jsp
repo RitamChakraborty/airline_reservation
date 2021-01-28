@@ -6,10 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Passenger Entry</title>
-</head>
-<body>
-<header>
-    <h1>Enter passenger details</h1>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -159,10 +155,14 @@
             color: tomato;
         }
     </style>
+</head>
+<body>
+<header>
+    <h1>Enter passenger details</h1>
 </header>
 <nav>
-    <a href="/user/user-home">Home</a>
-    <a href="/user/user-home/book-ticket">Cancel</a>
+    <a href="<c:url value="/user/user-home"/>">Home</a>
+    <a href="<c:url value="/user/user-home/book-ticket"/>">Cancel</a>
 </nav>
 <div class="content">
     <c:forEach var="i" begin="1" end="${ totalPassenger }">
@@ -176,7 +176,8 @@
                     <span id="error.passenger-${ i }.name" class="error-text"></span>
                     <br>
                     <label for="passenger-${ i }.age">Age</label>
-                    <input type="number" name="passenger-${ i }.age" id="passenger-${ i }.age" placeholder="Enter age"
+                    <input type="number" name="passenger-${ i }.age" id="passenger-${ i }.age"
+                           placeholder="Enter age"
                            value="1" min="0" max="120" required>
                     <span id="error.passenger-${ i }.age" class="error-text"></span>
                     <br>
@@ -189,12 +190,12 @@
             </div>
         </div>
     </c:forEach>
-    <a href="<c:url value="/user/user-home/book-ticket/booking-details"/>">
-        <button id="next-btn" class="submit-btn">Next</button>
-    </a>
+    <button id="next-btn" class="submit-btn">Next</button>
+    <c:url var="url" value="/user/user-home/book-ticket/booking-details"/>
 </div>
 <script>
     const next_btn = document.getElementById("next-btn");
+    const form = document.getElementById("form");
 
     next_btn.onclick = () => {
         const totalPassenger = ${ totalPassenger };
@@ -240,13 +241,17 @@
 
         if (validForm) {
             const body = JSON.stringify(passengers);
-            fetch("http://localhost:8080/user/user-home/book-ticket/passengers-entry", {
+
+            fetch("http://localhost:8080/user/user-home/book-ticket/passenger-entry", {
                 method: 'POST',
                 body: body,
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(response => response.json());
+
+            console.log("${ url }");
+            window.location.href = "${ url }";
         }
     }
 </script>

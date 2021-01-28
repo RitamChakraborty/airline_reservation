@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -147,19 +146,17 @@ public class BookTicketController {
 //        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
 //
 //        modelAndView.addObject("totalPassenger", ticket.getPassengerSeats().getTotalPassengerCount());
-        modelAndView.addObject("totalPassenger", 2);
+        modelAndView.addObject("totalPassenger", 1);
         modelAndView.setViewName("user/user_home/book_ticket/passenger-entry");
 
         return modelAndView;
     }
 
-    @PostMapping("/user/user-home/book-ticket/passengers-entry")
-    public RedirectView passengersDetails(
-            @RequestBody List<Passenger> passengers,
-            ModelAndView modelAndView
+    @PostMapping("/user/user-home/book-ticket/passenger-entry")
+    public void passengersDetails(
+            @RequestBody List<Passenger> passengers
     ) {
-        System.out.println("here");
-        return new RedirectView("/user/user-home/book-ticket/booking-details");
+        System.out.println(passengers);
     }
 
     @GetMapping("/user/user-home/book-ticket/booking-details")
