@@ -182,18 +182,19 @@
     </div>
     <div class="card">
         <div class="container">
+            <%--@elvariable id="passengerSeats" type="com.cognizant.airline_ticket_reservation_system.model.PassengerSeats"--%>
             <form:form action="/user/user-home/book-ticket/passenger-seats" method="post"
                        modelAttribute="passengerSeats">
                 <form:label path="businessSeats">
                     <spring:message code="label.flight.businessSeats"/>
                 </form:label>
-                <form:input path="businessSeats" type="number"/>
+                <form:input path="businessSeats" type="number" placeholder="Enter business seats count"/>
                 <form:errors path="businessSeats" cssClass="error-text"/>
                 <br>
                 <form:label path="economySeats">
                     <spring:message code="label.flight.economySeats"/>
                 </form:label>
-                <form:input path="economySeats" type="number"/>
+                <form:input path="economySeats" type="number" placeholder="Enter economy seats count"/>
                 <form:errors path="economySeats" cssClass="error-text"/>
                 <br>
                 <input type="submit" value="Next" class="submit-btn">

@@ -65,14 +65,10 @@ public class FlightScheduleController {
                 bindingResult.rejectValue("departureTime", "error.flightSchedule.departureTime.equalOrBeforeArrival");
             }
         }
-        System.out.println(flightSchedule);
-
 
         if (bindingResult.hasErrors()) {
             return new ModelAndView("admin/admin_home/schedule_flight/add-schedule");
         }
-
-        System.out.println(flightSchedule);
 
         flightSchedule.setFlightNo(flightNo);
         // Save flight schedule in the database

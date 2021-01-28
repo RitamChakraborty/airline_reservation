@@ -174,7 +174,7 @@
                 <form:label path="accountNo">
                     <spring:message code="label.bankAccount.accountNo"/>
                 </form:label>
-                <form:input path="accountNo" type="number"/>
+                <form:input path="accountNo" type="number" placeholder="Enter account no"/>
                 <form:errors path="accountNo" cssClass="error-text"/>
                 <br>
                 <input type="submit" value="Proceed" class="submit-btn">
