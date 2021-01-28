@@ -1,26 +1,23 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
 public class FlightBooking {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     private LocalDate date;
     private Integer scheduledFlightId;
     private Integer economySeatsAvailable;
     private Integer businessSeatsAvailable;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

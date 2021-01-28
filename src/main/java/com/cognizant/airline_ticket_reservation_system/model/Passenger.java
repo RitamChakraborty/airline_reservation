@@ -10,7 +10,7 @@ public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer bookingId;
+    private String bookingId;
     private String name;
     private Integer age;
     private String gender;
@@ -23,11 +23,11 @@ public class Passenger {
         this.id = id;
     }
 
-    public Integer getBookingId() {
+    public String getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(Integer bookingId) {
+    public void setBookingId(String bookingId) {
         this.bookingId = bookingId;
     }
 

@@ -1,11 +1,7 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
-import com.cognizant.airline_ticket_reservation_system.model.Account;
-import com.cognizant.airline_ticket_reservation_system.model.Bank;
-import com.cognizant.airline_ticket_reservation_system.model.BankAccount;
-import com.cognizant.airline_ticket_reservation_system.model.Ticket;
-import com.cognizant.airline_ticket_reservation_system.service.AccountService;
-import com.cognizant.airline_ticket_reservation_system.service.BankService;
+import com.cognizant.airline_ticket_reservation_system.model.*;
+import com.cognizant.airline_ticket_reservation_system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,12 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
 public class PaymentController {
     private BankService bankService;
     private AccountService accountService;
+    private FlightBookingService flightBookingService;
+    private BookingService bookingService;
+    private PassengerService passengerService;
 
     @Autowired
     public void setBankService(BankService bankService) {
@@ -32,6 +32,21 @@ public class PaymentController {
     @Autowired
     public void setAccountService(AccountService accountService) {
         this.accountService = accountService;
+    }
+
+    @Autowired
+    public void setFlightBookingService(FlightBookingService flightBookingService) {
+        this.flightBookingService = flightBookingService;
+    }
+
+    @Autowired
+    public void setBookingService(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
+    @Autowired
+    public void setPassengerService(PassengerService passengerService) {
+        this.passengerService = passengerService;
     }
 
     @GetMapping("/user/user-home/book-ticket/payment")
@@ -70,6 +85,34 @@ public class PaymentController {
             modelAndView.setViewName("user/user_home/book_ticket/payment");
             return modelAndView;
         }
+
+        // Object creation
+        String flightBookingId = UUID.randomUUID().toString();
+        FlightBooking flightBooking = new FlightBooking();
+        flightBooking.setId(flightBookingId);
+        flightBooking.setDate(ticket.getDate());
+        flightBooking.setScheduledFlightId(ticket.getFlightSchedule().getId());
+        flightBooking.setEconomySeatsAvailable(ticket.getEconomySeatsAvailable());
+        flightBooking.setBusinessSeatsAvailable(ticket.getBusinessSeatsAvailable());
+
+        // Save flightBooking in the database
+        flightBookingService.saveFlightBooking(flightBooking);
+
+        String bookingId = UUID.randomUUID().toString();
+        Booking booking = new Booking();
+        booking.setId(bookingId);
+        booking.setFlightBookingId(flightBookingId);
+        booking.setUserId(ticket.getUser().getId());
+
+        // Save booking in the database
+        bookingService.saveBooking(booking);
+
+        for (Passenger passenger : ticket.getPassengers()) {
+            passenger.setBookingId(bookingId);
+        }
+
+        // Save all passengers in the database
+        passengerService.saveAllPassengers(ticket.getPassengers());
 
         // Reduce balance
         Account account = accountService.getAccountByAccountNo(bankAccount.getAccountNo());
