@@ -178,13 +178,12 @@
 <div class="content">
     <div class="card">
         <div class="container1">
-            ${ sessionScope.flightSchedule }
         </div>
     </div>
     <div class="card">
         <div class="container">
             <%--@elvariable id="passengerSeats" type="com.cognizant.airline_ticket_reservation_system.model.PassengerSeats"--%>
-            <form:form action="/user/user-home/book-ticket/passenger-entry" method="post"
+            <form:form action="/user/user-home/book-ticket/book-flight/${ flightScheduleId }" method="post"
                        modelAttribute="passengerSeats">
                 <form:label path="economySeats">
                     <spring:message code="label.flight.economySeats"/>

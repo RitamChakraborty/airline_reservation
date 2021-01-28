@@ -1,9 +1,45 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
-// Todo: 1.2. Add appropriated annotation for the model to be created in the database, don't forget primary key
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Account {
-    // Todo: 10.2. Add validation annotations and error messages from messages.properties
+    @Id
     private Long accountNo;
     private int balance;
     private Integer bankId;
+
+    public Long getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(Long accountNo) {
+        this.accountNo = accountNo;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public Integer getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(Integer bankId) {
+        this.bankId = bankId;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountNo=" + accountNo +
+                ", balance=" + balance +
+                ", bankId=" + bankId +
+                '}';
+    }
 }

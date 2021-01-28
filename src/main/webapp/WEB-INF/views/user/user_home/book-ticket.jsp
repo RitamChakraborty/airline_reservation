@@ -279,7 +279,11 @@
                                     <td>${ flightSchedule.flight.economySeats }</td>
                                     <td>${ flightSchedule.flight.businessSeats }</td>
                                     <td>
-                                        <a href="/user/user-home/book-ticket/book-flight/${ flightSchedule.id }">Book</a>
+                                        <c:url var="bookFlight"
+                                               value="/user/user-home/book-ticket/book-flight/${ flightSchedule.id }">
+                                            <c:param name="date" value="${ param.date }"/>
+                                        </c:url>
+                                        <a href="${ bookFlight }">Book</a>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -29,3 +29,8 @@ values ('Some flights have been lost in Bermuda Triangle', '2021-01-21'),
        ('Very bad news', '2021-01-22'),
        ('Stay positive after such a bad news', '2021-01-23'),
        ('Hope for something good', '2021-01-24');
+
+insert into bank(bank_name)
+values ('HSBC'),
+       ('BNP Paribas'),
+       ('Standard Chartered');

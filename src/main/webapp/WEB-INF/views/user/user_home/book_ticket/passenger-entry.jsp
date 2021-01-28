@@ -189,7 +189,9 @@
             </div>
         </div>
     </c:forEach>
-    <button id="next-btn" class="submit-btn">Next</button>
+    <a href="<c:url value="/user/user-home/book-ticket/booking-details"/>">
+        <button id="next-btn" class="submit-btn">Next</button>
+    </a>
 </div>
 <script>
     const next_btn = document.getElementById("next-btn");
@@ -238,7 +240,7 @@
 
         if (validForm) {
             const body = JSON.stringify(passengers);
-            fetch("http://localhost:8080/user/user-home/book-ticket/passengers-details", {
+            fetch("http://localhost:8080/user/user-home/book-ticket/passengers-entry", {
                 method: 'POST',
                 body: body,
                 headers: {

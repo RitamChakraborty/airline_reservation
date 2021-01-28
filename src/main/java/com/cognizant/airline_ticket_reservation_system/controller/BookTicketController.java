@@ -1,24 +1,32 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.*;
+import com.cognizant.airline_ticket_reservation_system.service.AccountService;
+import com.cognizant.airline_ticket_reservation_system.service.BankService;
 import com.cognizant.airline_ticket_reservation_system.service.FlightScheduleService;
 import com.cognizant.airline_ticket_reservation_system.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookTicketController {
     private FlightScheduleService flightScheduleService;
     private FlightService flightService;
+    private BankService bankService;
+    private AccountService accountService;
 
     @Autowired
     public void setFlightScheduleService(FlightScheduleService flightScheduleService) {
@@ -28,6 +36,16 @@ public class BookTicketController {
     @Autowired
     public void setFlightService(FlightService flightService) {
         this.flightService = flightService;
+    }
+
+    @Autowired
+    public void setBankService(BankService bankService) {
+        this.bankService = bankService;
+    }
+
+    @Autowired
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping("/user/user-home/book-ticket")
@@ -74,66 +92,103 @@ public class BookTicketController {
     @GetMapping("/user/user-home/book-ticket/book-flight/{flightScheduleId}")
     public ModelAndView modelAndView(
             @PathVariable("flightScheduleId") Integer flightScheduleId,
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
             ModelAndView modelAndView,
             HttpServletRequest request
     ) {
+        User user = (User) request.getSession().getAttribute("user");
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightScheduleId);
-        flightSchedule.setFlight(flightService.getFlightByNo(flightSchedule.getFlightNo()));
+        Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
+
+        // Todo: Check in the database if there is any flight with same details present in the database
+        // If so then update the seats number according to it
+
+        Ticket ticket = new Ticket();
+        ticket.setUser(user);
+        ticket.setFlightSchedule(flightSchedule);
+        ticket.setFlight(flight);
+        ticket.setDate(date);
+        // Todo: Make sure to deal with it later
+        ticket.setEconomySeatsAvailable(flight.getEconomySeats());
+        ticket.setBusinessSeatsAvailable(flight.getBusinessSeats());
+        ticket.setPassengerSeats(passengerSeats);
+        // Todo: Also don't forget about his
+        ticket.setFlightIsScheduled(false);
+
+        request.getSession().setAttribute("ticket", ticket);
+
+        modelAndView.addObject("flightScheduleId", flightScheduleId);
         modelAndView.setViewName("user/user_home/book_ticket/book-flight");
-        request.getSession().setAttribute("flightSchedule", flightSchedule);
 
         return modelAndView;
     }
 
-    @PostMapping("/user/user-home/book-ticket/passenger-entry")
-    public ModelAndView passengerSeats(
+    @PostMapping("/user/user-home/book-ticket/book-flight/{flightScheduleId}")
+    public ModelAndView modelAndView(
+            @PathVariable("flightScheduleId") Integer flightScheduleId,
             @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
             ModelAndView modelAndView,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            HttpServletRequest request
     ) {
-        modelAndView.addObject("totalPassenger", passengerSeats.getTotalPassengerCount());
-        modelAndView.setViewName("user/user_home/book_ticket/book_flight/passenger-entry");
+        // Todo: Validate seat numbers
+
+//        modelAndView.setViewName(String.format("user/user_home/book_ticket/book-flight/%d", flightScheduleId));
+        modelAndView.setViewName("redirect:/user/user-home/book-ticket/passenger-entry");
 
         return modelAndView;
     }
 
-    @PostMapping("/user/user-home/book-ticket/passengers-details")
-    public ModelAndView passengersDetails(
-            @RequestBody List<Passenger> passengers
+    @GetMapping("/user/user-home/book-ticket/passenger-entry")
+    public ModelAndView passengerSeats(
+            ModelAndView modelAndView,
+            BindingResult bindingResult,
+            HttpServletRequest request
     ) {
-        System.out.println(passengers);
-        return new ModelAndView("user/user_home/book_ticket/book_flight/passenger-entry");
+//        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
+//
+//        modelAndView.addObject("totalPassenger", ticket.getPassengerSeats().getTotalPassengerCount());
+        modelAndView.addObject("totalPassenger", 2);
+        modelAndView.setViewName("user/user_home/book_ticket/passenger-entry");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/user/user-home/book-ticket/passengers-entry")
+    public RedirectView passengersDetails(
+            @RequestBody List<Passenger> passengers,
+            ModelAndView modelAndView
+    ) {
+        System.out.println("here");
+        return new RedirectView("/user/user-home/book-ticket/booking-details");
+    }
+
+    @GetMapping("/user/user-home/book-ticket/booking-details")
+    public ModelAndView bookingDetails() {
+        return new ModelAndView("user/user_home/book_ticket/booking-details");
     }
 
     @GetMapping("/user/user-home/book-ticket/payment")
-    public ModelAndView payment(
-            // Todo: 9.2. Also add the same annotation here also, because you know ...
-    ) {
+    public ModelAndView payment(@ModelAttribute("bankAccount") BankAccount bankAccount) {
         return new ModelAndView("user/user_home/book_ticket/payment");
     }
 
-    // Todo: 8. Add appropriate annotation for post mapping
+    @PostMapping("/user/user-home/book-ticket/payment")
     public ModelAndView payment(
-            // Todo: 9.1. Add model attributes to get the input
-            ModelAndView modelAndView,
-            HttpServletRequest request
+            @Valid @ModelAttribute("bankAccount") BankAccount bankAccount,
+            BindingResult bindingResult,
+            ModelAndView modelAndView
     ) {
-        // You can get the cost from the flightSchedule object
-        FlightSchedule flightSchedule = (FlightSchedule) request.getSession().getAttribute("flightSchedule");
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("user/user_home/book_ticket/payment");
+            return modelAndView;
+        }
 
-        // Todo: 12. Validate the inputs, don't forget about insufficient balance, and that error message will again be taken from message.properties file
-        // Todo: 13. If validations pass reduce the balance in Account class
-        // Todo: 14. Save value in database
-
-        // The page will redirected to payment-successful page if everything go on correctly
         modelAndView.setViewName("redirect:/user/user-home/book-ticket/payment-successful");
-
-        // Best of luck, here is something which will give you energy to push it through, 🍰
 
         return modelAndView;
     }
-
 
     @GetMapping("/user/user-home/book-ticket/payment-successful")
     public ModelAndView paymentSuccessful() {
@@ -150,9 +205,10 @@ public class BookTicketController {
         return destinations;
     }
 
-    // Todo: 4. create function which will get the bank name from database
-    // use correct annotation
-    // the function will return a Map of banks, where bank id is the key and bank name is the value
-
-    // Todo: 7. Add insert queries inside data.sql file to insert some banks in the database
+    @ModelAttribute("banks")
+    public Map<Integer, String> banks() {
+        return bankService.getBanks()
+                .stream()
+                .collect(Collectors.toMap(Bank::getId, Bank::getBankName));
+    }
 }

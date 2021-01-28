@@ -1,7 +1,26 @@
 package com.cognizant.airline_ticket_reservation_system.service;
 
-public class BankService {
-    // Todo: 5.1 Create an object of the BankDao and autowire it
+import com.cognizant.airline_ticket_reservation_system.dao.BankDao;
+import com.cognizant.airline_ticket_reservation_system.model.Bank;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-    // Todo: 6 write a function to get list of all the banks from the database using BankDao object
+import java.util.List;
+
+@Service
+public class BankService {
+    private BankDao bankDao;
+
+    @Autowired
+    public void setBankDao(BankDao bankDao) {
+        this.bankDao = bankDao;
+    }
+
+    public Bank getBankById(Integer id) {
+        return bankDao.findById(id).orElse(null);
+    }
+
+    public List<Bank> getBanks() {
+        return (List<Bank>) bankDao.findAll();
+    }
 }
