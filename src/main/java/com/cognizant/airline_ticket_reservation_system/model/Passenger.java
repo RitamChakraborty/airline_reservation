@@ -1,9 +1,35 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Passenger {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Integer bookingId;
     private String name;
     private Integer age;
     private String gender;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(Integer bookingId) {
+        this.bookingId = bookingId;
+    }
 
     public String getName() {
         return name;
@@ -32,7 +58,9 @@ public class Passenger {
     @Override
     public String toString() {
         return "Passenger{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", bookingId=" + bookingId +
+                ", name='" + name + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 '}';
