@@ -43,6 +43,24 @@
             place-items: center;
         }
 
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 1rem 4rem 0.5rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
         nav {
             padding: 1rem;
             display: flex;
@@ -67,106 +85,117 @@
             box-shadow: 0 15px 30px -10px grey;
         }
 
-        .content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            color: darkslategrey;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px -10px grey;
-            width: min-content;
-        }
-
         .submit-btn {
             font-size: large;
-            margin: 1rem 0;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
             border-radius: 4px;
+        }
+
+        .news-feed {
+            width: 50vw;
+        }
+
+        .news-feed table {
             width: 100%;
         }
 
-        .reset-btn {
-            font-size: large;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            width: 80vw;
-            display: grid;
-            place-items: center;
-        }
-
-        table * {
-            margin: 0.25rem;
-            padding: 0.25rem;
-            color: darkslategrey;
-        }
-
-        table caption {
+        .news-feed table caption {
             font-size: x-large;
             font-weight: bold;
             padding-bottom: 1rem;
         }
 
-        table tr, th, td {
-            border: 1px solid lightgrey;
+        .news-feed td:nth-child(even) {
+            padding: 1rem;
+            background-color: #eeeeee;
         }
 
-        table th {
-            background-color: grey;
-            color: white;
+        .container {
+            width: 75vw;
         }
 
-        table tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        table th, td {
-            padding: 1rem 0.25rem;
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
         }
 
         form * {
-            display: block;
-            padding: 0.25rem;
-            margin: 0.25rem;
+            width: 100%;
+            text-align: center;
         }
 
-        form label, .label {
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
             font-weight: bold;
         }
 
-        form input, select {
+        input, select, option {
+            margin: 0.5rem 1rem;
+            font-size: medium;
             border: none;
             outline: none;
             background-color: #dddddd;
-            width: 100%;
+            color: darkslategrey;
             padding: 0.5rem;
+            text-align-last: center;
             border-radius: 4px;
         }
 
-        form input:focus, select:focus {
-            outline: none;
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            place-items: center;
+        }
+
+        .box {
+            margin: 1rem;
+            padding: 1rem;
+            display: grid;
+            place-items: center;
+        }
+
+        .box input, select {
+            width: 90%;
+        }
+
+        .box-1 {
+            margin: 0;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .row * {
+            font-size: medium;
         }
     </style>
 </head>
@@ -185,65 +214,90 @@
     <div class="card">
         <div class="container">
             <form:form action="${ actionUrl }" method="post" modelAttribute="flightSchedule">
-                <form:label path="flightNo" class="one">
-                    <spring:message code="label.flightSchedule.flightNo"/>
-                </form:label>
-                <span>${ param.no }</span>
-                <p class="label">
-                    <spring:message code="label.flightSchedule.flight"/>
-                </p>
-                <span>${ flight }</span>
-                <form:label path="source" class="one">
-                    <spring:message code="label.flightSchedule.source"/>
-                </form:label>
-                <form:select path="source" items="${ sources }"/>
-                <form:label path="destination" class="one">
-                    <spring:message code="label.flightSchedule.destination"/>
-                </form:label>
-                <form:select path="destination" items="${ destinations }"/>
-                <form:label path="cost" class="one">
-                    <spring:message code="label.flightSchedule.cost"/>
-                </form:label>
-                <form:input path="cost" type="number" placeholder="Enter cost for the flight"/>
-                <form:errors path="cost"/>
-                <form:label path="arrivalTime" class="one">
-                    <spring:message code="label.flightSchedule.arrivalTime"/>
-                </form:label>
-                <form:input path="arrivalTime" type="time"/>
-                <form:errors path="arrivalTime"/>
-                <form:label path="departureTime" class="one">
-                    <spring:message code="label.flightSchedule.departureTime"/>
-                </form:label>
-                <form:input path="departureTime" type="time"/>
-                <from:errors path="departureTime"/>
-                <form:label path="sun">
-                    <spring:message code="label.flightSchedule.sun"/>
-                </form:label>
-                <form:checkbox path="sun"/>
-                <form:label path="mon">
-                    <spring:message code="label.flightSchedule.mon"/>
-                </form:label>
-                <form:checkbox path="mon"/>
-                <form:label path="tue">
-                    <spring:message code="label.flightSchedule.tue"/>
-                </form:label>
-                <form:checkbox path="tue"/>
-                <form:label path="wed">
-                    <spring:message code="label.flightSchedule.wed"/>
-                </form:label>
-                <form:checkbox path="wed"/>
-                <form:label path="thu">
-                    <spring:message code="label.flightSchedule.thu"/>
-                </form:label>
-                <form:checkbox path="thu"/>
-                <form:label path="fri">
-                    <spring:message code="label.flightSchedule.fri"/>
-                </form:label>
-                <form:checkbox path="fri"/>
-                <form:label path="sat">
-                    <spring:message code="label.flightSchedule.sat"/>
-                </form:label>
-                <form:checkbox path="sat"/>
+                <div class="box box-1">
+                    <form:label path="flightNo">
+                        <spring:message code="label.flightSchedule.flightNo"/>
+                    </form:label>
+                    <span>${ param.no }</span>
+                </div>
+                <div class="box box-1">
+                    <label>
+                        <spring:message code="label.flightSchedule.flight"/>
+                    </label>
+                    <span>${ flight }</span>
+                </div>
+                <div class="grid">
+                    <div class="box">
+                        <form:label path="source">
+                            <spring:message code="label.flightSchedule.source"/>
+                        </form:label>
+                        <form:select path="source" items="${ sources }"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="destination">
+                            <spring:message code="label.flightSchedule.destination"/>
+                        </form:label>
+                        <form:select path="destination" items="${ destinations }"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="businessSeatCost">
+                            <spring:message code="label.flightSchedule.businessSeatCost"/>
+                        </form:label>
+                        <form:input path="businessSeatCost" type="number" placeholder="Enter business seat cost"/>
+                        <form:errors path="businessSeatCost" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="economySeatCost">
+                            <spring:message code="label.flightSchedule.economySeatCost"/>
+                        </form:label>
+                        <form:input path="economySeatCost" type="number" placeholder="Enter business seat cost"/>
+                        <form:errors path="economySeatCost" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="arrivalTime">
+                            <spring:message code="label.flightSchedule.arrivalTime"/>
+                        </form:label>
+                        <form:input path="arrivalTime" type="time"/>
+                        <form:errors path="arrivalTime" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="departureTime">
+                            <spring:message code="label.flightSchedule.departureTime"/>
+                        </form:label>
+                        <form:input path="departureTime" type="time"/>
+                        <from:errors path="departureTime" cssClass="error-text"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <form:label path="sun">
+                        <spring:message code="label.flightSchedule.sun"/>
+                    </form:label>
+                    <form:checkbox path="sun"/>
+                    <form:label path="mon">
+                        <spring:message code="label.flightSchedule.mon"/>
+                    </form:label>
+                    <form:checkbox path="mon"/>
+                    <form:label path="tue">
+                        <spring:message code="label.flightSchedule.tue"/>
+                    </form:label>
+                    <form:checkbox path="tue"/>
+                    <form:label path="wed">
+                        <spring:message code="label.flightSchedule.wed"/>
+                    </form:label>
+                    <form:checkbox path="wed"/>
+                    <form:label path="thu">
+                        <spring:message code="label.flightSchedule.thu"/>
+                    </form:label>
+                    <form:checkbox path="thu"/>
+                    <form:label path="fri">
+                        <spring:message code="label.flightSchedule.fri"/>
+                    </form:label>
+                    <form:checkbox path="fri"/>
+                    <form:label path="sat">
+                        <spring:message code="label.flightSchedule.sat"/>
+                    </form:label>
+                    <form:checkbox path="sat"/>
+                </div>
                 <input type="submit" value="Schedule" class="submit-btn">
             </form:form>
         </div>

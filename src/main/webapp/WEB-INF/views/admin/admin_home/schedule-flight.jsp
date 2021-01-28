@@ -217,7 +217,8 @@
                             <th>Flight No</th>
                             <th>Source</th>
                             <th>Destination</th>
-                            <th>Cost</th>
+                            <th>Economy Seat Cost</th>
+                            <th>Business Seat Cost</th>
                             <th>Arrival Time</th>
                             <th>Departure Time</th>
                             <th>Dates</th>
@@ -230,7 +231,8 @@
                                 <td>${ flightSchedule.flightNo }</td>
                                 <td>${ flightSchedule.source }</td>
                                 <td>${ flightSchedule.destination }</td>
-                                <td>${ flightSchedule.cost }</td>
+                                <td>${ flightSchedule.economySeatCost }</td>
+                                <td>${ flightSchedule.businessSeatCost }</td>
                                 <td>${ flightSchedule.arrivalTime }</td>
                                 <td>${ flightSchedule.departureTime }</td>
                                 <td>

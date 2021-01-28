@@ -17,12 +17,13 @@ values ('British Airways', 'Boing 777', 'International', 200, 50),
        ('Emirates', 'Boing 747', 'International', 250, 75),
        ('IndiGo', 'Airbus A300', 'Domestic', '50', 10);
 
-insert into flight_schedule(flight_no, source, destination, cost, arrival_time, departure_time, sun, mon, tue, wed, thu,
+insert into flight_schedule(flight_no, source, destination, economy_seat_cost, business_seat_cost, arrival_time,
+                            departure_time, sun, mon, tue, wed, thu,
                             fri, sat)
-values ('1', 'Source_1', 'Destination_1', '5000', '01:00:00', '02:00:00', 1, 0, 0, 1, 1, 0, 0),
-       ('2', 'Source_2', 'Destination_3', '6000', '02:00:00', '05:00:00', 0, 1, 0, 1, 1, 1, 1),
-       ('3', 'Source_3', 'Destination_4', '7000', '03:00:00', '06:00:00', 0, 1, 0, 1, 0, 1, 0),
-       ('4', 'Source_4', 'Destination_2', '8000', '04:00:00', '08:00:00', 1, 0, 1, 0, 1, 0, 1);
+values ('1', 'Source_1', 'Destination_1', '2000', '5000', '01:00:00', '02:00:00', 1, 0, 0, 1, 1, 0, 0),
+       ('2', 'Source_2', 'Destination_3', '3000', '6000', '02:00:00', '05:00:00', 0, 1, 0, 1, 1, 1, 1),
+       ('3', 'Source_3', 'Destination_4', '4000', '7000', '03:00:00', '06:00:00', 0, 1, 0, 1, 0, 1, 0),
+       ('4', 'Source_4', 'Destination_2', '5000', '8000', '04:00:00', '08:00:00', 1, 0, 1, 0, 1, 0, 1);
 
 insert into news_feed(news, date)
 values ('Some flights have been lost in Bermuda Triangle', '2021-01-21'),

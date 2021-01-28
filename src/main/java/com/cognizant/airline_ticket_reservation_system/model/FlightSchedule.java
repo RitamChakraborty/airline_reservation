@@ -17,9 +17,12 @@ public class FlightSchedule {
     private Flight flight;
     private String source;
     private String destination;
-    @NotNull(message = "{error.flightSchedule.cost}")
-    @PositiveOrZero(message = "{error.flightSchedule.negative}")
-    private Integer cost;
+    @NotNull(message = "{error.flightSchedule.economySeatCost}")
+    @PositiveOrZero(message = "{error.flightSchedule.economySeatCost.negative}")
+    private Integer economySeatCost;
+    @NotNull(message = "{error.flightSchedule.businessSeatCost}")
+    @PositiveOrZero(message = "{error.flightSchedule.businessSeatCost.negative}")
+    private Integer businessSeatCost;
     @NotNull(message = "{error.flightSchedule.arrivalTime}")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime arrivalTime;
@@ -66,12 +69,20 @@ public class FlightSchedule {
         this.destination = destination;
     }
 
-    public Integer getCost() {
-        return cost;
+    public Integer getEconomySeatCost() {
+        return economySeatCost;
     }
 
-    public void setCost(Integer cost) {
-        this.cost = cost;
+    public void setEconomySeatCost(Integer cost) {
+        this.economySeatCost = cost;
+    }
+
+    public Integer getBusinessSeatCost() {
+        return businessSeatCost;
+    }
+
+    public void setBusinessSeatCost(Integer businessSeatCost) {
+        this.businessSeatCost = businessSeatCost;
     }
 
     public LocalTime getArrivalTime() {
@@ -162,7 +173,8 @@ public class FlightSchedule {
                 ", flight=" + flight +
                 ", source='" + source + '\'' +
                 ", destination='" + destination + '\'' +
-                ", cost=" + cost +
+                ", economySeatCost=" + economySeatCost +
+                ", businessSeatCost=" + businessSeatCost +
                 ", arrivalTime=" + arrivalTime +
                 ", departureTime=" + departureTime +
                 ", sun=" + sun +
