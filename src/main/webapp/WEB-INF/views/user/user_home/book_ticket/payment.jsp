@@ -166,10 +166,10 @@
         <div class="container">
             <%--@elvariable id="bankAccount" type="com.cognizant.airline_ticket_reservation_system.model.BankAccount"--%>
             <form:form action="/user/user-home/book-ticket/payment" method="post" modelAttribute="bankAccount">
-                <form:label path="bankName">
+                <form:label path="bankId">
                     <spring:message code="label.bankAccount.bankName"/>
                 </form:label>
-                <form:select path="bankName" items="${ banks }"/>
+                <form:select path="bankId" items="${ banks }"/>
                 <br>
                 <form:label path="accountNo">
                     <spring:message code="label.bankAccount.accountNo"/>

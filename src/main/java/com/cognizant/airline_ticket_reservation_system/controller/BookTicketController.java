@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 public class BookTicketController {
@@ -169,32 +167,6 @@ public class BookTicketController {
         return new ModelAndView("user/user_home/book_ticket/booking-details");
     }
 
-    @GetMapping("/user/user-home/book-ticket/payment")
-    public ModelAndView payment(@ModelAttribute("bankAccount") BankAccount bankAccount) {
-        return new ModelAndView("user/user_home/book_ticket/payment");
-    }
-
-    @PostMapping("/user/user-home/book-ticket/payment")
-    public ModelAndView payment(
-            @Valid @ModelAttribute("bankAccount") BankAccount bankAccount,
-            BindingResult bindingResult,
-            ModelAndView modelAndView
-    ) {
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("user/user_home/book_ticket/payment");
-            return modelAndView;
-        }
-
-        modelAndView.setViewName("redirect:/user/user-home/book-ticket/payment-successful");
-
-        return modelAndView;
-    }
-
-    @GetMapping("/user/user-home/book-ticket/payment-successful")
-    public ModelAndView paymentSuccessful() {
-        return new ModelAndView("user/user_home/book_ticket/payment-successful");
-    }
-
     @ModelAttribute("sources")
     private List<String> sources(@Value("#{'${flightSchedule.sources}'.split(',')}") List<String> sources) {
         return sources;
@@ -203,12 +175,5 @@ public class BookTicketController {
     @ModelAttribute("destinations")
     private List<String> destinations(@Value("#{'${flightSchedule.destinations}'.split(',')}") List<String> destinations) {
         return destinations;
-    }
-
-    @ModelAttribute("banks")
-    public Map<Integer, String> banks() {
-        return bankService.getBanks()
-                .stream()
-                .collect(Collectors.toMap(Bank::getId, Bank::getBankName));
     }
 }

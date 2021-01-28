@@ -17,4 +17,8 @@ public class AccountService {
     public Account getAccountByAccountNo(Long accountNo) {
         return accountDao.findById(accountNo).orElse(null);
     }
+
+    public void updateAccount(Account account) {
+        accountDao.save(account);
+    }
 }

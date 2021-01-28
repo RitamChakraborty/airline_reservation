@@ -3,16 +3,16 @@ package com.cognizant.airline_ticket_reservation_system.model;
 import javax.validation.constraints.NotNull;
 
 public class BankAccount {
-    private String bankName;
+    private Integer bankId;
     @NotNull(message = "{error.bankAccount.accountNo}")
     private Long accountNo;
 
-    public String getBankName() {
-        return bankName;
+    public Integer getBankId() {
+        return bankId;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setBankId(Integer bankId) {
+        this.bankId = bankId;
     }
 
     public Long getAccountNo() {
@@ -26,7 +26,7 @@ public class BankAccount {
     @Override
     public String toString() {
         return "BankAccount{" +
-                "bankName='" + bankName + '\'' +
+                "bankName='" + bankId + '\'' +
                 ", accountNo=" + accountNo +
                 '}';
     }

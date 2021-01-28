@@ -34,3 +34,10 @@ insert into bank(bank_name)
 values ('HSBC'),
        ('BNP Paribas'),
        ('Standard Chartered');
+
+insert into account(account_no, balance, bank_id)
+values ('12345', '100000', '1'),
+       ('23456', '50000', '2'),
+       ('34567', '10000', '3'),
+       ('45678', '5000', '1'),
+       ('56789', '1000', '2');
