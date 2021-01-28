@@ -48,10 +48,11 @@ public class PaymentController {
     public ModelAndView payment(
             @Valid @ModelAttribute("bankAccount") BankAccount bankAccount,
             BindingResult bindingResult,
-            ModelAndView modelAndView
+            ModelAndView modelAndView,
+            HttpServletRequest request
     ) {
-        // Should get from ticket object
-        int cost = 6000;
+        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
+        int cost = ticket.getCost();
 
         if (bankAccount.getAccountNo() != null) {
             Account account = accountService.getAccountByAccountNo(bankAccount.getAccountNo());
