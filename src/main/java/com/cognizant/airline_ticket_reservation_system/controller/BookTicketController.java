@@ -104,7 +104,6 @@ public class BookTicketController {
     ) {
         System.out.println(passengers);
         return new ModelAndView("user/user_home/book_ticket/book_flight/passenger-entry");
-
     }
 
     @GetMapping("/user/user-home/book-ticket/payment")
