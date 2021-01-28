@@ -1,8 +1,15 @@
 package com.cognizant.airline_ticket_reservation_system.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
 public class PassengerSeats {
-    private Integer economySeats = 0;
-    private Integer businessSeats = 0;
+    @NotNull(message = "{error.passengerSeats.economySeats}")
+    @PositiveOrZero(message = "{error.passengerSeats.economySeats.negative}")
+    private Integer economySeats;
+    @NotNull(message = "{error.passengerSeats.businessSeats}")
+    @PositiveOrZero(message = "{error.passengerSeats.businessSeats.negative}")
+    private Integer businessSeats;
 
     public Integer getEconomySeats() {
         return economySeats;
@@ -18,10 +25,6 @@ public class PassengerSeats {
 
     public void setBusinessSeats(Integer businessSeats) {
         this.businessSeats = businessSeats;
-    }
-
-    public int getTotalPassengerCount() {
-        return economySeats + businessSeats;
     }
 
     @Override

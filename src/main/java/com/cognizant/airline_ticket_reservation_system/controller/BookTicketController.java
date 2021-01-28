@@ -87,7 +87,7 @@ public class BookTicketController {
     }
 
     @GetMapping("/user/user-home/book-ticket/book-flight/{flightScheduleId}")
-    public ModelAndView modelAndView(
+    public ModelAndView bookFlight(
             @PathVariable("flightScheduleId") Integer flightScheduleId,
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
@@ -107,31 +107,48 @@ public class BookTicketController {
         ticket.setFlight(flight);
         ticket.setDate(date);
         // Todo: Make sure to deal with it later
-        ticket.setEconomySeatsAvailable(flight.getEconomySeats());
-        ticket.setBusinessSeatsAvailable(flight.getBusinessSeats());
+        ticket.setEconomySeatsAvailable(2);
+        ticket.setBusinessSeatsAvailable(1);
         ticket.setPassengerSeats(passengerSeats);
         // Todo: Also don't forget about his
         ticket.setFlightIsScheduled(false);
 
         request.getSession().setAttribute("ticket", ticket);
 
-        modelAndView.addObject("flightScheduleId", flightScheduleId);
-        modelAndView.setViewName("user/user_home/book_ticket/book-flight");
+        modelAndView.setViewName("redirect:/user/user-home/book-ticket/passenger-seats");
 
         return modelAndView;
     }
 
-    @PostMapping("/user/user-home/book-ticket/book-flight/{flightScheduleId}")
-    public ModelAndView modelAndView(
-            @PathVariable("flightScheduleId") Integer flightScheduleId,
-            @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
-            ModelAndView modelAndView,
+    @GetMapping("/user/user-home/book-ticket/passenger-seats")
+    public ModelAndView passengerSeats(
+            @ModelAttribute("passengerSeats") PassengerSeats passengerSeats
+    ) {
+        return new ModelAndView("user/user_home/book_ticket/passenger-seats");
+    }
+
+    @PostMapping("/user/user-home/book-ticket/passenger-seats")
+    public ModelAndView passengerSeats(
+            @Valid @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
             BindingResult bindingResult,
+            ModelAndView modelAndView,
             HttpServletRequest request
     ) {
-        // Todo: Validate seat numbers
+        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
 
-//        modelAndView.setViewName(String.format("user/user_home/book_ticket/book-flight/%d", flightScheduleId));
+        if (passengerSeats.getEconomySeats() != null && passengerSeats.getEconomySeats() > ticket.getEconomySeatsAvailable()) {
+            bindingResult.rejectValue("economySeats", "error.passengerSeats.economySeats.unavailable");
+        }
+
+        if (passengerSeats.getBusinessSeats() != null && passengerSeats.getBusinessSeats() > ticket.getBusinessSeatsAvailable()) {
+            bindingResult.rejectValue("businessSeats", "error.passengerSeats.businessSeats.unavailable");
+        }
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("user/user_home/book_ticket/passenger-seats");
+            return modelAndView;
+        }
+
         modelAndView.setViewName("redirect:/user/user-home/book-ticket/passenger-entry");
 
         return modelAndView;

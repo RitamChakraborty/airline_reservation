@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Book Flight</title>
@@ -170,7 +170,7 @@
 </head>
 <body>
 <header>
-    <h1>Book Flight</h1>
+    <h1>Passenger Seats</h1>
 </header>
 <nav>
     <a href="<c:url value="/user/user-home/book-ticket"/>">Back</a>
@@ -182,20 +182,19 @@
     </div>
     <div class="card">
         <div class="container">
-            <%--@elvariable id="passengerSeats" type="com.cognizant.airline_ticket_reservation_system.model.PassengerSeats"--%>
-            <form:form action="/user/user-home/book-ticket/book-flight/${ flightScheduleId }" method="post"
+            <form:form action="/user/user-home/book-ticket/passenger-seats" method="post"
                        modelAttribute="passengerSeats">
-                <form:label path="economySeats">
-                    <spring:message code="label.flight.economySeats"/>
-                </form:label>
-                <form:input path="economySeats" type="number"/>
-                <form:errors path="economySeats" cssClass="error-text"/>
-                <br>
                 <form:label path="businessSeats">
                     <spring:message code="label.flight.businessSeats"/>
                 </form:label>
                 <form:input path="businessSeats" type="number"/>
                 <form:errors path="businessSeats" cssClass="error-text"/>
+                <br>
+                <form:label path="economySeats">
+                    <spring:message code="label.flight.economySeats"/>
+                </form:label>
+                <form:input path="economySeats" type="number"/>
+                <form:errors path="economySeats" cssClass="error-text"/>
                 <br>
                 <input type="submit" value="Next" class="submit-btn">
             </form:form>
