@@ -27,6 +27,10 @@ public class PassengerSeats {
         this.businessSeats = businessSeats;
     }
 
+    public Integer getTotalPassengerCount() {
+        return economySeats + businessSeats;
+    }
+
     @Override
     public String toString() {
         return "PassengerSeats{" +

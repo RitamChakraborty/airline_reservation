@@ -3,6 +3,7 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 import com.cognizant.airline_ticket_reservation_system.model.Account;
 import com.cognizant.airline_ticket_reservation_system.model.Bank;
 import com.cognizant.airline_ticket_reservation_system.model.BankAccount;
+import com.cognizant.airline_ticket_reservation_system.model.Ticket;
 import com.cognizant.airline_ticket_reservation_system.service.AccountService;
 import com.cognizant.airline_ticket_reservation_system.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,7 +35,12 @@ public class PaymentController {
     }
 
     @GetMapping("/user/user-home/book-ticket/payment")
-    public ModelAndView payment(@ModelAttribute("bankAccount") BankAccount bankAccount) {
+    public ModelAndView payment(
+            @ModelAttribute("bankAccount") BankAccount bankAccount,
+            HttpServletRequest request
+    ) {
+        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
+        System.out.println(ticket);
         return new ModelAndView("user/user_home/book_ticket/payment");
     }
 

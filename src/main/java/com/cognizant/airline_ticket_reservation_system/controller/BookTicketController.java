@@ -95,8 +95,8 @@ public class BookTicketController {
             HttpServletRequest request
     ) {
         User user = (User) request.getSession().getAttribute("user");
+        Flight flight = flightService.getFlightByNo(flightScheduleId);
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightScheduleId);
-        Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
 
         // Todo: Check in the database if there is any flight with same details present in the database
         // If so then update the seats number according to it
@@ -149,6 +149,8 @@ public class BookTicketController {
             return modelAndView;
         }
 
+        ticket.setPassengerSeats(passengerSeats);
+
         modelAndView.setViewName("redirect:/user/user-home/book-ticket/passenger-entry");
 
         return modelAndView;
@@ -160,10 +162,9 @@ public class BookTicketController {
             BindingResult bindingResult,
             HttpServletRequest request
     ) {
-//        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
-//
-//        modelAndView.addObject("totalPassenger", ticket.getPassengerSeats().getTotalPassengerCount());
-        modelAndView.addObject("totalPassenger", 1);
+        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
+
+        modelAndView.addObject("totalPassenger", ticket.getPassengerSeats().getTotalPassengerCount());
         modelAndView.setViewName("user/user_home/book_ticket/passenger-entry");
 
         return modelAndView;
@@ -171,9 +172,11 @@ public class BookTicketController {
 
     @PostMapping("/user/user-home/book-ticket/passenger-entry")
     public void passengersDetails(
-            @RequestBody List<Passenger> passengers
+            @RequestBody List<Passenger> passengers,
+            HttpServletRequest request
     ) {
-        System.out.println(passengers);
+        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
+        ticket.setPassengers(passengers);
     }
 
     @GetMapping("/user/user-home/book-ticket/booking-details")
