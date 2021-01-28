@@ -180,7 +180,16 @@ public class BookTicketController {
     }
 
     @GetMapping("/user/user-home/book-ticket/booking-details")
-    public ModelAndView bookingDetails() {
+    public ModelAndView bookingDetails(HttpServletRequest request) {
+        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
+        FlightSchedule flightSchedule = ticket.getFlightSchedule();
+        PassengerSeats passengerSeats = ticket.getPassengerSeats();
+
+        // Calculate ticket cost
+        int cost = flightSchedule.getBusinessSeatCost() * passengerSeats.getBusinessSeats() +
+                flightSchedule.getEconomySeatCost() * passengerSeats.getEconomySeats();
+        ticket.setCost(cost);
+
         return new ModelAndView("user/user_home/book_ticket/booking-details");
     }
 
