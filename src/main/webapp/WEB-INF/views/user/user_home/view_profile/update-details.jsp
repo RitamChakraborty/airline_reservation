@@ -42,6 +42,24 @@
             place-items: center;
         }
 
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 1rem 4rem 0.5rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
         nav {
             padding: 1rem;
             display: flex;
@@ -66,112 +84,15 @@
             box-shadow: 0 15px 30px -10px grey;
         }
 
-        .content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            color: darkslategrey;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px -10px grey;
-            width: min-content;
-        }
-
-        .buttons-container {
-            width: 100%;
-            display: flex;
-            justify-content: space-evenly;
-        }
-
         .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
             border-radius: 4px;
-        }
-
-        .reset-btn {
-            font-size: large;
-            margin: 1rem 0;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            width: 50vw;
-            display: grid;
-            place-items: center;
-        }
-
-        table * {
-            margin: 0.25rem;
-            padding: 0.25rem;
-            color: darkslategrey;
-            text-align: center;
-        }
-
-        table caption {
-            font-size: x-large;
-            font-weight: bold;
-            padding-bottom: 1rem;
-        }
-
-        table tr, th, td {
-            border: 1px solid lightgrey;
-        }
-
-        table th {
-            background-color: grey;
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        table th, td {
-            padding: 1rem 0.25rem;
-        }
-
-        form * {
-            display: block;
-            padding: 0.25rem;
-            margin: 0.25rem;
-        }
-
-        form label, .label {
-            font-weight: bold;
-        }
-
-        form input, select {
-            border: none;
-            outline: none;
-            background-color: #dddddd;
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        form input:focus, select:focus {
-            outline: none;
         }
 
         .news-feed {
@@ -192,6 +113,76 @@
             padding: 1rem;
             background-color: #eeeeee;
         }
+
+        .container {
+            width: 75vw;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        input, select, option {
+            margin: 0.5rem 1rem;
+            font-size: medium;
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            place-items: center;
+        }
+
+        .box {
+            margin: 1rem;
+            padding: 1rem;
+            display: grid;
+            place-items: center;
+        }
+
+        .box input, select {
+            width: 90%;
+        }
     </style>
 </head>
 <body>
@@ -199,60 +190,68 @@
     <h1>Update Details</h1>
 </header>
 <nav>
-    <a href="<c:url value="/user/user-home"/>">Home</a>
+    <a href="<c:url value="/user/user-home/view-profile"/>">Back</a>
 </nav>
 <div class="content">
     <div class="card">
         <div class="container">
             <%--@elvariable id="userDetailsUpdate" type="com.cognizant.airline_ticket_reservation_system.model.User"--%>
             <form:form action="/user/user-home/view-profile/update-details" method="post" modelAttribute="user">
-                <form:label path="name">
-                    <spring:message code="label.user.name"/>
-                </form:label>
-                <form:input path="name" value="${ sessionScope.user.name }"/>
-                <form:errors path="name"/>
-                <br>
-                <form:label path="age">
-                    <spring:message code="label.user.age"/>
-                </form:label>
-                <form:input path="age" type="number" value="${ sessionScope.user.age }"/>
-                <form:errors path="age"/>
-                <br>
-                <form:label path="gender">
-                    <spring:message code="label.user.gender"/>
-                </form:label>
-                <form:select path="gender">
-                    <c:forEach var="gender" items="${ genders }">
-                        <c:choose>
-                            <c:when test="${ gender eq sessionScope.user.gender }">
-                                <form:option value="${ gender }" selected="true"/>
-                            </c:when>
-                            <c:otherwise>
-                                <form:option value="${ gender }"/>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </form:select>
-                <br>
-                <form:label path="email">
-                    <spring:message code="label.user.email"/>
-                </form:label>
-                <form:input path="email" value="${ sessionScope.user.email }"/>
-                <form:errors path="email"/>
-                <br>
-                <form:label path="address">
-                    <spring:message code="label.user.address"/>
-                </form:label>
-                <form:input path="address" value="${ sessionScope.user.address }"/>
-                <form:errors path="address"/>
-                <br>
-                <form:label path="phone">
-                    <spring:message code="label.user.phone"/>
-                </form:label>
-                <form:input path="phone" value="${ sessionScope.user.phone }"/>
-                <form:errors path="phone"/>
-                <br>
-                <p>${ message }</p>
+                <div class="grid">
+                    <div class="box">
+                        <form:label path="name">
+                            <spring:message code="label.user.name"/>
+                        </form:label>
+                        <form:input path="name" value="${ sessionScope.user.name }"/>
+                        <form:errors path="name" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="age">
+                            <spring:message code="label.user.age"/>
+                        </form:label>
+                        <form:input path="age" type="number" value="${ sessionScope.user.age }"/>
+                        <form:errors path="age" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="gender">
+                            <spring:message code="label.user.gender"/>
+                        </form:label>
+                        <form:select path="gender">
+                            <c:forEach var="gender" items="${ genders }">
+                                <c:choose>
+                                    <c:when test="${ gender eq sessionScope.user.gender }">
+                                        <form:option value="${ gender }" selected="true"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form:option value="${ gender }"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </form:select>
+                    </div>
+                    <div class="box">
+                        <form:label path="email">
+                            <spring:message code="label.user.email"/>
+                        </form:label>
+                        <form:input path="email" value="${ sessionScope.user.email }"/>
+                        <form:errors path="email" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="address">
+                            <spring:message code="label.user.address"/>
+                        </form:label>
+                        <form:input path="address" value="${ sessionScope.user.address }"/>
+                        <form:errors path="address" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="phone">
+                            <spring:message code="label.user.phone"/>
+                        </form:label>
+                        <form:input path="phone" value="${ sessionScope.user.phone }"/>
+                        <form:errors path="phone" cssClass="error-text"/>
+                    </div>
+                </div>
+                <p class="error-text">${ message }</p>
                 <input type="submit" value="Update" class="submit-btn">
             </form:form>
         </div>

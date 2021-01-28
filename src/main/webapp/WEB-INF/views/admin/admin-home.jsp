@@ -57,7 +57,7 @@
         .card {
             background-color: rgba(255, 255, 255, 0.7);
             padding: 2rem;
-            margin: 2rem 4rem 0 4rem;
+            margin: 1rem 4rem 0.5rem 4rem;
             border-radius: 10px;
             box-shadow: 0 15px 30px -10px grey;
             width: min-content;
@@ -70,7 +70,6 @@
             justify-content: space-evenly;
             align-items: center;
             font-size: large;
-            text-align: center;
         }
 
         nav a {
@@ -90,18 +89,9 @@
 
         .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
-        }
-
-        .reset-btn {
-            font-size: large;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
             border: none;
             outline: none;
             color: white;
@@ -125,6 +115,45 @@
         .news-feed td:nth-child(even) {
             padding: 1rem;
             background-color: #eeeeee;
+        }
+
+        .container {
+            width: 25vw;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        input, select, option {
+            margin: 0.5rem 1rem;
+            font-size: medium;
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: tomato;
         }
     </style>
 <body>

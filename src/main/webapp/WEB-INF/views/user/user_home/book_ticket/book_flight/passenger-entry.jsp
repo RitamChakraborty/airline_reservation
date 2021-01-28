@@ -169,6 +169,7 @@
         <div class="card">
             <div class="container">
                 <form id="passenger-${ i }">
+                    <h2 style="color: steelblue; padding-bottom: 1rem;">Passenger ${ i }</h2>
                     <label for="passenger-${ i }.name">Name</label>
                     <input type="text" id="passenger-${ i }.name" name="passenger-${ i }.name"
                            placeholder="Enter passenger name" required>

@@ -42,6 +42,24 @@
             place-items: center;
         }
 
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 1rem 4rem 0.5rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
         nav {
             padding: 1rem;
             display: flex;
@@ -66,113 +84,15 @@
             box-shadow: 0 15px 30px -10px grey;
         }
 
-        .content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            color: darkslategrey;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px -10px grey;
-            width: min-content;
-        }
-
-        .buttons-container {
-            width: 100%;
-            display: flex;
-            justify-content: space-evenly;
-        }
-
         .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
             border-radius: 4px;
-        }
-
-        .reset-btn {
-            font-size: large;
-            margin: 1rem 0;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            width: 25vw;
-            display: grid;
-            place-items: center;
-        }
-
-        table * {
-            margin: 0.25rem;
-            padding: 0.25rem;
-            color: darkslategrey;
-            text-align: center;
-        }
-
-        table caption {
-            font-size: x-large;
-            font-weight: bold;
-            padding-bottom: 1rem;
-        }
-
-        table tr, th, td {
-            border: 1px solid lightgrey;
-        }
-
-        table th {
-            background-color: grey;
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        table th, td {
-            padding: 1rem 0.25rem;
-        }
-
-        form * {
-            display: block;
-            padding: 0.25rem;
-            margin: 0.25rem;
-            text-align: center;
-        }
-
-        form label, .label {
-            font-weight: bold;
-        }
-
-        form input, select {
-            border: none;
-            outline: none;
-            background-color: #dddddd;
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        form input:focus, select:focus {
-            outline: none;
         }
 
         .news-feed {
@@ -193,6 +113,58 @@
             padding: 1rem;
             background-color: #eeeeee;
         }
+
+        .container {
+            width: 50vw;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        input, select, option {
+            margin: 0.5rem 1rem;
+            font-size: medium;
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-evenly;
+        }
     </style>
 </head>
 <body>
@@ -200,7 +172,7 @@
     <h1>Change Password</h1>
 </header>
 <nav>
-    <a href="<c:url value="/user/user-home"/>">Home</a>
+    <a href="<c:url value="/user/user-home/view-profile"/>">Back</a>
 </nav>
 <div class="content">
     <div class="card">
@@ -212,19 +184,19 @@
                     <spring:message code="label.userChangePassword.previousPassword"/>
                 </form:label>
                 <form:password path="previousPassword" placeholder="Enter previous password"/>
-                <form:errors path="previousPassword"/>
+                <form:errors path="previousPassword" cssClass="error-text"/>
                 <br>
                 <form:label path="newPassword">
                     <spring:message code="label.userChangePassword.newPassword"/>
                 </form:label>
                 <form:password path="newPassword" placeholder="Enter new password"/>
-                <form:errors path="newPassword"/>
+                <form:errors path="newPassword" cssClass="error-text"/>
                 <br>
                 <form:label path="confirmPassword">
                     <spring:message code="label.userChangePassword.confirmPassword"/>
                 </form:label>
                 <form:password path="confirmPassword" placeholder="Confirm password"/>
-                <form:errors path="confirmPassword"/>
+                <form:errors path="confirmPassword" cssClass="error-text"/>
                 <br>
                 <input type="submit" value="Change" class="submit-btn">
             </form:form>
