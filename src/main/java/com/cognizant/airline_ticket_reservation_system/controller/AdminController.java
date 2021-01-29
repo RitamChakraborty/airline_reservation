@@ -1,11 +1,10 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.Admin;
+import com.cognizant.airline_ticket_reservation_system.model.FlightBooking;
 import com.cognizant.airline_ticket_reservation_system.model.NewsFeed;
 import com.cognizant.airline_ticket_reservation_system.model.User;
-import com.cognizant.airline_ticket_reservation_system.service.AdminService;
-import com.cognizant.airline_ticket_reservation_system.service.NewsFeedService;
-import com.cognizant.airline_ticket_reservation_system.service.UserService;
+import com.cognizant.airline_ticket_reservation_system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,9 @@ public class AdminController {
     private AdminService adminService;
     private UserService userService;
     private NewsFeedService newsFeedService;
+    private FlightBookingService flightBookingService;
+    private BookingService bookingService;
+    private PassengerService passengerService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -40,6 +42,21 @@ public class AdminController {
     @Autowired
     public void setNewsFeedService(NewsFeedService newsFeedService) {
         this.newsFeedService = newsFeedService;
+    }
+
+    @Autowired
+    public void setFlightBookingService(FlightBookingService flightBookingService) {
+        this.flightBookingService = flightBookingService;
+    }
+
+    @Autowired
+    public void setBookingService(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
+    @Autowired
+    public void setPassengerService(PassengerService passengerService) {
+        this.passengerService = passengerService;
     }
 
     @GetMapping("/admin/admin-login")
@@ -83,8 +100,13 @@ public class AdminController {
     }
 
     @GetMapping("/admin/admin-home/booking-details")
-    public ModelAndView bookingDetails() {
-        return new ModelAndView("admin/admin_home/booking-details");
+    public ModelAndView bookingDetails(ModelAndView modelAndView) {
+        List<FlightBooking> flightBookings = flightBookingService.getFlightBookings();
+
+        modelAndView.addObject("flightBookings", flightBookings);
+        modelAndView.setViewName("admin/admin_home/booking-details");
+
+        return modelAndView;
     }
 
     @GetMapping("/admin/admin-home/user-details")

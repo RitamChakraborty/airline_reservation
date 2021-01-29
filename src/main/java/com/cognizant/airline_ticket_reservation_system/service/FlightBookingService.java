@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class FlightBookingService {
@@ -33,5 +34,9 @@ public class FlightBookingService {
 
     public FlightBooking findFlightBookingByFlightScheduledIdAndDate(Integer flightScheduleId, LocalDate date) {
         return flightBookingDaoImpl.findByFlightScheduledIdAndDate(flightScheduleId, date);
+    }
+
+    public List<FlightBooking> getFlightBookings() {
+        return (List<FlightBooking>) flightBookingDao.findAll();
     }
 }
