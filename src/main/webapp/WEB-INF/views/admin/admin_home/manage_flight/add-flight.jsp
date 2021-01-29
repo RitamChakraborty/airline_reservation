@@ -42,6 +42,24 @@
             place-items: center;
         }
 
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 1rem 4rem 0.5rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
         nav {
             padding: 1rem;
             display: flex;
@@ -66,66 +84,103 @@
             box-shadow: 0 15px 30px -10px grey;
         }
 
-        .content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            color: darkslategrey;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px -10px grey;
-            width: min-content;
-        }
-
-        .container {
-            width: 50vw;
-        }
-
-        form * {
-            display: block;
-            padding: 0.25rem;
-            margin: 0.25rem;
-        }
-
-        form input, select {
-            border: none;
-            outline: none;
-            background-color: #dddddd;
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        form input:focus, select:focus {
-            outline: none;
-        }
-
         .submit-btn {
             font-size: large;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
             border-radius: 4px;
+        }
+
+        .news-feed {
+            width: 50vw;
+        }
+
+        .news-feed table {
             width: 100%;
         }
 
-        .reset-btn {
-            font-size: large;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
+        .news-feed table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
+        }
+
+        .news-feed td:nth-child(even) {
+            padding: 1rem;
+            background-color: #eeeeee;
+        }
+
+        .container {
+            width: 75vw;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        input, select, option {
+            margin: 0.5rem 1rem;
+            font-size: medium;
             border: none;
             outline: none;
-            color: white;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
             border-radius: 4px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            place-items: center;
+        }
+
+        .box {
+            margin: 1rem;
+            padding: 1rem;
+            display: grid;
+            place-items: center;
+        }
+
+        .box input, select {
+            width: 90%;
         }
     </style>
 </head>
@@ -136,42 +191,50 @@
     </h1>
 </header>
 <nav>
-    <a href="<c:url value="/admin/admin-home/manage-flight"/>">Manage Flight</a>
+    <a href="<c:url value="/admin/admin-home"/>">Home</a>
+    <a href="<c:url value="/admin/admin-home/manage-flight"/>">Back</a>
 </nav>
 <%--@elvariable id="flight" type="com.cognizant.airline_ticket_reservation_system.model.Flight"--%>
 <div class="content">
     <div class="card">
         <div class="container">
             <form:form action="/admin/admin-home/manage-flight/add-flight" method="post" modelAttribute="flight">
-                <form:label path="airline" class="one">
-                    <spring:message code="label.flight.airline"/>
-                </form:label>
-                <form:select path="airline" items="${ airlines }"/>
-                <br>
-                <form:label path="model" class="one">
-                    <spring:message code="label.flight.model"/>
-                </form:label>
-                <form:select path="model" items="${ models }"/>
-                <br>
-                <form:label path="type" class="one">
-                    <spring:message code="label.flight.type"/>
-                </form:label>
-                <form:select path="type" items="${ types }"/>
-                <br>
-                <form:label path="economySeats">
-                    <spring:message code="label.flight.economySeats"/>
-                </form:label>
-                <form:input path="economySeats" type="number" pattern="^\d+$"
-                            placeholder="Enter business seats number"/>
-                <form:errors path="economySeats"/>
-                <br>
-                <form:label path="businessSeats">
-                    <spring:message code="label.flight.businessSeats"/>
-                </form:label>
-                <form:input path="businessSeats" type="number" pattern="^\d+$"
-                            placeholder="Enter economyl seats number"/>
-                <form:errors path="businessSeats"/>
-                <br>
+                <div class="box">
+                    <form:label path="airline" class="one">
+                        <spring:message code="label.flight.airline"/>
+                    </form:label>
+                    <form:select path="airline" items="${ airlines }"/>
+                </div>
+                <div class="grid">
+                    <div class="box">
+                        <form:label path="model" class="one">
+                            <spring:message code="label.flight.model"/>
+                        </form:label>
+                        <form:select path="model" items="${ models }"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="type" class="one">
+                            <spring:message code="label.flight.type"/>
+                        </form:label>
+                        <form:select path="type" items="${ types }"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="economySeats">
+                            <spring:message code="label.flight.economySeats"/>
+                        </form:label>
+                        <form:input path="economySeats" type="number" pattern="^\d+$"
+                                    placeholder="Enter business seats number"/>
+                        <form:errors path="economySeats" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="businessSeats">
+                            <spring:message code="label.flight.businessSeats"/>
+                        </form:label>
+                        <form:input path="businessSeats" type="number" pattern="^\d+$"
+                                    placeholder="Enter economy seats number"/>
+                        <form:errors path="businessSeats" cssClass="error-text"/>
+                    </div>
+                </div>
                 <input type="submit" value="Add Flight" class="submit-btn">
             </form:form>
         </div>
