@@ -120,9 +120,19 @@ public class BookTicketController {
 
     @GetMapping("/user/user-home/book-ticket/passenger-seats")
     public ModelAndView passengerSeats(
-            @ModelAttribute("passengerSeats") PassengerSeats passengerSeats
+            @ModelAttribute("passengerSeats") PassengerSeats passengerSeats,
+            ModelAndView modelAndView,
+            HttpServletRequest request
     ) {
-        return new ModelAndView("user/user_home/book_ticket/passenger-seats");
+        Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
+
+        if (ticket.getEconomySeatsAvailable() == 0 && ticket.getBusinessSeatsAvailable() == 0) {
+            modelAndView.addObject("errorMessage", "Seat not available");
+        }
+
+        modelAndView.setViewName("user/user_home/book_ticket/passenger-seats");
+
+        return modelAndView;
     }
 
     @PostMapping("/user/user-home/book-ticket/passenger-seats")
@@ -134,12 +144,22 @@ public class BookTicketController {
     ) {
         Ticket ticket = (Ticket) request.getSession().getAttribute("ticket");
 
+        if (ticket.getEconomySeatsAvailable() == 0 && ticket.getBusinessSeatsAvailable() == 0) {
+            modelAndView.addObject("errorMessage", "Seat not available");
+        }
+
         if (passengerSeats.getEconomySeats() != null && passengerSeats.getEconomySeats() > ticket.getEconomySeatsAvailable()) {
             bindingResult.rejectValue("economySeats", "error.passengerSeats.economySeats.unavailable");
         }
 
         if (passengerSeats.getBusinessSeats() != null && passengerSeats.getBusinessSeats() > ticket.getBusinessSeatsAvailable()) {
             bindingResult.rejectValue("businessSeats", "error.passengerSeats.businessSeats.unavailable");
+        }
+
+        if (passengerSeats.getBusinessSeats() != null && passengerSeats.getEconomySeats() != null) {
+            if (passengerSeats.getEconomySeats() == 0 && passengerSeats.getBusinessSeats() == 0) {
+                bindingResult.rejectValue("economySeats", "error.passengerSeats.bothZero");
+            }
         }
 
         if (bindingResult.hasErrors()) {
