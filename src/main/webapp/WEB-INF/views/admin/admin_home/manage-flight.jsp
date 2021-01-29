@@ -101,7 +101,7 @@
         .reset-btn {
             font-size: large;
             padding: 0.5rem 1rem;
-            background-color: forestgreen;
+            background-color: tomato;
             border: none;
             outline: none;
             color: white;
@@ -130,6 +130,7 @@
         }
 
         table tr, th, td {
+            text-align: center;
             border: 1px solid lightgrey;
         }
 
@@ -161,6 +162,7 @@
 <nav>
     <a href="<c:url value="/admin/admin-home"/>" class="one">Home</a>
     <a href="<c:url value="/admin/admin-home/manage-flight/add-flight"/>" class="one">Add Flight</a>
+    <a href="<c:url value="/admin/admin-home/schedule-flight"/>">Schedule Flight</a>
 </nav>
 <div class="content">
     <div class="card">

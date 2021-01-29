@@ -83,7 +83,7 @@
         .card {
             background-color: rgba(255, 255, 255, 0.7);
             padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
+            margin: 2rem 4rem 0 4rem;
             border-radius: 10px;
             box-shadow: 0 15px 30px -10px grey;
             width: min-content;
@@ -91,8 +91,8 @@
 
         .submit-btn {
             font-size: large;
+            padding: 0.5rem 1rem;
             background-color: dodgerblue;
-            padding: 0.25rem 0;
             border: none;
             outline: none;
             color: white;
@@ -103,7 +103,7 @@
         .reset-btn {
             font-size: large;
             padding: 0.5rem 1rem;
-            background-color: forestgreen;
+            background-color: tomato;
             border: none;
             outline: none;
             color: white;
@@ -123,7 +123,6 @@
         table * {
             margin: 0.25rem;
             padding: 0.25rem;
-            color: darkslategrey;
         }
 
         table caption {
@@ -133,6 +132,7 @@
         }
 
         table tr, th, td {
+            text-align: center;
             border: 1px solid lightgrey;
         }
 
@@ -156,6 +156,7 @@
 </header>
 <nav>
     <a href="<c:url value="/admin/admin-home"/>">Home</a>
+    <a href="<c:url value="/admin/admin-home/manage-flight"/>">Manage Flight</a>
 </nav>
 <div class="content">
     <div class="card">

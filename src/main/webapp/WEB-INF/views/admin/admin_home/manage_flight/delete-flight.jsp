@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -42,6 +43,24 @@
             place-items: center;
         }
 
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 1rem 4rem 0.5rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
         nav {
             padding: 1rem;
             display: flex;
@@ -66,54 +85,105 @@
             box-shadow: 0 15px 30px -10px grey;
         }
 
-        .content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            color: darkslategrey;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px -10px grey;
-            width: min-content;
-        }
-
         .submit-btn {
             font-size: large;
-            margin: 1rem 0;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: tomato;
             border: none;
             outline: none;
             color: white;
             border-radius: 4px;
+        }
+
+        .news-feed {
+            width: 50vw;
+        }
+
+        .news-feed table {
             width: 100%;
         }
 
-        .reset-btn {
-            font-size: large;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
+        .news-feed table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
         }
 
-        a {
-            text-decoration: none;
+        .news-feed td:nth-child(even) {
+            padding: 1rem;
+            background-color: #eeeeee;
         }
 
         .container {
             width: 50vw;
             display: grid;
             place-items: center;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        input, select, option {
+            margin: 0.5rem 1rem;
+            font-size: medium;
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            place-items: center;
+        }
+
+        .box {
+            margin: 1rem;
+            padding: 1rem;
+            display: grid;
+            place-items: center;
+        }
+
+        .box input, select {
+            width: 90%;
         }
 
         table * {
@@ -129,6 +199,7 @@
         }
 
         table tr, th, td {
+            width: max-content;
             border: 1px solid lightgrey;
         }
 
@@ -151,7 +222,8 @@
     <h1>Delete Flight</h1>
 </header>
 <nav>
-    <a href="/admin/admin-home/manage-flight">Manage Flight</a>
+    <a href="<c:url value="/admin/admin-home"/>">Home</a>
+    <a href="<c:url value="/admin/admin-home/manage-flight"/>">Back</a>
 </nav>
 <div class="content">
     <div class="card">
