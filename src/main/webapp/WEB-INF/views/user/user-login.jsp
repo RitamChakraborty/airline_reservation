@@ -169,7 +169,7 @@
             display: inline;
         }
 
-        .container1 {
+        .container-1 {
             display: flex;
             justify-content: space-evenly;
         }

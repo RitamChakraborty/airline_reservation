@@ -44,4 +44,10 @@ values ('12345', '100000', '1'),
        ('56789', '1000', '2');
 
 insert into flight_booking(id, scheduled_flight_id, date, business_seats_available, economy_seats_available)
-values ('c6303a2a-c904-4db5-9bc0-66d16a6ebac4', '3', '2021-01-29', '1', '1');
+values ('1', '3', '2021-01-29', '1', '1');
+
+insert into booking(id, flight_booking_id, user_id)
+values ('1', '1', '1');
+
+insert into passenger(id, booking_id, name, age, gender)
+values ('1', '1', 'Ritam', '22', 'Male');

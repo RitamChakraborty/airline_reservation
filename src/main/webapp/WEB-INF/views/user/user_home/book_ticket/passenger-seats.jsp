@@ -161,10 +161,35 @@
             display: inline;
         }
 
-        .container1 {
+        .container-1 {
             width: 75vw;
             display: flex;
             justify-content: space-evenly;
+        }
+
+        table * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+        }
+
+        table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
+        }
+
+        table tr, th, td {
+            text-align: center;
+            border: 1px solid lightgrey;
+        }
+
+        table th {
+            background-color: grey;
+            color: white;
+        }
+
+        table th, td {
+            padding: 1rem 0.25rem;
         }
     </style>
 </head>
@@ -177,7 +202,59 @@
 </nav>
 <div class="content">
     <div class="card">
-        <div class="container1">
+        <div class="container-1">
+            <table>
+                <caption>Flight Information</caption>
+                <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>Airline</th>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Total Economy Seats</th>
+                    <th>Total Business Seats</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>${ sessionScope.ticket.flight.no }</td>
+                    <td>${ sessionScope.ticket.flight.airline }</td>
+                    <td>${ sessionScope.ticket.flight.model }</td>
+                    <td>${ sessionScope.ticket.flight.type }</td>
+                    <td>${ sessionScope.ticket.flight.economySeats }</td>
+                    <td>${ sessionScope.ticket.flight.businessSeats }</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="container-1">
+            <table>
+                <caption>Information</caption>
+                <tbody>
+                <tr>
+                    <th>Source</th>
+                    <th>Destination</th>
+                    <th>Economy Seat Cost</th>
+                    <th>Business Seat Cost</th>
+                    <th>Arrival Time</th>
+                    <th>Departure Time</th>
+                    <th>Available Economy Seats</th>
+                    <th>Available Business Seats</th>
+                </tr>
+                <tr>
+                    <td>${ sessionScope.ticket.flightSchedule.source }</td>
+                    <td>${ sessionScope.ticket.flightSchedule.destination }</td>
+                    <td>${ sessionScope.ticket.flightSchedule.economySeatCost }</td>
+                    <td>${ sessionScope.ticket.flightSchedule.businessSeatCost }</td>
+                    <td>${ sessionScope.ticket.flightSchedule.arrivalTime }</td>
+                    <td>${ sessionScope.ticket.flightSchedule.departureTime }</td>
+                    <td>${ sessionScope.ticket.economySeatsAvailable }</td>
+                    <td>${ sessionScope.ticket.businessSeatsAvailable }</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="card">
