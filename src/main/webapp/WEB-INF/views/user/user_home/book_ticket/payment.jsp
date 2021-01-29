@@ -1,3 +1,4 @@
+<%@ page import="com.cognizant.airline_ticket_reservation_system.model.Ticket" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -152,9 +153,37 @@
             font-family: monospace;
             color: tomato;
         }
+
+        table * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+        }
+
+        table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
+        }
+
+        table tr, th, td {
+            text-align: center;
+            border: 1px solid lightgrey;
+        }
+
+        table th {
+            background-color: grey;
+            color: white;
+        }
+
+        table th, td {
+            padding: 1rem 0.25rem;
+        }
     </style>
 </head>
 <body>
+<%
+    Ticket ticket = (Ticket) session.getAttribute("ticket");
+%>
 <header>
     <h1>Payment</h1>
 </header>
@@ -162,6 +191,45 @@
     <a href="<c:url value="/user/user-home/book-ticket"/>">Cancel</a>
 </nav>
 <div class="content">
+    <div class="card">
+        <div class="container">
+            <table>
+                <caption>Cost Calculation</caption>
+                <tbody>
+                <tr>
+                    <td>Business Seat</td>
+                    <td>${ sessionScope.ticket.passengerSeats.businessSeats }
+                        X ${ sessionScope.ticket.flightSchedule.businessSeatCost }</td>
+                    <td>
+                        <%
+                            int businessSeatsCount = ticket.getPassengerSeats().getBusinessSeats();
+                            int businessSeatCost = ticket.getFlightSchedule().getBusinessSeatCost();
+                            int totalBusinessSeatCost = businessSeatCost * businessSeatsCount;
+                            out.print(totalBusinessSeatCost);
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Economy Seat</td>
+                    <td>${ sessionScope.ticket.passengerSeats.economySeats }
+                        X ${ sessionScope.ticket.flightSchedule.economySeatCost }</td>
+                    <td>
+                        <%
+                            int economySeatsCount = ticket.getPassengerSeats().getEconomySeats();
+                            int economySeatCost = ticket.getFlightSchedule().getEconomySeatCost();
+                            int totalEconomySeatCost = economySeatCost * economySeatsCount;
+                            out.print(totalEconomySeatCost);
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total</td>
+                    <td>${ sessionScope.ticket.cost }</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="card">
         <div class="container">
             <%--@elvariable id="bankAccount" type="com.cognizant.airline_ticket_reservation_system.model.BankAccount"--%>
