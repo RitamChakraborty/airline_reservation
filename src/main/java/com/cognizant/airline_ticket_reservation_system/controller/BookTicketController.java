@@ -88,28 +88,31 @@ public class BookTicketController {
             HttpServletRequest request
     ) {
         User user = (User) request.getSession().getAttribute("user");
-        Flight flight = flightService.getFlightByNo(flightScheduleId);
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightScheduleId);
+        Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
 
-        // Todo: Check in the database if there is any flight with same details present in the database
-        // If so then update the seats number according to it
+        // Check if the flight is scheduled or not
         FlightBooking flightBooking = flightBookingService.findFlightBookingByFlightScheduledIdAndDate(flightScheduleId, date);
-
 
         Ticket ticket = new Ticket();
         ticket.setUser(user);
         ticket.setFlightSchedule(flightSchedule);
         ticket.setFlight(flight);
         ticket.setDate(date);
-        // Todo: Make sure to deal with it later
-        ticket.setEconomySeatsAvailable(2);
-        ticket.setBusinessSeatsAvailable(1);
+
+        if (flightBooking != null) {
+            ticket.setEconomySeatsAvailable(flightBooking.getEconomySeatsAvailable());
+            ticket.setBusinessSeatsAvailable(flightBooking.getBusinessSeatsAvailable());
+            ticket.setFlightIsScheduled(true);
+        } else {
+            ticket.setEconomySeatsAvailable(flight.getEconomySeats());
+            ticket.setBusinessSeatsAvailable(flight.getBusinessSeats());
+            ticket.setFlightIsScheduled(false);
+        }
+
         ticket.setPassengerSeats(passengerSeats);
-        // Todo: Also don't forget about his
-        ticket.setFlightIsScheduled(false);
 
         request.getSession().setAttribute("ticket", ticket);
-
         modelAndView.setViewName("redirect:/user/user-home/book-ticket/passenger-seats");
 
         return modelAndView;
@@ -145,6 +148,9 @@ public class BookTicketController {
         }
 
         ticket.setPassengerSeats(passengerSeats);
+        // Change seat availability number
+        ticket.setEconomySeatsAvailable(ticket.getEconomySeatsAvailable() - passengerSeats.getEconomySeats());
+        ticket.setBusinessSeatsAvailable(ticket.getBusinessSeatsAvailable() - passengerSeats.getBusinessSeats());
 
         modelAndView.setViewName("redirect:/user/user-home/book-ticket/passenger-entry");
 

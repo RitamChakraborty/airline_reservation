@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public class FlightBookingDaoImpl {
@@ -19,6 +20,8 @@ public class FlightBookingDaoImpl {
 
     public FlightBooking findByFlightScheduledIdAndDate(Integer flightScheduleId, LocalDate date) {
         String query = "select * from flight_booking where scheduled_flight_id = ? and date = ?;";
-        return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(), flightScheduleId, date);
+        List<FlightBooking> flightBookings = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(), flightScheduleId, date);
+
+        return flightBookings.isEmpty() ? null : flightBookings.get(0);
     }
 }

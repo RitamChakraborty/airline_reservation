@@ -18,6 +18,11 @@ public class FlightBookingService {
         this.flightBookingDao = flightBookingDao;
     }
 
+    @Autowired
+    public void setFlightBookingDaoImpl(FlightBookingDaoImpl flightBookingDaoImpl) {
+        this.flightBookingDaoImpl = flightBookingDaoImpl;
+    }
+
     public void saveFlightBooking(FlightBooking flightBooking) {
         flightBookingDao.save(flightBooking);
     }
