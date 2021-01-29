@@ -93,8 +93,13 @@ public class PaymentController {
         flightBooking.setEconomySeatsAvailable(ticket.getEconomySeatsAvailable());
         flightBooking.setBusinessSeatsAvailable(ticket.getBusinessSeatsAvailable());
 
-        // Save flightBooking in the database
-        flightBookingService.saveFlightBooking(flightBooking);
+        if (ticket.getFlightIsScheduled()) {
+            // Update flightBooking in the database
+            flightBookingService.updateFlightBooking(flightBooking);
+        } else {
+            // Save flightBooking in the database
+            flightBookingService.saveFlightBooking(flightBooking);
+        }
 
         String bookingId = UUID.randomUUID().toString();
         Booking booking = new Booking();

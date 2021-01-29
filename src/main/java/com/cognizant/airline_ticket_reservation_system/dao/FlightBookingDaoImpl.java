@@ -21,8 +21,12 @@ public class FlightBookingDaoImpl {
     public FlightBooking findByFlightScheduledIdAndDate(Integer flightScheduleId, LocalDate date) {
         String query = "select * from flight_booking where scheduled_flight_id = ? and date = ?;";
         List<FlightBooking> flightBookings = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(FlightBooking.class), flightScheduleId, date);
-        System.out.println(flightBookings);
 
         return flightBookings.isEmpty() ? null : flightBookings.get(0);
+    }
+
+    public void update(FlightBooking flightBooking) {
+        String query = "update flight_booking set economy_seats_available = ?, business_seats_available = ?;";
+        jdbcTemplate.update(query, flightBooking.getEconomySeatsAvailable(), flightBooking.getBusinessSeatsAvailable());
     }
 }

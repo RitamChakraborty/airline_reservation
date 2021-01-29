@@ -42,6 +42,3 @@ values ('12345', '100000', '1'),
        ('34567', '10000', '3'),
        ('45678', '5000', '1'),
        ('56789', '1000', '2');
-
-insert into flight_booking(id, scheduled_flight_id, date, business_seats_available, economy_seats_available)
-values ('c6303a2a-c904-4db5-9bc0-66d16a6ebac4', '3', '2021-01-29', '1', '1');
