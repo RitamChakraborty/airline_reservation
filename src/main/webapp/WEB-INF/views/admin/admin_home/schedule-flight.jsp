@@ -188,9 +188,7 @@
                                     <c:url var="addSchedule" value="/admin/admin-home/schedule-flight/add-schedule">
                                         <c:param name="no" value="${ flight.no }"/>
                                     </c:url>
-                                    <a href="${ addSchedule }">
-                                        <button class="submit-btn">Schedule</button>
-                                    </a>
+                                    <a href="${ addSchedule }" class="submit-btn">Schedule</a>
                                 </td>
                             </tr>
                         </c:forEach>
