@@ -202,62 +202,6 @@
 </nav>
 <div class="content">
     <div class="card">
-        <div class="container-1">
-            <table>
-                <caption>Flight Information</caption>
-                <thead>
-                <tr>
-                    <th>NO</th>
-                    <th>Airline</th>
-                    <th>Model</th>
-                    <th>Type</th>
-                    <th>Total Economy Seats</th>
-                    <th>Total Business Seats</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>${ sessionScope.ticket.flight.no }</td>
-                    <td>${ sessionScope.ticket.flight.airline }</td>
-                    <td>${ sessionScope.ticket.flight.model }</td>
-                    <td>${ sessionScope.ticket.flight.type }</td>
-                    <td>${ sessionScope.ticket.flight.economySeats }</td>
-                    <td>${ sessionScope.ticket.flight.businessSeats }</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card">
-        <div class="container-1">
-            <table>
-                <caption>Information</caption>
-                <tbody>
-                <tr>
-                    <th>Source</th>
-                    <th>Destination</th>
-                    <th>Economy Seat Cost</th>
-                    <th>Business Seat Cost</th>
-                    <th>Arrival Time</th>
-                    <th>Departure Time</th>
-                    <th>Available Economy Seats</th>
-                    <th>Available Business Seats</th>
-                </tr>
-                <tr>
-                    <td>${ sessionScope.ticket.flightSchedule.source }</td>
-                    <td>${ sessionScope.ticket.flightSchedule.destination }</td>
-                    <td>${ sessionScope.ticket.flightSchedule.economySeatCost }</td>
-                    <td>${ sessionScope.ticket.flightSchedule.businessSeatCost }</td>
-                    <td>${ sessionScope.ticket.flightSchedule.arrivalTime }</td>
-                    <td>${ sessionScope.ticket.flightSchedule.departureTime }</td>
-                    <td>${ sessionScope.ticket.economySeatsAvailable }</td>
-                    <td>${ sessionScope.ticket.businessSeatsAvailable }</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card">
         <div class="container">
             <%--@elvariable id="passengerSeats" type="com.cognizant.airline_ticket_reservation_system.model.PassengerSeats"--%>
             <form:form action="/user/user-home/book-ticket/passenger-seats" method="post"
@@ -267,13 +211,15 @@
                         <form:label path="businessSeats">
                             <spring:message code="label.flight.businessSeats"/>
                         </form:label>
-                        <form:input path="businessSeats" type="number" placeholder="Enter business seats count"/>
+                        <form:input path="businessSeats" type="number"
+                                    placeholder="${ sessionScope.ticket.businessSeatsAvailable } available"/>
                         <form:errors path="businessSeats" cssClass="error-text"/>
                         <br>
                         <form:label path="economySeats">
                             <spring:message code="label.flight.economySeats"/>
                         </form:label>
-                        <form:input path="economySeats" type="number" placeholder="Enter economy seats count"/>
+                        <form:input path="economySeats" type="number"
+                                    placeholder="${ sessionScope.ticket.economySeatsAvailable } available"/>
                         <form:errors path="economySeats" cssClass="error-text"/>
                         <br>
                         <input type="submit" value="Next" class="submit-btn">
