@@ -14,7 +14,56 @@
 <div class="content">
     <div class="card">
         <div class="container">
-
+            <table>
+                <caption>Flight Information</caption>
+                <tbody>
+                <tr>
+                    <td>Flight No</td>
+                    <td>${ flight.no }</td>
+                </tr>
+                <tr>
+                    <td>Airline</td>
+                    <td>${ flight.airline }</td>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>${ flight.model }</td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>${ flight.type }</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="container">
+            <table>
+                <caption>Flight Schedule Information</caption>
+                <tbody>
+                <tr>
+                    <td>Date</td>
+                    <td>${ flightBooking.date }</td>
+                </tr>
+                <tr>
+                    <td>Source</td>
+                    <td>${ flightSchedule.source }</td>
+                </tr>
+                <tr>
+                    <td>Destination</td>
+                    <td>${ flightSchedule.destination }</td>
+                </tr>
+                <tr>
+                    <td>Arrival Time</td>
+                    <td>${ flightSchedule.arrivalTime }</td>
+                </tr>
+                <tr>
+                    <td>Departure Time</td>
+                    <td>${ flightSchedule.departureTime }</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

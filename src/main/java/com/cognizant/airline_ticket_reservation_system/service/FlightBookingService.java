@@ -39,4 +39,8 @@ public class FlightBookingService {
     public List<FlightBooking> getFlightBookings() {
         return (List<FlightBooking>) flightBookingDao.findAll();
     }
+
+    public FlightBooking getByFlightBookingId(String flightBookingId) {
+        return flightBookingDao.findById(flightBookingId).orElse(null);
+    }
 }
