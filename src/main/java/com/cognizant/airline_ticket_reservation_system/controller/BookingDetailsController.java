@@ -1,5 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
+import com.cognizant.airline_ticket_reservation_system.model.Booking;
 import com.cognizant.airline_ticket_reservation_system.model.Flight;
 import com.cognizant.airline_ticket_reservation_system.model.FlightBooking;
 import com.cognizant.airline_ticket_reservation_system.model.FlightSchedule;
@@ -19,6 +20,7 @@ public class BookingDetailsController {
     private FlightBookingService flightBookingService;
     private BookingService bookingService;
     private PassengerService passengerService;
+    private UserService userService;
 
     @Autowired
     public void setFlightService(FlightService flightService) {
@@ -45,6 +47,11 @@ public class BookingDetailsController {
         this.passengerService = passengerService;
     }
 
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/admin/admin-home/booking-details")
     public ModelAndView bookingDetails(ModelAndView modelAndView) {
         List<FlightBooking> flightBookings = flightBookingService.getFlightBookings();
@@ -63,11 +70,12 @@ public class BookingDetailsController {
         FlightBooking flightBooking = flightBookingService.getByFlightBookingId(flightBookingId);
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightBooking.getScheduledFlightId());
         Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
-
+        List<Booking> bookings = bookingService.getBookingsByFlightBookingId(flightBookingId);
 
         modelAndView.addObject("flightBooking", flightBooking);
         modelAndView.addObject("flightSchedule", flightSchedule);
         modelAndView.addObject("flight", flight);
+        modelAndView.addObject("bookings", bookings);
         modelAndView.setViewName("admin/admin_home/booking_details/view-booking");
 
         return modelAndView;

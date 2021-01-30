@@ -66,6 +66,27 @@
             </table>
         </div>
     </div>
+    <div class="card">
+        <div class="container">
+            <table>
+                <caption>All Bookings</caption>
+                <thead>
+                <tr>
+                    <th>User Id</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="booking" items="${ bookings }">
+                    <tr>
+                        <td>${ booking.id }</td>
+                        <td><a href="/admin/admin-home/booking-details/booking-information/${ booking.id }">View</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>
