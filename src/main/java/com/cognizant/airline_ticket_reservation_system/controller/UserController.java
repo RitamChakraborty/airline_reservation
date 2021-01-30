@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -249,10 +246,7 @@ public class UserController {
             ModelAndView modelAndView,
             HttpServletRequest request
     ) {
-//        User user = (User) request.getSession().getAttribute("user");
-        // Todo: Don't forget to remove it
-        User user = new User();
-        user.setId(1);
+        User user = (User) request.getSession().getAttribute("user");
 
         List<Booking> bookings = bookingService.getBookingsByUserId(user.getId());
         List<FlightBooking> flightBookings = bookings.stream()
@@ -261,6 +255,29 @@ public class UserController {
 
         modelAndView.addObject("flightBookings", flightBookings);
         modelAndView.setViewName("/user/user_home/history");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/user/user-home/history/view-booking/{flightBookingId}")
+    public ModelAndView viewBooking(
+            @PathVariable("flightBookingId") String flightBookingId,
+            ModelAndView modelAndView,
+            HttpServletRequest request
+    ) {
+        User user = (User) request.getSession().getAttribute("user");
+
+        FlightBooking flightBooking = flightBookingService.getByFlightBookingId(flightBookingId);
+        FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightBooking.getScheduledFlightId());
+        Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
+        Booking booking = bookingService.getBookingByFlightBookingIdAndUserId(flightBookingId, user.getId());
+        List<Passenger> passengers = passengerService.getPassengersByBookingId(booking.getId());
+
+        modelAndView.addObject("flightBooking", flightBooking);
+        modelAndView.addObject("flightSchedule", flightSchedule);
+        modelAndView.addObject("flight", flight);
+        modelAndView.addObject("passengers", passengers);
+        modelAndView.setViewName("user/user_home/history/view-booking");
 
         return modelAndView;
     }
