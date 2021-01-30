@@ -32,7 +32,7 @@ public class FlightBookingService {
         flightBookingDaoImpl.update(flightBooking);
     }
 
-    public FlightBooking findFlightBookingByFlightScheduledIdAndDate(Integer flightScheduleId, LocalDate date) {
+    public FlightBooking getFlightBookingByFlightScheduledIdAndDate(Integer flightScheduleId, LocalDate date) {
         return flightBookingDaoImpl.findByFlightScheduledIdAndDate(flightScheduleId, date);
     }
 

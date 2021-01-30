@@ -34,4 +34,8 @@ public class BookingService {
     public Booking getBookingByBookingId(String bookingId) {
         return bookingDao.findById(bookingId).orElse(null);
     }
+
+    public List<Booking> getBookingsByUserId(Integer userId) {
+        return bookingDaoImpl.findByUserId(userId);
+    }
 }

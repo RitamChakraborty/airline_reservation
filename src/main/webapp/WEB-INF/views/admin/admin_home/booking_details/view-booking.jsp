@@ -113,6 +113,10 @@
             place-items: center;
         }
 
+        table {
+            width: 100%;
+        }
+
         table * {
             margin: 0.25rem;
             padding: 0.25rem;

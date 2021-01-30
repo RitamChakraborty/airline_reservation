@@ -1,8 +1,7 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
 import com.cognizant.airline_ticket_reservation_system.model.*;
-import com.cognizant.airline_ticket_reservation_system.service.NewsFeedService;
-import com.cognizant.airline_ticket_reservation_system.service.UserService;
+import com.cognizant.airline_ticket_reservation_system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -25,6 +24,11 @@ import java.util.stream.Collectors;
 public class UserController {
     private UserService userService;
     private NewsFeedService newsFeedService;
+    private FlightService flightService;
+    private FlightScheduleService flightScheduleService;
+    private FlightBookingService flightBookingService;
+    private BookingService bookingService;
+    private PassengerService passengerService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -34,6 +38,31 @@ public class UserController {
     @Autowired
     public void setNewsFeedService(NewsFeedService newsFeedService) {
         this.newsFeedService = newsFeedService;
+    }
+
+    @Autowired
+    public void setFlightService(FlightService flightService) {
+        this.flightService = flightService;
+    }
+
+    @Autowired
+    public void setFlightScheduleService(FlightScheduleService flightScheduleService) {
+        this.flightScheduleService = flightScheduleService;
+    }
+
+    @Autowired
+    public void setFlightBookingService(FlightBookingService flightBookingService) {
+        this.flightBookingService = flightBookingService;
+    }
+
+    @Autowired
+    public void setBookingService(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
+    @Autowired
+    public void setPassengerService(PassengerService passengerService) {
+        this.passengerService = passengerService;
     }
 
     @GetMapping("/user/user-login")
@@ -216,8 +245,24 @@ public class UserController {
     }
 
     @GetMapping("/user/user-home/history")
-    public ModelAndView history() {
-        return new ModelAndView("/user/user_home/history");
+    public ModelAndView history(
+            ModelAndView modelAndView,
+            HttpServletRequest request
+    ) {
+//        User user = (User) request.getSession().getAttribute("user");
+        // Todo: Don't forget to remove it
+        User user = new User();
+        user.setId(1);
+
+        List<Booking> bookings = bookingService.getBookingsByUserId(user.getId());
+        List<FlightBooking> flightBookings = bookings.stream()
+                .map(booking -> flightBookingService.getByFlightBookingId(booking.getFlightBookingId()))
+                .collect(Collectors.toList());
+
+        modelAndView.addObject("flightBookings", flightBookings);
+        modelAndView.setViewName("/user/user_home/history");
+
+        return modelAndView;
     }
 
     @GetMapping("/user/user-home/view-profile")

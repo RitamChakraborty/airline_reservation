@@ -92,7 +92,7 @@ public class BookTicketController {
         Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
 
         // Check if the flight is scheduled or not
-        FlightBooking flightBooking = flightBookingService.findFlightBookingByFlightScheduledIdAndDate(flightScheduleId, date);
+        FlightBooking flightBooking = flightBookingService.getFlightBookingByFlightScheduledIdAndDate(flightScheduleId, date);
 
         Ticket ticket = new Ticket();
         ticket.setUser(user);

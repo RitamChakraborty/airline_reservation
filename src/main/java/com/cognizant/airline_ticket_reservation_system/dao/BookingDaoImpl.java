@@ -21,4 +21,9 @@ public class BookingDaoImpl {
         String query = "select * from booking where flight_booking_id = ?;";
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Booking.class), flightBookingId);
     }
+
+    public List<Booking> findByUserId(Integer userId) {
+        String query = "select * from booking where user_id = ?;";
+        return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Booking.class), userId);
+    }
 }
