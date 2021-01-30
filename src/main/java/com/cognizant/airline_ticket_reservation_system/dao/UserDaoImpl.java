@@ -1,5 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.dao;
 
+import com.cognizant.airline_ticket_reservation_system.constant.Queries;
 import com.cognizant.airline_ticket_reservation_system.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,8 +21,10 @@ public class UserDaoImpl {
     }
 
     public void update(User user) {
+        String query = Queries.USER_UPDATE;
+
         jdbcTemplate.update(
-                "update user set password = ?, name = ?, age = ?, gender = ?, email = ?, address = ?, phone = ?, secret_question = ?, answer = ? where id = ?;",
+                query,
                 user.getPassword(),
                 user.getName(),
                 user.getAge(),

@@ -1,5 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.dao;
 
+import com.cognizant.airline_ticket_reservation_system.constant.Queries;
 import com.cognizant.airline_ticket_reservation_system.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,8 +16,10 @@ public class FlightDaoImpl {
     }
 
     public void update(Flight flight) {
+        String query = Queries.FLIGHT_UPDATE;
+
         jdbcTemplate.update(
-                "update flight set airline = ?, model = ?, type = ?, economy_seats = ?, business_seats = ? where no = ?",
+                query,
                 flight.getAirline(),
                 flight.getModel(),
                 flight.getType(),

@@ -1,5 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.dao;
 
+import com.cognizant.airline_ticket_reservation_system.constant.Queries;
 import com.cognizant.airline_ticket_reservation_system.model.Passenger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -18,7 +19,7 @@ public class PassengerDaoImpl {
     }
 
     public List<Passenger> findAllByBookingId(String bookingId) {
-        String query = "select * from passenger where booking_id = ?;";
+        String query = Queries.PASSENGER_FIND_ALL_BY_BOOKING_ID;
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Passenger.class), bookingId);
     }
 }
