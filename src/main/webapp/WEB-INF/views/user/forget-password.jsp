@@ -191,68 +191,68 @@
     <h1>Forget Password</h1>
 </header>
 <nav>
-<a href="<c:url value="/">">Back</a>
-    </nav>
-    <div class="content">
+    <a href="<c:url value="/"/>">Back</a>
+</nav>
+<div class="content">
     <div class="card">
-    <div class="container">
-    <%--@elvariable id="userForgetPassword" type="com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword"--%>
-    <form:form action="/user/forget-password" method="post" modelAttribute="userForgetPassword">
-        <div class="box">
-            <form:label path="id">
-                <spring:message code="label.user.id"/>
-            </form:label>
-            <form:input path="id" placeholder="Enter User Id"/>
-            <form:errors path="id" cssClass="error-text"/>
+        <div class="container">
+            <%--@elvariable id="userForgetPassword" type="com.cognizant.airline_ticket_reservation_system.model.UserForgetPassword"--%>
+            <form:form action="/user/forget-password" method="post" modelAttribute="userForgetPassword">
+                <div class="box">
+                    <form:label path="id">
+                        <spring:message code="label.user.id"/>
+                    </form:label>
+                    <form:input path="id" placeholder="Enter User Id"/>
+                    <form:errors path="id" cssClass="error-text"/>
+                </div>
+                <div class="grid">
+                    <div class="box">
+                        <form:label path="secretQuestion">
+                            <spring:message code="label.user.secretQuestion"/>
+                        </form:label>
+                        <form:select path="secretQuestion" items="${ secretQuestions }"/>
+                        <form:errors path="secretQuestion" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="answer">
+                            <spring:message code="label.user.answer"/>
+                        </form:label>
+                        <form:input path="answer" placeholder="Answer of the secret quetion"/>
+                        <form:errors path="answer" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <from:label path="email">
+                            <spring:message code="label.user.email"/>
+                        </from:label>
+                        <form:input path="email" placeholder="Enter Email"/>
+                        <form:errors path="email" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="phone">
+                            <spring:message code="label.user.phone"/>
+                        </form:label>
+                        <form:input path="phone" placeholder="Enter Phone Number"/>
+                        <form:errors path="phone" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="newPassword">
+                            <spring:message code="label.userChangePassword.newPassword"/>
+                        </form:label>
+                        <form:password path="newPassword" placeholder="Enter New Password"/>
+                        <form:errors path="newPassword" cssClass="error-text"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="confirmPassword">
+                            <spring:message code="label.userChangePassword.confirmPassword"/>
+                        </form:label>
+                        <form:password path="confirmPassword" placeholder="Re-enter Password"/>
+                        <form:errors path="confirmPassword" cssClass="error-text"/>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="submit-btn">
+            </form:form>
         </div>
-        <div class="grid">
-            <div class="box">
-                <form:label path="secretQuestion">
-                    <spring:message code="label.user.secretQuestion"/>
-                </form:label>
-                <form:select path="secretQuestion" items="${ secretQuestions }"/>
-                <form:errors path="secretQuestion" cssClass="error-text"/>
-            </div>
-            <div class="box">
-                <form:label path="answer">
-                    <spring:message code="label.user.answer"/>
-                </form:label>
-                <form:input path="answer" placeholder="Answer of the secret quetion"/>
-                <form:errors path="answer" cssClass="error-text"/>
-            </div>
-            <div class="box">
-                <from:label path="email">
-                    <spring:message code="label.user.email"/>
-                </from:label>
-                <form:input path="email" placeholder="Enter Email"/>
-                <form:errors path="email" cssClass="error-text"/>
-            </div>
-            <div class="box">
-                <form:label path="phone">
-                    <spring:message code="label.user.phone"/>
-                </form:label>
-                <form:input path="phone" placeholder="Enter Phone Number"/>
-                <form:errors path="phone" cssClass="error-text"/>
-            </div>
-            <div class="box">
-                <form:label path="newPassword">
-                    <spring:message code="label.userChangePassword.newPassword"/>
-                </form:label>
-                <form:password path="newPassword" placeholder="Enter New Password"/>
-                <form:errors path="newPassword" cssClass="error-text"/>
-            </div>
-            <div class="box">
-                <form:label path="confirmPassword">
-                    <spring:message code="label.userChangePassword.confirmPassword"/>
-                </form:label>
-                <form:password path="confirmPassword" placeholder="Re-enter Password"/>
-                <form:errors path="confirmPassword" cssClass="error-text"/>
-            </div>
-        </div>
-        <input type="submit" value="Submit" class="submit-btn">
-    </form:form>
     </div>
-    </div>
-    </div>
-    </body>
-    </html>
+</div>
+</body>
+</html>

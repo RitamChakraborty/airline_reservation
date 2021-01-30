@@ -259,18 +259,18 @@
                     <c:choose>
                         <c:when test="${ not empty flightsFound }">
                             <caption>Available Flights</caption>
+                            <thead>
+                            <tr>
+                                <th>Flight No</th>
+                                <th>Airline</th>
+                                <th>Model</th>
+                                <th>Type</th>
+                                <th>Business Seats</th>
+                                <th>Economy Seats</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             <c:forEach var="flightSchedule" items="${ flightSchedules }">
-                                <thead>
-                                <tr>
-                                    <th>Flight No</th>
-                                    <th>Airline</th>
-                                    <th>Model</th>
-                                    <th>Type</th>
-                                    <th>Business Seats</th>
-                                    <th>Economy Seats</th>
-                                </tr>
-                                </thead>
-                                <tbody>
                                 <tr>
                                     <td>${ flightSchedule.flight.no }</td>
                                     <td>${ flightSchedule.flight.airline }</td>
@@ -286,8 +286,8 @@
                                         <a href="${ bookFlight }">Book</a>
                                     </td>
                                 </tr>
-                                </tbody>
                             </c:forEach>
+                            </tbody>
                         </c:when>
                         <c:otherwise>
                             <caption>No flights found for journey from ${ param.source } to ${ param.destination }

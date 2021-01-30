@@ -51,8 +51,7 @@ public class PaymentController {
 
     @GetMapping("/user/user-home/book-ticket/payment")
     public ModelAndView payment(
-            @ModelAttribute("bankAccount") BankAccount bankAccount,
-            HttpServletRequest request
+            @ModelAttribute("bankAccount") BankAccount bankAccount
     ) {
         return new ModelAndView("user/user_home/book_ticket/payment");
     }

@@ -21,7 +21,7 @@ public class UserDaoImpl {
 
     public void update(User user) {
         jdbcTemplate.update(
-                "update user set password = ?, name = ?, age = ?, gender = ?, email = ?, address = ?, phone = ?, secret_question = ?, answer = ? where id = ?",
+                "update user set password = ?, name = ?, age = ?, gender = ?, email = ?, address = ?, phone = ?, secret_question = ?, answer = ? where id = ?;",
                 user.getPassword(),
                 user.getName(),
                 user.getAge(),

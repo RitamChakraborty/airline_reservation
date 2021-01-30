@@ -57,7 +57,6 @@ public class UserController {
         User user = userService.getValidateUser(userLogin);
 
         if (user == null) {
-            System.out.println(errorMessage);
             modelAndView.addObject("errorMessage", errorMessage);
             modelAndView.setViewName("user/user-login");
 
@@ -133,8 +132,6 @@ public class UserController {
             HttpServletRequest request,
             @Value("${user.updatePasswordSuccessful}") String message
     ) {
-        System.out.println(userForgetPassword);
-
         if (userForgetPassword.getId() != null) {
             User user = userService.getUserById(userForgetPassword.getId());
 

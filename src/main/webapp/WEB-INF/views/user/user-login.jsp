@@ -208,7 +208,7 @@
                 <input type="submit" value="Login" class="submit-btn">
             </form:form>
                 <br>
-                <div class="container1">
+                <div class="container-1">
                     <a href="<c:url value="/user/user-registration"/>">Sign Up</a><br>
                     <a href="<c:url value="/user/forget-password"/>">Forget Password</a>
                 </div>

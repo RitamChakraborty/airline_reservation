@@ -168,7 +168,7 @@
         response.sendRedirect("/logout");
     }
 %>
-<c:if test="${ not empty param.msg}">
+<c:if test="${ not empty param.msg }">
     <script>
         alert('${ param.msg }');
     </script>
@@ -177,7 +177,7 @@
     <h1>Welcome ${ user.name }</h1>
 </header>
 <nav>
-    <a href="/user/user-home/book-ticket">Book Ticket</a>
+    <a href="<c:url value="/user/user-home/book-ticket"/>">Book Ticket</a>
     <a href="<c:url value="/user/user-home/history"/>">History</a>
     <a href="<c:url value="/user/user-home/view-profile"/>">View Profile</a>
     <a href="<c:url value="/logout"/>">Logout</a>
