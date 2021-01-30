@@ -30,4 +30,8 @@ public class BookingService {
     public List<Booking> getBookingsByFlightBookingId(String flightBookingId) {
         return bookingDaoImpl.findByFlightBookingId(flightBookingId);
     }
+
+    public Booking getBookingByBookingId(String bookingId) {
+        return bookingDao.findById(bookingId).orElse(null);
+    }
 }

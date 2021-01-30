@@ -1,9 +1,6 @@
 package com.cognizant.airline_ticket_reservation_system.controller;
 
-import com.cognizant.airline_ticket_reservation_system.model.Booking;
-import com.cognizant.airline_ticket_reservation_system.model.Flight;
-import com.cognizant.airline_ticket_reservation_system.model.FlightBooking;
-import com.cognizant.airline_ticket_reservation_system.model.FlightSchedule;
+import com.cognizant.airline_ticket_reservation_system.model.*;
 import com.cognizant.airline_ticket_reservation_system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,6 +74,23 @@ public class BookingDetailsController {
         modelAndView.addObject("flight", flight);
         modelAndView.addObject("bookings", bookings);
         modelAndView.setViewName("admin/admin_home/booking_details/view-booking");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/admin/admin-home/booking-details/booking-information/{bookingId}")
+    public ModelAndView bookingInformation(
+            @PathVariable("bookingId") String bookingId,
+            ModelAndView modelAndView
+    ) {
+        Booking booking = bookingService.getBookingByBookingId(bookingId);
+        User user = userService.getUserById(booking.getUserId());
+        List<Passenger> passengers = passengerService.getPassengersByBookingId(bookingId);
+
+        modelAndView.addObject("booking", booking);
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("passengers", passengers);
+        modelAndView.setViewName("admin/admin_home/booking_details/booking-information");
 
         return modelAndView;
     }
