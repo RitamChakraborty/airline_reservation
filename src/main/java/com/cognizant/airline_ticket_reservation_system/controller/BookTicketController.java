@@ -104,6 +104,7 @@ public class BookTicketController {
             ticket.setEconomySeatsAvailable(flightBooking.getEconomySeatsAvailable());
             ticket.setBusinessSeatsAvailable(flightBooking.getBusinessSeatsAvailable());
             ticket.setFlightIsScheduled(true);
+            ticket.setFlightBookingId(flightBooking.getId());
         } else {
             ticket.setEconomySeatsAvailable(flight.getEconomySeats());
             ticket.setBusinessSeatsAvailable(flight.getBusinessSeats());
@@ -112,7 +113,9 @@ public class BookTicketController {
 
         ticket.setPassengerSeats(passengerSeats);
 
+        // Add ticket object in the session
         request.getSession().setAttribute("ticket", ticket);
+
         modelAndView.setViewName("redirect:/user/user-home/book-ticket/passenger-seats");
 
         return modelAndView;

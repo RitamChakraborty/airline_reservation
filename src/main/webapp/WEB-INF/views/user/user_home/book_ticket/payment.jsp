@@ -117,6 +117,8 @@
 
         .container {
             width: 25vw;
+            display: grid;
+            place-items: center;
         }
 
         form {

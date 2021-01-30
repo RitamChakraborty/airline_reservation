@@ -219,7 +219,8 @@
                                 <td>${ flightBooking.id }</td>
                                 <td>${ flightBooking.date }</td>
                                 <td>
-                                    <a href="/admin/admin/home/booking-details/view-booking/${ flightBooking.id }">View</a>
+                                    <a href="/admin/admin/home/booking-details/view-booking/${ flightBooking.id }"
+                                       class="submit-btn">View</a>
                                 </td>
                             </tr>
                         </c:forEach>

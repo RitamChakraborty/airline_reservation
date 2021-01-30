@@ -283,7 +283,7 @@
                                                value="/user/user-home/book-ticket/book-flight/${ flightSchedule.id }">
                                             <c:param name="date" value="${ param.date }"/>
                                         </c:url>
-                                        <a href="${ bookFlight }">Book</a>
+                                        <a href="${ bookFlight }" class="submit-btn">Book</a>
                                     </td>
                                 </tr>
                             </c:forEach>

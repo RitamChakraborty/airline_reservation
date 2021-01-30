@@ -250,7 +250,7 @@ public class UserController {
 
         List<Booking> bookings = bookingService.getBookingsByUserId(user.getId());
         List<FlightBooking> flightBookings = bookings.stream()
-                .map(booking -> flightBookingService.getByFlightBookingId(booking.getFlightBookingId()))
+                .map(booking -> flightBookingService.getFlightBookingByFlightBookingId(booking.getFlightBookingId()))
                 .collect(Collectors.toList());
 
         modelAndView.addObject("flightBookings", flightBookings);
@@ -267,7 +267,7 @@ public class UserController {
     ) {
         User user = (User) request.getSession().getAttribute("user");
 
-        FlightBooking flightBooking = flightBookingService.getByFlightBookingId(flightBookingId);
+        FlightBooking flightBooking = flightBookingService.getFlightBookingByFlightBookingId(flightBookingId);
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightBooking.getScheduledFlightId());
         Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
         Booking booking = bookingService.getBookingByFlightBookingIdAndUserId(flightBookingId, user.getId());

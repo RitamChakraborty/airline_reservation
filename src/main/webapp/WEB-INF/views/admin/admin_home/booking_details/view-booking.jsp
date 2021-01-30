@@ -231,7 +231,8 @@
                 <c:forEach var="booking" items="${ bookings }">
                     <tr>
                         <td>${ booking.id }</td>
-                        <td><a href="/admin/admin-home/booking-details/booking-information/${ booking.id }">View</a>
+                        <td><a href="/admin/admin-home/booking-details/booking-information/${ booking.id }"
+                               class="submit-btn">View</a>
                         </td>
                     </tr>
                 </c:forEach>

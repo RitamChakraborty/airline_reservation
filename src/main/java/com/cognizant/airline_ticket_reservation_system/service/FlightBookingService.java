@@ -40,7 +40,7 @@ public class FlightBookingService {
         return (List<FlightBooking>) flightBookingDao.findAll();
     }
 
-    public FlightBooking getByFlightBookingId(String flightBookingId) {
+    public FlightBooking getFlightBookingByFlightBookingId(String flightBookingId) {
         return flightBookingDao.findById(flightBookingId).orElse(null);
     }
 }

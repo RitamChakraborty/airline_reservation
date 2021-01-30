@@ -14,6 +14,7 @@ public class Ticket {
     private Integer cost;
     private List<Passenger> passengers;
     private Boolean flightIsScheduled;
+    private String flightBookingId;
 
     public User getUser() {
         return user;
@@ -95,6 +96,14 @@ public class Ticket {
         this.flightIsScheduled = flightIsScheduled;
     }
 
+    public String getFlightBookingId() {
+        return flightBookingId;
+    }
+
+    public void setFlightBookingId(String flightBookingId) {
+        this.flightBookingId = flightBookingId;
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -108,6 +117,7 @@ public class Ticket {
                 ", cost=" + cost +
                 ", passengers=" + passengers +
                 ", flightIsScheduled=" + flightIsScheduled +
+                ", flightBookingId='" + flightBookingId + '\'' +
                 '}';
     }
 }

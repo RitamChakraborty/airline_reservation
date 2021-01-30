@@ -64,7 +64,7 @@ public class BookingDetailsController {
             @PathVariable("flightBookingId") String flightBookingId,
             ModelAndView modelAndView
     ) {
-        FlightBooking flightBooking = flightBookingService.getByFlightBookingId(flightBookingId);
+        FlightBooking flightBooking = flightBookingService.getFlightBookingByFlightBookingId(flightBookingId);
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightBooking.getScheduledFlightId());
         Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
         List<Booking> bookings = bookingService.getBookingsByFlightBookingId(flightBookingId);

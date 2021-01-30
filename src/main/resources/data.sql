@@ -20,16 +20,14 @@ values ('British Airways', 'Boing 777', 'International', 200, 50),
 insert into flight_schedule(flight_no, source, destination, economy_seat_cost, business_seat_cost, arrival_time,
                             departure_time, sun, mon, tue, wed, thu,
                             fri, sat)
-values ('1', 'Source_1', 'Destination_1', '2000', '5000', '01:00:00', '02:00:00', 1, 0, 0, 1, 1, 0, 0),
+values ('1', 'Source_1', 'Destination_1', '2000', '5000', '01:00:00', '02:00:00', 1, 1, 1, 1, 1, 1, 1),
        ('2', 'Source_2', 'Destination_3', '3000', '6000', '02:00:00', '05:00:00', 0, 1, 0, 1, 1, 1, 1),
        ('3', 'Source_3', 'Destination_4', '4000', '7000', '03:00:00', '06:00:00', 0, 1, 0, 1, 0, 1, 0),
        ('4', 'Source_4', 'Destination_2', '5000', '8000', '04:00:00', '08:00:00', 1, 0, 1, 0, 1, 0, 1);
 
 insert into news_feed(news, date)
-values ('Some flights have been lost in Bermuda Triangle', '2021-01-21'),
-       ('Very bad news', '2021-01-22'),
-       ('Stay positive after such a bad news', '2021-01-23'),
-       ('Hope for something good', '2021-01-24');
+values ('Due to fog some flights will get delayed', '2021-02-10'),
+       ('Our agency will never call you for bank information', '2021-02-08');
 
 insert into bank(bank_name)
 values ('HSBC'),
@@ -42,12 +40,3 @@ values ('12345', '100000', '1'),
        ('34567', '10000', '3'),
        ('45678', '5000', '1'),
        ('56789', '1000', '2');
-
-insert into flight_booking(id, scheduled_flight_id, date, business_seats_available, economy_seats_available)
-values ('1', '3', '2021-01-29', '1', '1');
-
-insert into booking(id, flight_booking_id, user_id)
-values ('1', '1', '1');
-
-insert into passenger(id, booking_id, name, age, gender)
-values ('1', '1', 'Ritam', '22', 'Male');

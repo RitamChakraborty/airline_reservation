@@ -50,9 +50,7 @@ public class PaymentController {
     }
 
     @GetMapping("/user/user-home/book-ticket/payment")
-    public ModelAndView payment(
-            @ModelAttribute("bankAccount") BankAccount bankAccount
-    ) {
+    public ModelAndView payment(@ModelAttribute("bankAccount") BankAccount bankAccount) {
         return new ModelAndView("user/user_home/book_ticket/payment");
     }
 
@@ -83,8 +81,15 @@ public class PaymentController {
             return modelAndView;
         }
 
+        String flightBookingId;
+
+        if (ticket.getFlightIsScheduled()) {
+            flightBookingId = ticket.getFlightBookingId();
+        } else {
+            flightBookingId = UUID.randomUUID().toString();
+        }
+
         // Object creation
-        String flightBookingId = UUID.randomUUID().toString();
         FlightBooking flightBooking = new FlightBooking();
         flightBooking.setId(flightBookingId);
         flightBooking.setDate(ticket.getDate());
@@ -127,7 +132,9 @@ public class PaymentController {
     }
 
     @GetMapping("/user/user-home/book-ticket/payment-successful")
-    public ModelAndView paymentSuccessful() {
+    public ModelAndView paymentSuccessful(HttpServletRequest request) {
+        // Remove ticket session
+        request.getSession().removeAttribute("ticket");
         return new ModelAndView("user/user_home/book_ticket/payment-successful");
     }
 
