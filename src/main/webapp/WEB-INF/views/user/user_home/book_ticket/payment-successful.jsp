@@ -87,16 +87,6 @@
     </style>
 </head>
 <body>
-<%
-    response.setHeader("Cache-Control", "no-cache");
-    response.setHeader("Cache-Control", "no-store");
-    response.setHeader("Pragma", "no-cache");
-    response.setDateHeader("Expires", 0);
-
-    if (session.getAttribute("ticket") == null) {
-        response.sendRedirect("/user/user-home");
-    }
-%>
 <div class="content">
     <div class="card">
         <div class="container">
