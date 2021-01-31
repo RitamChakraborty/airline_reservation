@@ -200,21 +200,21 @@
         <div class="container">
             <table>
                 <c:choose>
-                    <c:when test="${ not empty flightBookings }">
+                    <c:when test="${ not empty bookings }">
                         <caption>All Bookings</caption>
                         <thead>
                         <tr>
                             <th>Booking ID</th>
-                            <th>Date</th>
+                            <th>Flight Booking ID</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="flightBooking" items="${ flightBookings }">
+                        <c:forEach var="booking" items="${ bookings }">
                             <tr>
-                                <td>${ flightBooking.id }</td>
-                                <td>${ flightBooking.date }</td>
+                                <td>${ booking.flightBookingId }</td>
+                                <td>${ booking.id }</td>
                                 <td>
-                                    <a href="/user/user-home/history/view-booking/${ flightBooking.id }"
+                                    <a href="/user/user-home/history/view-booking/${ booking.id }/${ booking.flightBookingId }"
                                        class="submit-btn">View</a>
                                 </td>
                             </tr>

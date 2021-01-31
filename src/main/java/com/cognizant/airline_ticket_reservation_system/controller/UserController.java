@@ -249,29 +249,23 @@ public class UserController {
         User user = (User) request.getSession().getAttribute("user");
 
         List<Booking> bookings = bookingService.getBookingsByUserId(user.getId());
-        List<FlightBooking> flightBookings = bookings.stream()
-                .map(booking -> flightBookingService.getFlightBookingByFlightBookingId(booking.getFlightBookingId()))
-                .collect(Collectors.toList());
 
-        modelAndView.addObject("flightBookings", flightBookings);
+        modelAndView.addObject("bookings", bookings);
         modelAndView.setViewName("/user/user_home/history");
 
         return modelAndView;
     }
 
-    @GetMapping("/user/user-home/history/view-booking/{flightBookingId}")
+    @GetMapping("/user/user-home/history/view-booking/{bookingId}/{flightBookingId}")
     public ModelAndView viewBooking(
+            @PathVariable("bookingId") String bookingId,
             @PathVariable("flightBookingId") String flightBookingId,
-            ModelAndView modelAndView,
-            HttpServletRequest request
+            ModelAndView modelAndView
     ) {
-        User user = (User) request.getSession().getAttribute("user");
-
         FlightBooking flightBooking = flightBookingService.getFlightBookingByFlightBookingId(flightBookingId);
         FlightSchedule flightSchedule = flightScheduleService.getFlightScheduleById(flightBooking.getScheduledFlightId());
         Flight flight = flightService.getFlightByNo(flightSchedule.getFlightNo());
-        Booking booking = bookingService.getBookingByFlightBookingIdAndUserId(flightBookingId, user.getId());
-        List<Passenger> passengers = passengerService.getPassengersByBookingId(booking.getId());
+        List<Passenger> passengers = passengerService.getPassengersByBookingId(bookingId);
 
         modelAndView.addObject("flightBooking", flightBooking);
         modelAndView.addObject("flightSchedule", flightSchedule);
