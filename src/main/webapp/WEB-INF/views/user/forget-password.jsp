@@ -206,7 +206,7 @@
                     <form:label path="id">
                         <spring:message code="label.user.id"/>
                     </form:label>
-                    <form:input path="id" placeholder="Enter User Id"/>
+                    <form:input path="id" type="number" placeholder="Enter User Id"/>
                     <form:errors path="id" cssClass="error-text"/>
                 </div>
                 <div class="grid">
