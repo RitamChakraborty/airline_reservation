@@ -147,6 +147,7 @@
         }
 
         .container-1 {
+            width: 50vw;
             display: flex;
             justify-content: space-evenly;
             align-items: center;
@@ -224,12 +225,12 @@
         </div>
     </div>
     <div class="card">
-        <div class="container">
+        <div class="container-1">
             <table>
                 <caption>All Bookings</caption>
                 <thead>
                 <tr>
-                    <th>User Id</th>
+                    <th>Booking Id</th>
                 </tr>
                 </thead>
                 <tbody>

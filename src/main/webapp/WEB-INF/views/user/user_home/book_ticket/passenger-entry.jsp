@@ -255,7 +255,6 @@
                 }
             }).then(response => response.json());
 
-            console.log("${ url }");
             window.location.href = "${ url }";
         }
     }

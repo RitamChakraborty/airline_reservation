@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -97,6 +98,16 @@
             border-radius: 4px;
         }
 
+        .reset-btn {
+            font-size: large;
+            padding: 0.5rem 1rem;
+            background-color: mediumseagreen;
+            border: none;
+            outline: none;
+            color: white;
+            border-radius: 4px;
+        }
+
         .news-feed {
             width: 50vw;
         }
@@ -117,7 +128,8 @@
         }
 
         .container {
-            width: 50vw;
+            display: grid;
+            width: 75vw;
             display: grid;
             place-items: center;
         }
@@ -192,6 +204,38 @@
             padding: 1rem 0.25rem;
         }
 
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            place-items: center;
+        }
+
+        .box {
+            margin: 1rem;
+            padding: 1rem;
+            display: grid;
+            place-items: center;
+        }
+
+        .box input, select {
+            width: 90%;
+        }
+
+        .container-1 {
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .container-1 button {
+            margin: 0 2rem;
+        }
+
+        .container-1 a {
+            color: white;
+        }
 
         footer {
             margin-bottom: 2rem;
@@ -208,13 +252,48 @@
 <div class="content">
     <div class="card">
         <div class="container">
+            <%--@elvariable id="flightBookingFilter" type="com.cognizant.airline_ticket_reservation_system.model.FlightBookingFilter"--%>
+            <form:form action="/admin/admin-home/booking-details" method="post"
+                       modelAttribute="flightBookingFilter">
+                <div class="grid">
+                    <div class="box">
+                        <form:label path="date">Date</form:label>
+                        <form:input path="date" type="date"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="flightNo">Flight No</form:label>
+                        <form:select path="flightNo" items="${ flights }"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="source">Source</form:label>
+                        <form:select path="source" items="${ sources }"/>
+                    </div>
+                    <div class="box">
+                        <form:label path="destination">Destination</form:label>
+                        <form:select path="destination" items="${ destinations }"/>
+                    </div>
+                </div>
+                <div class="container-1">
+                    <button type="submit" class="submit-btn">Filter</button>
+                    <button type="reset" class="reset-btn">
+                        <a href="<c:url value="/admin/admin-home/booking-details?msg=reset"/>">Reset</a>
+                    </button>
+                </div>
+            </form:form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="container">
             <table>
                 <c:choose>
                     <c:when test="${ not empty flightBookings }">
                         <caption>All Bookings</caption>
                         <thead>
                         <tr>
-                            <th>Booking ID</th>
+                            <th>Flight Booking ID</th>
+                            <th>Flight No</th>
+                            <th>Source</th>
+                            <th>Destination</th>
                             <th>Date</th>
                         </tr>
                         </thead>
@@ -222,6 +301,9 @@
                         <c:forEach var="flightBooking" items="${ flightBookings }">
                             <tr>
                                 <td>${ flightBooking.id }</td>
+                                <td>${ flightBooking.flightSchedule.flightNo }</td>
+                                <td>${ flightBooking.flightSchedule.source }</td>
+                                <td>${ flightBooking.flightSchedule.destination }</td>
                                 <td>${ flightBooking.date }</td>
                                 <td>
                                     <a href="/admin/admin/home/booking-details/view-booking/${ flightBooking.id }"

@@ -185,7 +185,6 @@
             width: 90%;
         }
 
-
         footer {
             margin-bottom: 2rem;
         }

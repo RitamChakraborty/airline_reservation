@@ -3,12 +3,13 @@ package com.cognizant.airline_ticket_reservation_system.controller;
 import com.cognizant.airline_ticket_reservation_system.model.*;
 import com.cognizant.airline_ticket_reservation_system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookingDetailsController {
@@ -50,8 +51,65 @@ public class BookingDetailsController {
     }
 
     @GetMapping("/admin/admin-home/booking-details")
-    public ModelAndView bookingDetails(ModelAndView modelAndView) {
+    public ModelAndView bookingDetails(
+            @ModelAttribute("flightBookingFilter") FlightBookingFilter flightBookingFilter,
+            ModelAndView modelAndView
+    ) {
         List<FlightBooking> flightBookings = flightBookingService.getFlightBookings();
+        flightBookings.forEach(i -> {
+            i.setFlightSchedule(flightScheduleService.getFlightScheduleById(i.getScheduledFlightId()));
+            i.getFlightSchedule().setFlight(flightService.getFlightByNo(i.getFlightSchedule().getFlightNo()));
+        });
+
+        modelAndView.addObject("flightBookings", flightBookings);
+        modelAndView.setViewName("admin/admin_home/booking-details");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/admin/admin-home/booking-details")
+    public ModelAndView bookingDetails(
+            @RequestParam(value = "msg", required = false) String message,
+            @ModelAttribute("flightBookingFilter") FlightBookingFilter flightBookingFilter,
+            ModelAndView modelAndView
+    ) {
+        List<FlightBooking> flightBookings = flightBookingService.getFlightBookings();
+
+        flightBookings.forEach(i -> {
+            i.setFlightSchedule(flightScheduleService.getFlightScheduleById(i.getScheduledFlightId()));
+            i.getFlightSchedule().setFlight(flightService.getFlightByNo(i.getFlightSchedule().getFlightNo()));
+        });
+
+        // Reset request
+        if (message == null) {
+            // Filter date
+            if (flightBookingFilter.getDate() != null) {
+                flightBookings = flightBookings.stream()
+                        .filter(i -> i.getDate().equals(flightBookingFilter.getDate()))
+                        .collect(Collectors.toList());
+            }
+
+            // Filter flight no
+            if (flightBookingFilter.getFlightNo() != null) {
+                flightBookings = flightBookings.stream()
+                        .filter(i -> i.getFlightSchedule().getFlightNo().equals(flightBookingFilter.getFlightNo()))
+                        .collect(Collectors.toList());
+            }
+
+            // Filter source
+            if (flightBookingFilter.getSource() != null) {
+                flightBookings = flightBookings.stream()
+                        .filter(i -> i.getFlightSchedule().getSource().equals(flightBookingFilter.getSource()))
+                        .collect(Collectors.toList());
+            }
+
+            // Filter destination
+            if (flightBookingFilter.getDestination() != null) {
+                flightBookings = flightBookings.stream()
+                        .filter(i -> i.getFlightSchedule().getDestination().equals(flightBookingFilter.getDestination()))
+                        .collect(Collectors.toList());
+            }
+        }
 
         modelAndView.addObject("flightBookings", flightBookings);
         modelAndView.setViewName("admin/admin_home/booking-details");
@@ -93,5 +151,23 @@ public class BookingDetailsController {
         modelAndView.setViewName("admin/admin_home/booking_details/booking-information");
 
         return modelAndView;
+    }
+
+    @ModelAttribute("sources")
+    private List<String> sources(@Value("#{'${flightSchedule.sources}'.split(',')}") List<String> sources) {
+        return sources;
+    }
+
+    @ModelAttribute("destinations")
+    private List<String> destinations(@Value("#{'${flightSchedule.destinations}'.split(',')}") List<String> destinations) {
+        return destinations;
+    }
+
+    @ModelAttribute("flights")
+    public List<Integer> flights() {
+        return flightService.getFlights()
+                .stream()
+                .map(Flight::getNo)
+                .collect(Collectors.toList());
     }
 }

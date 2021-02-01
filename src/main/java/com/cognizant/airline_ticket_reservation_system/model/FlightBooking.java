@@ -2,6 +2,7 @@ package com.cognizant.airline_ticket_reservation_system.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +13,8 @@ public class FlightBooking {
     private Integer scheduledFlightId;
     private Integer economySeatsAvailable;
     private Integer businessSeatsAvailable;
+    @Transient
+    private FlightSchedule flightSchedule;
 
     public String getId() {
         return id;
@@ -53,14 +56,23 @@ public class FlightBooking {
         this.businessSeatsAvailable = businessSeatsAvailable;
     }
 
+    public FlightSchedule getFlightSchedule() {
+        return flightSchedule;
+    }
+
+    public void setFlightSchedule(FlightSchedule flightSchedule) {
+        this.flightSchedule = flightSchedule;
+    }
+
     @Override
     public String toString() {
         return "FlightBooking{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", date=" + date +
                 ", scheduledFlightId=" + scheduledFlightId +
                 ", economySeatsAvailable=" + economySeatsAvailable +
                 ", businessSeatsAvailable=" + businessSeatsAvailable +
+                ", flightSchedule=" + flightSchedule +
                 '}';
     }
 }
