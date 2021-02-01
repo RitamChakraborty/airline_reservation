@@ -192,6 +192,11 @@
             padding: 1rem;
             background-color: #eeeeee;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -252,5 +257,6 @@
         </div>
     </div>
 </div>
+<footer></footer>
 </body>
 </html>

@@ -150,6 +150,11 @@
             font-family: monospace;
             color: tomato;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -160,5 +165,6 @@
     <a href="<c:url value="/admin/admin-home"/>">Home</a>
     <a href="<c:url value="/admin/admin-home/survey/create-survey"/>">Create Survey</a>
 </nav>
+<footer></footer>
 </body>
 </html>

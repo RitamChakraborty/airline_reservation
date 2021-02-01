@@ -189,6 +189,11 @@
         table th, td {
             padding: 1rem 0.25rem;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -255,5 +260,6 @@
         <button class="submit-btn">Pay</button>
     </a>
 </div>
+<footer></footer>
 </body>
 </html>

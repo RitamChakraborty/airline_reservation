@@ -160,6 +160,11 @@
             font-family: monospace;
             color: tomato;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -197,5 +202,6 @@
         </div>
     </div>
 </div>
+<footer></footer>
 </body>
 </html>

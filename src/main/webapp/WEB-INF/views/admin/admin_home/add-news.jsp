@@ -42,6 +42,24 @@
             place-items: center;
         }
 
+        .content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            color: darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            margin: 1rem 4rem 0.5rem 4rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px -10px grey;
+            width: min-content;
+        }
+
         nav {
             padding: 1rem;
             display: flex;
@@ -66,106 +84,15 @@
             box-shadow: 0 15px 30px -10px grey;
         }
 
-        .content {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            color: darkslategrey;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
-            margin: 2rem 4rem 1rem 4rem;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px -10px grey;
-            width: min-content;
-        }
-
         .submit-btn {
             font-size: large;
-            margin: 1rem 0;
+            margin: 1rem 2rem;
             padding: 0.5rem 1rem;
             background-color: dodgerblue;
             border: none;
             outline: none;
             color: white;
             border-radius: 4px;
-            width: 100%;
-        }
-
-        .reset-btn {
-            font-size: large;
-            padding: 0.5rem 1rem;
-            background-color: forestgreen;
-            border: none;
-            outline: none;
-            color: white;
-            border-radius: 4px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            width: 50vw;
-            display: grid;
-            place-items: center;
-        }
-
-        table * {
-            margin: 0.25rem;
-            padding: 0.25rem;
-            color: darkslategrey;
-        }
-
-        table caption {
-            font-size: x-large;
-            font-weight: bold;
-            padding-bottom: 1rem;
-        }
-
-        table tr, th, td {
-            border: 1px solid lightgrey;
-        }
-
-        table th {
-            background-color: grey;
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        table th, td {
-            padding: 1rem 0.25rem;
-        }
-
-        form * {
-            display: block;
-            padding: 0.25rem;
-            margin: 0.25rem;
-        }
-
-        form label, .label {
-            font-weight: bold;
-        }
-
-        form input, select {
-            border: none;
-            outline: none;
-            background-color: #dddddd;
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        form input:focus, select:focus {
-            outline: none;
         }
 
         .news-feed {
@@ -185,6 +112,82 @@
         .news-feed td:nth-child(even) {
             padding: 1rem;
             background-color: #eeeeee;
+        }
+
+        .container {
+            width: 25vw;
+        }
+
+        form {
+            display: grid;
+            place-items: center;
+            font-size: medium;
+        }
+
+        form * {
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            margin: 0.25rem 1rem 0.5rem 1rem;
+            font-size: x-large;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+        input, select, option {
+            margin: 0.5rem 1rem;
+            font-size: medium;
+            border: none;
+            outline: none;
+            background-color: #dddddd;
+            color: darkslategrey;
+            padding: 0.5rem;
+            text-align-last: center;
+            border-radius: 4px;
+        }
+
+        .error-text {
+            font-family: monospace;
+            color: tomato;
+        }
+
+        a {
+            text-decoration: none;
+            color: forestgreen;
+            text-align: center;
+            padding: 0.25rem;
+            display: inline;
+        }
+
+        .container-1 {
+            width: 50vw;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .news-feed {
+            width: 50vw;
+        }
+
+        .news-feed table {
+            width: 100%;
+        }
+
+        .news-feed table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
+        }
+
+        .news-feed td:nth-child(even) {
+            padding: 1rem;
+            background-color: #eeeeee;
+        }
+
+        footer {
+            margin-bottom: 2rem;
         }
     </style>
 </head>
@@ -217,7 +220,7 @@
         </div>
     </div>
     <div class="card">
-        <div class="container">
+        <div class="container-1">
             <div class="news-feed">
                 <table>
                     <c:choose>
@@ -239,5 +242,6 @@
         </div>
     </div>
 </div>
+<footer></footer>
 </body>
 </html>

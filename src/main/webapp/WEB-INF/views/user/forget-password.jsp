@@ -184,6 +184,11 @@
         .box input, select {
             width: 90%;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -254,5 +259,6 @@
         </div>
     </div>
 </div>
+<footer></footer>
 </body>
 </html>

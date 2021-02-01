@@ -174,6 +174,11 @@
         form input:focus, select:focus {
             outline: none;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -222,5 +227,6 @@
         </div>
     </div>
 </div>
+<footer></footer>
 </body>
 </html>

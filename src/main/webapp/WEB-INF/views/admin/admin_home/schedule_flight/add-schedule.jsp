@@ -197,6 +197,11 @@
         .row * {
             font-size: medium;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -303,5 +308,6 @@
         </div>
     </div>
 </div>
+<footer></footer>
 </body>
 </html>

@@ -191,6 +191,11 @@
         table th, td {
             padding: 1rem 0.25rem;
         }
+
+
+        footer {
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -232,5 +237,6 @@
         </div>
     </div>
 </div>
+<footer></footer>
 </body>
 </html>
