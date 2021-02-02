@@ -44,10 +44,8 @@ public class FlightScheduleController {
             ModelAndView modelAndView
     ) {
         Flight flight = flightService.getFlightByNo(flightNo);
-        String flightBuilder = "Airline : " + flight.getAirline() +
-                ", Model : " + flight.getModel() +
-                ", Type : " + flight.getType();
-        modelAndView.addObject("flight", flightBuilder);
+
+        modelAndView.addObject("flight", flight);
         modelAndView.setViewName("admin/admin_home/schedule_flight/add-schedule");
 
         return modelAndView;

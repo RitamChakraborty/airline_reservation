@@ -199,6 +199,35 @@
         }
 
 
+        table * {
+            margin: 0.25rem;
+            padding: 0.25rem;
+        }
+
+        table caption {
+            font-size: x-large;
+            font-weight: bold;
+            padding-bottom: 1rem;
+        }
+
+        table tr, th, td {
+            text-align: center;
+            border: 1px solid lightgrey;
+        }
+
+        table th {
+            background-color: grey;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        table th, td {
+            padding: 1rem 0.25rem;
+        }
+
         footer {
             margin-bottom: 2rem;
         }
@@ -218,19 +247,32 @@
 <div class="content">
     <div class="card">
         <div class="container">
+            <div class="box">
+                <table>
+                    <caption>Flight Information</caption>
+                    <thead>
+                    <tr>
+                        <th>Flight No</th>
+                        <th>Airline</th>
+                        <th>Model</th>
+                        <th>Type</th>
+                        <th>Economy Seats</th>
+                        <th>Business Seats</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>${ flight.no }</td>
+                        <td>${ flight.airline }</td>
+                        <td>${ flight.model }</td>
+                        <td>${ flight.type }</td>
+                        <td>${ flight.economySeats }</td>
+                        <td>${ flight.businessSeats }</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <form:form action="${ actionUrl }" method="post" modelAttribute="flightSchedule">
-                <div class="box box-1">
-                    <form:label path="flightNo">
-                        <spring:message code="label.flightSchedule.flightNo"/>
-                    </form:label>
-                    <span>${ param.no }</span>
-                </div>
-                <div class="box box-1">
-                    <label>
-                        <spring:message code="label.flightSchedule.flight"/>
-                    </label>
-                    <span>${ flight }</span>
-                </div>
                 <div class="grid">
                     <div class="box">
                         <form:label path="source">
