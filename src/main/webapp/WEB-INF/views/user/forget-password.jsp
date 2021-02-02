@@ -192,7 +192,7 @@
 </head>
 <body>
 <header>
-    <h1>Forget Password</h1>
+    <h1>Password Recovery</h1>
 </header>
 <nav>
     <a href="<c:url value="/"/>">Back</a>
