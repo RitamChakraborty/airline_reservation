@@ -243,6 +243,7 @@
                             <spring:message code="label.flightSchedule.destination"/>
                         </form:label>
                         <form:select path="destination" items="${ destinations }"/>
+                        <form:errors path="destination" cssClass="error-text"/>
                     </div>
                     <div class="box">
                         <form:label path="businessSeatCost">

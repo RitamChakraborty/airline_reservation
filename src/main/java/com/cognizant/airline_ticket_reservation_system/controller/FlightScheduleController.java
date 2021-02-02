@@ -66,6 +66,15 @@ public class FlightScheduleController {
             }
         }
 
+        // Check if source and destination are same
+        if (
+                flightSchedule.getSource() != null &&
+                        flightSchedule.getDestination() != null &&
+                        flightSchedule.getSource().equals(flightSchedule.getDestination())
+        ) {
+            bindingResult.rejectValue("destination", "error.flightSchedule.destination.equal");
+        }
+
         if (bindingResult.hasErrors()) {
             return new ModelAndView("admin/admin_home/schedule_flight/add-schedule");
         }

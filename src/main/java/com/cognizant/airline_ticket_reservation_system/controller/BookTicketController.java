@@ -49,9 +49,20 @@ public class BookTicketController {
             BindingResult bindingResult,
             ModelAndView modelAndView
     ) {
+        // Check if booking date in the past
         if (bookTicket.getDate() != null && bookTicket.getDate().compareTo(LocalDate.now()) < 0) {
             bindingResult.rejectValue("date", "error.bookTicket.date.past");
         }
+
+        // Check if source and destination are same
+        if (
+                bookTicket.getSource() != null &&
+                        bookTicket.getDestination() != null
+                        && bookTicket.getSource().equals(bookTicket.getDestination())
+        ) {
+            bindingResult.rejectValue("destination", "error.bookTicket.destination.equal");
+        }
+
 
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("showFlight", false);

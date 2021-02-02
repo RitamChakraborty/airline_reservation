@@ -252,6 +252,7 @@
                     <spring:message code="label.bookTicket.destination"/>
                 </form:label>
                 <form:select path="destination" items="${ destinations }"/>
+                <form:errors path="destination" cssClass="error-text"/>
                 <br>
                 <input type="submit" value="Search" class="submit-btn">
             </form:form>
