@@ -12,20 +12,22 @@ values ('k.afrin', 'Afrin Kardashian', '22', 'Female', 'kardashian.afrin@gmail.c
         '6543210987', 'Your nickname', 'shuktika');
 
 insert into flight(airline, model, type, economy_seats, business_seats)
-values ('British Airways', 'Boing 777', 'International', 200, 50),
-       ('Lufthansa', 'Airbus A380', 'International', 500, 200),
-       ('Emirates', 'Boing 747', 'International', 250, 75),
-       ('IndiGo', 'Airbus A300', 'Domestic', '50', 10);
+values ('Air India', 'Airbus A300', 'Domestic', '50', '10'),
+       ('IndiGo', 'Boeing 737', 'Domestic', '100', '30'),
+       ('SpiceJet', 'Airbus A321', 'Domestic', '150', '50'),
+       ('Emirates', 'Boeing 777', 'International', '200', '50'),
+       ('British Airways', 'Boeing 787', 'International', '250', '75');
 
 insert into flight_schedule(flight_no, source, destination, economy_seat_cost, business_seat_cost, arrival_time,
                             departure_time, sun, mon, tue, wed, thu,
                             fri, sat)
-values ('1', 'Source_1', 'Destination_1', '2000', '5000', '01:00:00', '02:00:00', 1, 1, 1, 1, 1, 1, 1),
-       ('2', 'Source_2', 'Destination_3', '3000', '6000', '02:00:00', '05:00:00', 0, 1, 0, 1, 1, 1, 1),
-       ('3', 'Source_3', 'Destination_4', '4000', '7000', '03:00:00', '06:00:00', 0, 1, 0, 1, 0, 1, 0),
-       ('4', 'Source_4', 'Destination_2', '5000', '8000', '04:00:00', '08:00:00', 1, 0, 1, 0, 1, 0, 1);
+values (1, 'Kolkata', 'Chennai', '3000', '5000', '10:00:00', '12:00:00', 1, 1, 1, 1, 1, 1, 1),
+       (3, 'Hyderabad', 'Bangalore', '5000', '9000', '12:00:00', '14:00:00', 1, 1, 1, 1, 1, 1, 1),
+       (4, 'Delhi', 'Dubai', '12000', '20000', '17:30:00', '19:00:00', 0, 1, 0, 1, 0, 1, 0),
+       (5, 'Mumbai', 'London', '10000', '15000', '10:00:00', '13:00:00', 1, 0, 1, 0, 1, 0, 1);
 
-insert into news_feed(news, date)
+insert
+into news_feed(news, date)
 values ('Due to fog some flights will get delayed', '2021-02-10'),
        ('Our agency will never call you for bank information', '2021-02-08');
 
