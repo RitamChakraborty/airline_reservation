@@ -175,7 +175,7 @@
             <table>
                 <c:choose>
                     <c:when test="${ not empty flights }">
-                        <caption>All Fight</caption>
+                        <caption>All Flights</caption>
                         <thead>
                         <tr>
                             <th>NO</th>
