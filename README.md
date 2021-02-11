@@ -1,53 +1,55 @@
 # Airline Ticket Reservation System
 
+## Flow Diagram
+
+> Admin 
+
+<p align="center">
+    <img src="screenshots/admin_flow.png" />
+</p>
+
+> User
+
+<p align="center">
+    <img src="screenshots/user_flow.png" />
+</p>
+
 ## Demo
 
 > Admin Home and News
 
 <p align="center">
-    <video height="270" widht="480" controls controls>
-        <source src="screenshots/1.mp4" type="video/mp4">
-    </video>
+    <img src="screenshots/1.gif" height="270" width="480" />
 </p>
 
 > User Home and Update Profile
 
 <p align="center">
-    <video height="270" widht="480" controls>
-        <source src="screenshots/2.mp4" type="video/mp4">
-    </video>
+    <img src="screenshots/2.gif" height="270" width="480" />
 </p>
 
 > User Registration and Account Recovery
 
 <p align="center">
-     <video height="270" widht="480" controls>
-        <source src="screenshots/3.mp4" type="video/mp4">
-    </video>
+    <img src="screenshots/3.gif" height="270" width="480" />
 </p>
 
 > Manage Flight
 
 <p align="center">
-     <video height="270" widht="480" controls>
-        <source src="screenshots/4.mp4" type="video/mp4">
-    </video>
+    <img src="screenshots/4.gif" height="270" width="480" />
 </p>
 
 > Schedule Flight
 
 <p align="center">
-    <video height="270" widht="480" controls>
-        <source src="screenshots/5.mp4" type="video/mp4">
-    </video>
+    <img src="screenshots/5.gif" height="270" width="480" />
 </p>
 
 > Book Flight and Booking Details
 
 <p align="center">
-     <video height="270" widht="480" controls>
-        <source src="screenshots/6.mp4" type="video/mp4">
-    </video>
+    <img src="screenshots/6.gif" height="270" width="480" />
 </p>
 
 ## Contributors
