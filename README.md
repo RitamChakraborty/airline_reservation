@@ -66,6 +66,11 @@ Make sure `Java11` is installed in your system and run it with the command
 java -jar airline_ticket_reservation_system-1.0.0-alpha.jar
 ```
 
+> **Note**
+> <br>admin *username*: `ritam`
+> <br>admin *password*: `password`
+> <br>You can sign up as new user
+
 ## Contributors
 
 - [Afrin Kadher](https://github.com/AfrinKadher)
