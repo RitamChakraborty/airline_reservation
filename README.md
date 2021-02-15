@@ -52,6 +52,20 @@
     <img src="screenshots/6.gif" height="270" width="480" />
 </p>
 
+## How to use
+
+Check out the deployed application in **Heroku** from [here](https://airline-ritam.herokuapp.com/)
+
+Or 
+
+Download the jar from [here](https://github.com/RitamChakraborty/airline_ticket_reservation_system/releases/download/v1.0.0-alpha/airline_ticket_reservation_system-1.0.0-alpha.jar)
+
+Make sure `Java11` is installed in your system and run it with the command
+
+```shell script
+java -jar airline_ticket_reservation_system-1.0.0-alpha.jar
+```
+
 ## Contributors
 
 - [Afrin Kadher](https://github.com/AfrinKadher)
